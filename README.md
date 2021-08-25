@@ -43,12 +43,13 @@ Feel free to learn from them and incorporate them in your own projects.
 Fabric Beta Essentials is based ***heavily*** on [Cursed Legacy API] and also "borrows" code from [Station API].
 Both of which share the [MIT] license of Beta Fabric Essentials.
 
-Roughly Enough Items and ModMenu are included as optional modules, and also share the [MIT] license.
+[Roughly Enough Items] and [ModMenu] are included as optional modules, and [CoreLib] is included with the Textures API.
+They all also share the [MIT] license.
 
 (Pre-Lex era) Minecraft Forge API is also included as an optional module to help ease the transition for modders.
 It is licensed under the [Minecraft Forge Public License v1.0](./beta-forge-hooks/LICENSE).
 
-Big thanks to the Minecraft Cursed Legacy team, Modification Station, TerraformersMC, and shedaniel for their
+Big thanks to the Minecraft Cursed Legacy team, Modification Station, TerraformersMC, paulevs and shedaniel for their
 contributions to the modding community.
 
 # About Better Than Updates
