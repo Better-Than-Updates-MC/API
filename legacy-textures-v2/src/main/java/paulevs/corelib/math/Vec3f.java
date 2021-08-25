@@ -1,6 +1,5 @@
 package paulevs.corelib.math;
 
-import net.minecraft.util.Vec3i;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.util.vector.Vector3f;
 import paulscode.sound.Vector3D;
@@ -154,14 +153,14 @@ public class Vec3f extends Vector3f {
 		} else if (obj instanceof Vector3D) {
 			Vector3D vec = (Vector3D) obj;
 			return x == vec.x && y == vec.y && z == vec.z;
-		} else if (obj instanceof Vector3i) {
-			Vector3i vec = (Vector3i) obj;
+		} else if (obj instanceof Vec3i) {
+			Vec3i vec = (Vec3i) obj;
 			return x == vec.x && y == vec.y && z == vec.z;
 		} else if (obj instanceof Vec3d) {
 			Vec3d vec = (Vec3d) obj;
 			return x == vec.x && y == vec.y && z == vec.z;
-		} else if (obj instanceof Vec3i) {
-			Vec3i vec = (Vec3i) obj;
+		} else if (obj instanceof net.minecraft.util.Vec3i) {
+			net.minecraft.util.Vec3i vec = (net.minecraft.util.Vec3i) obj;
 			return x == vec.x && y == vec.y && z == vec.z;
 		} else if (obj instanceof Integer || obj instanceof Float || obj instanceof Double) {
 			double d = (double) obj;
@@ -182,7 +181,7 @@ public class Vec3f extends Vector3f {
 		return this;
 	}
 
-	public void set(Vector3i vec) {
+	public void set(Vec3i vec) {
 		set(vec.x, vec.y, vec.z);
 	}
 }

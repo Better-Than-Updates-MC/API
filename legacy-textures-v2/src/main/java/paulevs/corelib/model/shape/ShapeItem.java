@@ -3,30 +3,29 @@ package paulevs.corelib.model.shape;
 import java.util.Arrays;
 import java.util.Random;
 
-import net.minecraft.client.render.block.BlockRenderer;
 import net.minecraft.block.Block;
+import net.minecraft.client.render.block.BlockRenderer;
 import net.minecraft.world.BlockView;
-import paulevs.corelib.math.*;
-import paulevs.corelib.math.BlockFacing;
+import paulevs.corelib.CoreLib;
+import paulevs.corelib.math.LocationRandom;
+import paulevs.corelib.math.Vec3f;
+import paulevs.corelib.math.Vec3i;
 import paulevs.corelib.texture.UVPair;
 
-public abstract class Shape {
-	protected static final boolean[] RENDER_WORLD = new boolean[6];
+public abstract class ShapeItem {
 	protected static final boolean[] RENDER_FACE = new boolean[6];
-	protected static final UVPair[] DESTRUCTION = new UVPair[10];
 
 	private static final LocationRandom RANDOM = new LocationRandom();
 	protected static final Vec3f RENDER_POS = new Vec3f();
 	protected static final Vec3f OFFSET = new Vec3f();
-	protected static final Vector3i POS = new Vector3i();
+	protected static final Vec3i POS = new Vec3i();
 	protected static BlockRenderer renderer;
-	protected static BlockView blockView;
+	protected static BlockView blockView = CoreLib.ITEM_VIEW;
 	protected static float light = 1;
-	protected static int color = 0xFFFFFF;
+	protected static int color = 0xFFFFFFFF;
 	protected static Block block = Block.STONE;
 	protected static UVPair uv = new UVPair();
 	protected static int meta = 0;
-	protected static int destruction = -1;
 
 	public static void setPos(int x, int y, int z) {
 		POS.set(x, y, z);
@@ -46,39 +45,39 @@ public abstract class Shape {
 	}
 
 	public static void setRenderer(BlockRenderer renderer) {
-		Shape.renderer = renderer;
+		ShapeItem.renderer = renderer;
 	}
 
 	public static void setBlockView(BlockView blockView) {
-		Shape.blockView = blockView;
+		ShapeItem.blockView = blockView;
 	}
 
 	public static void setColor(int color) {
-		Shape.color = color;
+		ShapeItem.color = color;
 	}
 
 	public static void setColorWhite() {
-		Shape.color = 0xFFFFFF;
+		ShapeItem.color = 0xFFFFFFFF;
 	}
 
 	public static void setColorFromWorld() {
-		Shape.color = block.getColorMultiplier(blockView, POS.x, POS.y, POS.z);
+		ShapeItem.color = block.getColorMultiplier(blockView, POS.x, POS.y, POS.z);
 	}
 
 	public static void setUV(UVPair uv) {
-		Shape.uv = destruction < 0 ? uv : getDestruction();
+		ShapeItem.uv = uv;
 	}
 
 	public static void setLight(float light) {
-		Shape.light = light;
+		ShapeItem.light = light;
 	}
 
 	public static void setLightFromWorld() {
-		Shape.light = block.getColorMultiplier(blockView, POS.x, POS.y, POS.z);
+		ShapeItem.light = block.getBrightness(blockView, POS.x, POS.y, POS.z);
 	}
 
 	public static void setBlock(Block block) {
-		Shape.block = block;
+		ShapeItem.block = block;
 	}
 
 	public static Random getRandomForLocation() {
@@ -110,55 +109,22 @@ public abstract class Shape {
 	}
 
 	public static void setMeta(int meta) {
-		Shape.meta = meta;
+		ShapeItem.meta = meta;
 	}
 
 	public static int getMeta() {
 		return meta;
 	}
 
-	public static void setWorldCulling(boolean ignore) {
-		if (ignore) {
-			Arrays.fill(RENDER_WORLD, true);
-		}
-		else {
-			for (BlockFacing facing: BlockFacing.getValues()) {
-				int id = facing.getID();
-				int x = facing.offsetX(POS.x);
-				int y = facing.offsetY(POS.y);
-				int z = facing.offsetZ(POS.z);
-				RENDER_WORLD[id] = block.isSideRendered(blockView, x, y, z, id);
-			}
-		}
-	}
-
-	public static void setFaceRendering(BlockFacing facing, boolean renderFace) {
-		RENDER_FACE[facing.getID()] = renderFace;
+	public static void setFaceRendering(int index, boolean renderFace) {
+		RENDER_FACE[index] = renderFace;
 	}
 
 	public static void drawAll() {
 		Arrays.fill(RENDER_FACE, true);
 	}
 
-	protected boolean shouldRenderFace(BlockFacing facing) {
-		int index = facing.getID();
-		return RENDER_WORLD[index] && RENDER_FACE[index];
-	}
-
-	public static Block getBlock() {
-		return block;
-	}
-	
-	public static void setDestruction(int destruction) {
-		Shape.destruction = destruction;
-	}
-	
-	private static UVPair getDestruction() {
-		if (DESTRUCTION[0] == null) {
-			for (int i = 0; i < 10; i++) {
-				DESTRUCTION[i] = UVPair.getVanillaUV(240 + i);
-			}
-		}
-		return DESTRUCTION[MHelper.clamp(destruction, 0, 9)];
+	protected static boolean shouldRenderFace(int index) {
+		return RENDER_FACE[index];
 	}
 }

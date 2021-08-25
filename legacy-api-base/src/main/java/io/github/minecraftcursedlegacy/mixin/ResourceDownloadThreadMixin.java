@@ -55,8 +55,7 @@ public class ResourceDownloadThreadMixin {
 	@Shadow
 	private Minecraft client;
 	@Shadow
-	private boolean field_139;
-
+	private boolean cancelled;
 
 	@ModifyConstant(method = "run", constant = @Constant(stringValue = "http://s3.amazonaws.com/MinecraftResources/"), remap = false, require = 0)
 	public String run(String string) {
@@ -117,7 +116,7 @@ public class ResourceDownloadThreadMixin {
 								e.printStackTrace();
 							}
 
-							if (field_139) return; //Cancelled loading
+							if (cancelled) return; //Cancelled loading
 						}
 
 						client.loadSoundFromDir(entry.getKey(), asset);

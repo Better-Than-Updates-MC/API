@@ -35,6 +35,7 @@ import tk.valoeghese.zoesteriaconfig.api.template.ConfigTemplate;
 /**
  * Class for loading and saving mod configs.
  */
+@SuppressWarnings("unused")
 public final class Configs {
 	private Configs() {
 		// NO-OP
@@ -50,9 +51,10 @@ public final class Configs {
 	 * @throws IOException if there is an error creating the config file.
 	 * @throws NullPointerException if {@code configId} is null
 	 */
+	@SuppressWarnings("deprecation")
 	public static WritableConfig loadOrCreate(Identifier configId, ConfigTemplate defaults) throws IOException {
 		File directory = new File(FabricLoader.getInstance().getConfigDirectory(), configId.getNamespace());
-		directory.mkdirs();
+		if (directory.mkdirs()) System.out.println("Created config directory.");
 		File configFile = new File(directory, configId.getName() + ".cfg");
 		boolean createNew = configFile.createNewFile();
 
