@@ -23,18 +23,14 @@
 
 package io.github.minecraftcursedlegacy.api.registry;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Spliterator;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -48,15 +44,16 @@ import net.minecraft.util.io.CompoundTag;
 /**
  * Registry for game content.
  */
+@SuppressWarnings("unused")
 public class Registry<T> implements Iterable<T> {
 	/**
 	 * Creates a new registry object.
 	 * @param clazz the class of the values in this registry.
-	 * @param registryName the identifier for this registry.
+	 * @param registryId the identifier for this registry.
 	 * @param defaultValue the default value for ids in registry.
 	 */
-	public Registry(Class<T> clazz, Id registryName, @Nullable T defaultValue) {
-		this.registryName = registryName;
+	public Registry(Class<T> clazz, @NotNull Identifier registryId, @Nullable T defaultValue) {
+		this.registryId = registryId;
 		this.defaultValue = defaultValue;
 		RegistryRemapper.addRegistry(this);
 
@@ -64,11 +61,10 @@ public class Registry<T> implements Iterable<T> {
 		this.remapEvent = RegistryImpl.createRemapEvent(clazz);
 	}
 
-	protected final BiMap<Id, T> byRegistryId = HashBiMap.create();
+	protected final BiMap<@NotNull Identifier, @NotNull T> byRegistryId = HashBiMap.create();
 	protected final BiMap<Integer, T> bySerialisedId = HashBiMap.create();
-	private final Id registryName;
-	@Nullable
-	private final T defaultValue;
+	private final @NotNull Identifier registryId;
+	private final @Nullable T defaultValue;
 	private final Event<RegistryEntryAddedCallback<T>> event;
 	// Remap stuff
 	private RegistryDiffImpl<T> lastDiff;
@@ -86,10 +82,12 @@ public class Registry<T> implements Iterable<T> {
 	 * @param value the value to register to the registry.
 	 * @return the value registered to the registry.
 	 */
-	public <E extends T> E registerValue(Id id, E value) {
+	public <E extends T> E registerValue(@NotNull Identifier id, E value) {
 		if (locked) {
 			throw new RuntimeException("Registry is locked!");
 		}
+
+		Objects.requireNonNull(id, "Null ID in registry!");
 
 		int serialisedId = this.getNextSerialisedId();
 		this.byRegistryId.put(id, value);
@@ -104,10 +102,12 @@ public class Registry<T> implements Iterable<T> {
 	 * @param valueProvider the provider of the value to register to the registry, which takes the int serialised id.
 	 * @return the value registered to the registry.
 	 */
-	public <E extends T> E register(Id id, IntFunction<E> valueProvider) {
+	public <E extends T> E register(@NotNull Identifier id, @NotNull IntFunction<E> valueProvider) {
 		if (locked) {
 			throw new RuntimeException("Registry is locked!");
 		}
+
+		Objects.requireNonNull(id, "Null ID in registry!");
 
 		int serialisedId = this.getNextSerialisedId();
 		E value = valueProvider.apply(serialisedId);
@@ -123,34 +123,33 @@ public class Registry<T> implements Iterable<T> {
 	 * @param id the registry id of the registered value.
 	 * @param value the registered value.
 	 */
-	protected void onRegister(int serialisedId, Id id, T value) {
+	protected void onRegister(int serialisedId, @NotNull Identifier id, T value) {
 		this.event.invoker().onEntryAdded(value, id, serialisedId);
 	}
 
 	/**
 	 * Looks up the id in the registry.
 	 * @param id the specified id to look up in the registry.
-	 * @return the value specified by the id in the registry, if it exists. Otherwise returns the default value.
+	 * @return the value specified by the id in the registry, if it exists. Otherwise, returns the default value.
 	 */
-	@Nullable
-	public T getById(Id id) {
+	@SuppressWarnings("ConstantConditions")
+	public @Nullable T getById(@NotNull Identifier id) {
 		return this.byRegistryId.getOrDefault(id, this.defaultValue);
 	}
 
 	/**
 	 * Looks up the id of the value in the registry.
 	 * @param value the specified value to find the id of.
-	 * @return the id of the value in the registry, if it exists. Otherwise returns null.
+	 * @return the id of the value in the registry, if it exists. Otherwise, returns null.
 	 */
-	@Nullable
-	public Id getId(T value) {
+	public @NotNull Identifier getId(T value) {
 		return this.byRegistryId.inverse().get(value);
 	}
 
 	/**
 	 * Looks up the int serialised id in the registry.
 	 * @param serialisedId the specified serialised id to look up in the registry.
-	 * @return the value specified by the serialised id in the registry, if it exists. Otherwise returns the default value.
+	 * @return the value specified by the serialised id in the registry, if it exists. Otherwise, returns the default value.
 	 */
 	public T getBySerialisedId(int serialisedId) {
 		return this.bySerialisedId.getOrDefault(serialisedId, this.defaultValue);
@@ -159,7 +158,7 @@ public class Registry<T> implements Iterable<T> {
 	/**
 	 * Looks up the int serialised id of the value in the registry.
 	 * @param value the specified value to find the serialised id of.
-	 * @return the int serialised id of the value in the registry, if it exists. Otherwise returns null.
+	 * @return the int serialised id of the value in the registry, if it exists. Otherwise, returns null.
 	 */
 	public int getSerialisedId(T value) {
 		return this.bySerialisedId.inverse().get(value);
@@ -168,8 +167,8 @@ public class Registry<T> implements Iterable<T> {
 	/**
 	 * @return the identifier of this registry.
 	 */
-	public final Id getRegistryName() {
-		return this.registryName;
+	public final @NotNull Identifier getRegistryId() {
+		return this.registryId;
 	}
 
 	/**
@@ -196,13 +195,13 @@ public class Registry<T> implements Iterable<T> {
 
 		// prepare
 		this.beforeRemap(tag);
-		List<Entry<Id, T>> unmapped = new ArrayList<>();
-		Set<Entry<Id, T>> toMap = this.byRegistryId.entrySet();
+		List<Entry<Identifier, T>> unmapped = new ArrayList<>();
+		Set<Entry<Identifier, T>> toMap = this.byRegistryId.entrySet();
 		this.lastDiff = new RegistryDiffImpl<>(this.bySerialisedId);
 		this.bySerialisedId.clear();
 
 		// remap serialised ids
-		for (Entry<Id, T> entry : toMap) {
+		for (Entry<Identifier, T> entry : toMap) {
 			String key = entry.getKey().toString();
 
 			if (tag.containsKey(key)) {
@@ -231,17 +230,17 @@ public class Registry<T> implements Iterable<T> {
 	/**
 	 * Called to add new values to the registry during remapping. (i.e. values that were not previously in the remapper).
 	 */
-	protected void addNewValues(List<Entry<Id, T>> unmapped, CompoundTag tag) {
+	protected void addNewValues(List<Entry<Identifier, T>> unmapped, CompoundTag tag) {
 		int serialisedId = this.getStartSerialisedId();
 
-		for (Entry<Id, T> entry : unmapped) {
+		for (Entry<Identifier, T> entry : unmapped) {
 			T value = entry.getValue();
 
 			while (this.bySerialisedId.get(serialisedId) != null) {
 				++serialisedId;
 			}
 
-			// readd to registry
+			// read to registry
 			this.bySerialisedId.put(serialisedId, value);
 			this.lastDiff.addEntry(serialisedId, value);
 			// add to tag
@@ -256,7 +255,7 @@ public class Registry<T> implements Iterable<T> {
 	public final CompoundTag toTag() {
 		CompoundTag tag = new CompoundTag();
 
-		for (Entry<Id, T> entry : this.byRegistryId.entrySet()) {
+		for (Entry<Identifier, T> entry : this.byRegistryId.entrySet()) {
 			tag.put(entry.getKey().toString(), this.bySerialisedId.inverse().get(entry.getValue()));
 		}
 
@@ -283,7 +282,7 @@ public class Registry<T> implements Iterable<T> {
 
 	/**
 	 * Called before registry remapping for this registry.
-	 * Override this to add finalisations for after registry remapping.
+	 * Override this to add finalizations for after registry remapping.
 	 * The default implementation invokes this registry's {@linkplain RegistryRemappedCallback}.
 	 */
 	protected void postRemap() {
@@ -317,7 +316,7 @@ public class Registry<T> implements Iterable<T> {
 	 *
 	 * @return the ids of all objects stored in this registry.
 	 */
-	public Set<Id> ids() {
+	public Set<Identifier> ids() {
 		return this.byRegistryId.keySet();
 	}
 
@@ -345,7 +344,7 @@ public class Registry<T> implements Iterable<T> {
 	}
 
 	@Override
-	@Nonnull
+	@NotNull
 	public Iterator<T> iterator() {
 		return this.values().iterator();
 	}
@@ -364,7 +363,7 @@ public class Registry<T> implements Iterable<T> {
 	 * @param consumer the callback function.
 	 * @since 1.1.0
 	 */
-	public void forEach(BiConsumer<Id, ? super T> consumer) {
+	public void forEach(BiConsumer<@NotNull Identifier, ? super T> consumer) {
 		this.byRegistryId.forEach(consumer);
 	}
 

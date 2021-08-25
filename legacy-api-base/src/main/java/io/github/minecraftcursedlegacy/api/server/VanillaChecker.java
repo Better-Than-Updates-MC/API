@@ -24,7 +24,7 @@
 package io.github.minecraftcursedlegacy.api.server;
 
 import io.github.minecraftcursedlegacy.impl.base.VanillaCheckerImpl;
-import net.minecraft.entity.player.Player;
+import net.minecraft.entity.player.PlayerEntity;
 
 public final class VanillaChecker {
 	private VanillaChecker() {
@@ -33,7 +33,7 @@ public final class VanillaChecker {
 	/**
 	 * Checks if a player is using a Vanilla Client.
 	 */
-	public static boolean isVanilla(Player player) {
+	public static boolean isVanilla(PlayerEntity player) {
 		return VanillaCheckerImpl.playermap.get(player.name);
 	}
 }

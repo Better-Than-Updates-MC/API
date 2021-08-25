@@ -37,7 +37,7 @@ import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import io.github.minecraftcursedlegacy.api.registry.Registry;
 import net.minecraft.util.io.AbstractTag;
@@ -84,7 +84,7 @@ public class RegistryRemapper {
 				LOGGER.info("Collecting Registry Data.");
 
 				for (Registry<?> registry : REGISTRIES) {
-					cache.put(registry.getRegistryName().toString(), registry.toTag());
+					cache.put(registry.getRegistryId().toString(), registry.toTag());
 				}
 
 				// write
@@ -106,7 +106,7 @@ public class RegistryRemapper {
 		LOGGER.info(isNull ? "Remapping Registries." : "Remapping Registries and storing registry updates.");
 		while (iter.hasNext()) {
 			Registry<?> registry = iter.next(); // get next registry
-			String key = registry.getRegistryName().toString(); // get name
+			String key = registry.getRegistryId().toString(); // get name
 
 			if (isNull) {
 				if (readFrom.containsKey(key)) { // Otherwise, just remap

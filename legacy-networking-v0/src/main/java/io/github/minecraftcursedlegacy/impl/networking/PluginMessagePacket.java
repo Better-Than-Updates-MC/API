@@ -76,8 +76,8 @@ public class PluginMessagePacket extends AbstractPacket {
 	}
 
 	@Override
-	public void handle(PacketHandler arg) {
-		PluginChannelRegistryImpl.handlePacket(arg, this);
+	public void apply(PacketHandler handler) {
+		PluginChannelRegistryImpl.handlePacket(handler, this);
 	}
 
 	@Override

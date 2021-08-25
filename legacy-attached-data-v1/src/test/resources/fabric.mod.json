@@ -6,7 +6,8 @@
   "name": "Attached Data Test Mod",
   "description": "Tests for the attached data module of Cursed Legacy API.",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
   ],
   "contact": {
     "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",
@@ -14,13 +15,12 @@
   },
 
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "init": [
       "io.github.minecraftcursedlegacy.test.ItemDataTest",
-      "io.github.minecraftcursedlegacy.test.LevelPropertiesDataTest"
+	    "io.github.minecraftcursedlegacy.test.WorldPropertiesDataTest"
     ]
   },
 

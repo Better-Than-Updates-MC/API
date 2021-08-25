@@ -23,7 +23,7 @@
 
 package io.github.minecraftcursedlegacy.api.command.dispatcher;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import io.github.minecraftcursedlegacy.api.command.Sender;
 import net.fabricmc.api.EnvType;

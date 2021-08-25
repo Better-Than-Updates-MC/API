@@ -27,8 +27,8 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.github.minecraftcursedlegacy.api.terrain.ChunkGenEvents;
-import net.minecraft.level.Level;
-import net.minecraft.level.structure.Feature;
+import net.minecraft.world.World;
+import net.minecraft.world.feature.Feature;
 
 /**
  * A combination of a {@linkplain Feature} and a {@linkplain Placement} for ease of use in generation.
@@ -44,26 +44,31 @@ public final class PositionedFeature extends Feature {
 
 	/**
 	 * Generate this positioned feature in the world, assuming the root positions of x, z are given (i.e. those provided by {@linkplain ChunkGenEvents.Decorate}, chunkX * 16 and chunkZ * 16).
-	 * @param level the level in which to generate the feature.
+	 * @param world the world in which to generate the feature.
 	 * @param rand the worldgen pseudorandom number generator.
 	 * @param startX the start x position for generation.
 	 * @param startZ the start z position for generation.
 	 * @return whether the feature successfully generated at least once.
 	 */
-	public boolean generate(Level level, Random rand, int startX, int startZ) {
-		return this.generate(level, rand, startX, 0, startZ);
+	public boolean generate(World world, Random rand, int startX, int startZ) {
+		return this.generate(world, rand, startX, 0, startZ);
 	}
 
 	/**
 	 * Generate this positioned feature in various positions relative to the given start coordinates.
+	 * @param world the world in which to generate the feature.
+	 * @param rand the worldgen pseudorandom number generator.
+	 * @param x the start x position for generation.
+	 * @param y the start y position for generation.
+	 * @param z the start z position for generation.
 	 * @return true if at least one feature generated successfully.
 	 */
 	@Override
-	public boolean generate(Level level, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, int x, int y, int z) {
 		AtomicBoolean success = new AtomicBoolean(false);
 
-		this.placement.getPositions(level, rand, x, y, z).forEach(pos -> {
-			if (this.feature.generate(level, rand, pos.x, pos.y, pos.z)) {
+		this.placement.getPositions(world, rand, x, y, z).forEach(pos -> {
+			if (this.feature.generate(world, rand, pos.x, pos.y, pos.z)) {
 				success.set(true);
 			}
 		});
@@ -72,7 +77,7 @@ public final class PositionedFeature extends Feature {
 	}
 
 	@Override
-	public void setupTreeGeneration(double d, double d1, double d2) {
-		this.feature.setupTreeGeneration(d, d1, d2);
+	public void setScale(double d, double d1, double d2) {
+		this.feature.setScale(d, d1, d2);
 	}
 }

@@ -1,5 +1,5 @@
 archivesBaseName = 'legacy-api-base'
-version = getSubprojectVersion(project, '1.0.0')
+version = rootProject.version
 
 dependencies {
 }

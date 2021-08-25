@@ -31,27 +31,29 @@ import java.io.UncheckedIOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-import javax.annotation.Nullable;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import javax.imageio.ImageIO;
 
 import com.google.gson.Gson;
-
-import io.github.minecraftcursedlegacy.api.registry.Id;
 
 /**
  * Resource Loader for models and textures.
  * @since 1.1.0
  */
+@SuppressWarnings("unused")
 public class ResourceLoader {
 	/**
 	 * Retrieves the resource specified as a JModel.
 	 * @param id the resource id, including type.
-	 * @param type the subfile type.
+	 * @param type the sub-file type.
 	 * @return the loaded model object.
 	 */
-	public static ModelJson getModel(Id id, ModelType type) {
-		Id modelId = new Id(id.getNamespace(), type.getLocation() + "/" + id.getName());
+	public static ModelJson getModel(@NotNull Identifier id, ModelType type) {
+		Identifier modelId = new Identifier(id.getNamespace(), type.getLocation() + "/" + id.getName());
 		ModelJson prelim = getModel(modelId);
 
 		if (prelim == null) {
@@ -67,7 +69,7 @@ public class ResourceLoader {
 	 * @return the loaded model object.
 	 */
 	@Nullable
-	private static ModelJson getModel(Id id) {
+	private static ModelJson getModel(Identifier id) {
 		return MODELS.computeIfAbsent(id, id_ -> {
 			InputStream stream = getStream(id_, "models", ".json");
 			ModelJson result = stream == null ? null : GSON.fromJson( // load from json
@@ -76,14 +78,14 @@ public class ResourceLoader {
 
 			if (result != null) { // if not null, resolve parent stuff
 				// recursive initialisation!
-				Id next = new Id(result.parent);
+				Identifier next = new Identifier(result.parent);
 				ModelSetup setup = SETUPS.get(next); // get the model setup to check if it's a root java impl or an intermediary step
 
 				if (setup == null) { // if intermediary, we do ye olde recursive function
 					ModelJson parent = getModel(next);
 
 					// fill in parent values where not set
-					for (Map.Entry<String, String> entry : parent.textures.entrySet()) {
+					for (Map.Entry<String, String> entry : Objects.requireNonNull(parent, "Parent mustn't be null.").textures.entrySet()) {
 						result.textures.putIfAbsent(entry.getKey(), entry.getValue());
 					}
 
@@ -104,18 +106,17 @@ public class ResourceLoader {
 	}
 
 	@Nullable
-	static ModelJson getModelDirect(Id id) {
+	static ModelJson getModelDirect(Identifier id) {
 		return MODELS.get(id);
 	}
 
 	/**
 	 * Retrieves the resource specified as a BufferedImage, caching results.
 	 * @param id the resource id.
-	 * @param type the subfile type. item or tile usually.
 	 * @return the respective buffered image.
 	 */
 	@Nullable
-	public static BufferedImage getTexture(Id id) {
+	public static BufferedImage getTexture(Identifier id) {
 		return TEXTURES.computeIfAbsent(id, id_ -> {
 			try {
 				URL url = getURL(id_, "textures", ".png");
@@ -127,7 +128,7 @@ public class ResourceLoader {
 	}
 
 	@Nullable
-	public static String getValidatedTextureLocation(Id provided) {
+	public static String getValidatedTextureLocation(Identifier provided) {
 		String resourceLocation = getResourceLocation(provided, "textures", ".png");
 
 		// validate
@@ -138,33 +139,36 @@ public class ResourceLoader {
 		return resourceLocation;
 	}
 
-	public static ModelSetup addModelSetup(Id id, ModelSetup setup) {
+	@SuppressWarnings("UnusedReturnValue")
+	public static ModelSetup addModelSetup(Identifier id, ModelSetup setup) {
 		SETUPS.put(id, setup);
 		return setup;
 	}
 
 	@Nullable
-	static ModelSetup getSetup(Id id) {
+	static ModelSetup getSetup(Identifier id) {
 		return SETUPS.get(id);
 	}
 
 	@Nullable
-	private static InputStream getStream(Id id, String locator, String extension) {
+	@SuppressWarnings("SameParameterValue")
+	private static InputStream getStream(Identifier id, String locator, String extension) {
 		return ResourceLoader.class.getClassLoader().getResourceAsStream(getResourceLocation(id, locator, extension));
 	}
 
 	@Nullable
-	private static URL getURL(Id id, String locator, String extension) {
+	@SuppressWarnings("SameParameterValue")
+	private static URL getURL(Identifier id, String locator, String extension) {
 		String s = getResourceLocation(id, locator, extension);
 		return ResourceLoader.class.getClassLoader().getResource(s);
 	}
 
-	private static String getResourceLocation(Id id, String locator, String extension) {
+	private static String getResourceLocation(Identifier id, String locator, String extension) {
 		return "assets/" + id.getNamespace() + "/" + locator + "/" + id.getName() + extension;
 	}
 
-	private static final Map<Id, ModelSetup> SETUPS = new HashMap<>();
-	private static final Map<Id, ModelJson> MODELS = new HashMap<>();
-	private static final Map<Id, BufferedImage> TEXTURES = new HashMap<>();
+	private static final Map<Identifier, ModelSetup> SETUPS = new HashMap<>();
+	private static final Map<Identifier, ModelJson> MODELS = new HashMap<>();
+	private static final Map<Identifier, BufferedImage> TEXTURES = new HashMap<>();
 	private static final Gson GSON = new Gson();
 }

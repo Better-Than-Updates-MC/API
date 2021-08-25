@@ -23,7 +23,7 @@
 
 package io.github.minecraftcursedlegacy.impl.registry;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import net.minecraft.entity.Entity;
 
 public class EntityType {
@@ -40,7 +40,7 @@ public class EntityType {
 		this.vanillaRegistryStringId = vanillaRegistryStringId;
 	}
 
-	public EntityType(Class<? extends Entity> clazz, Id id) {
+	public EntityType(Class<? extends Entity> clazz, Identifier id) {
 		this.clazz = clazz;
 		this.vanillaRegistryStringId = id.toString();
 	}
@@ -53,7 +53,7 @@ public class EntityType {
 		return vanillaRegistryStringId;
 	}
 
-	public Id getId() {
-		return new Id(vanillaRegistryStringId);
+	public Identifier getId() {
+		return new Identifier(vanillaRegistryStringId);
 	}
 }

@@ -3,14 +3,14 @@
   "package": "io.github.minecraftcursedlegacy.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinLoginRequestPacketClient",
-    "MixinOverlay",
-    "MixinTitleScreen",
-    "MixinResourceDownloadThread"
+	  "LoginRequestPacketClientMixin",
+    "InGameHudMixin",
+    "TitleScreenMixin",
+    "ResourceDownloadThreadMixin"
   ],
   "server": [
-    "MixinServerLoginPacketHandler",
-    "MixinServerPlayerPacketHandler"
+    "ServerLoginPacketHandlerMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

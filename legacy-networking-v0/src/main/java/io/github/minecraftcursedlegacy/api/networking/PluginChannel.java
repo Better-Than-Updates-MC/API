@@ -23,11 +23,11 @@
 
 package io.github.minecraftcursedlegacy.api.networking;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.impl.networking.PluginMessagePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketHandler;
-import net.minecraft.server.player.ServerPlayer;
+import net.minecraft.server.entity.player.ServerPlayerEntity;
 
 public abstract class PluginChannel {
 	/**
@@ -35,7 +35,7 @@ public abstract class PluginChannel {
 	 * This should always have the same return value.
 	 * @return Channel Identifier
 	 */
-	public abstract Id getChannelIdentifier();
+	public abstract Identifier getChannelIdentifier();
 
 	/**
 	 * Called when this channel receives a packet.
@@ -49,16 +49,16 @@ public abstract class PluginChannel {
 	 * @param data The data to send
 	 * @param player The player to send the data to
 	 */
-	public void send(byte[] data, ServerPlayer player) {
+	public void send(byte[] data, ServerPlayerEntity player) {
 		player.packetHandler.send(new PluginMessagePacket(getChannelIdentifier().toString(), data));
 	}
 
 	/**
 	 * Client packet send method.
 	 * @param data The data to send
-	 * @param mc The local Minecraft
+	 * @param client The Minecraft client
 	 */
-	public void send(byte[] data, Minecraft mc) {
-		mc.method_2145().sendPacket(new PluginMessagePacket(getChannelIdentifier().toString(), data));
+	public void send(byte[] data, Minecraft client) {
+		client.getPacketHandler().sendPacket(new PluginMessagePacket(getChannelIdentifier().toString(), data));
 	}
 }

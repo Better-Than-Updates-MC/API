@@ -1,10 +1,10 @@
 package io.github.minecraftcursedlegacy.impl.command;
 
-import io.github.minecraftcursedlegacy.accessor.command.AccessorServerPlayPacketHandler;
+import io.github.minecraftcursedlegacy.accessor.command.ServerPlayPacketHandlerAccessor;
 import io.github.minecraftcursedlegacy.api.command.Sender;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.entity.player.Player;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandSource;
 
 @Environment(EnvType.SERVER)
@@ -15,9 +15,9 @@ public class ServerCommandSender implements Sender {
 		this.source = source;
 	}
 
-	public Player getPlayer() {
-		if (source instanceof AccessorServerPlayPacketHandler) {
-			return ((AccessorServerPlayPacketHandler) source).getPlayer();
+	public PlayerEntity getPlayer() {
+		if (source instanceof ServerPlayPacketHandlerAccessor) {
+			return ((ServerPlayPacketHandlerAccessor) source).getPlayer();
 		}
 		return null;
 	}

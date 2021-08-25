@@ -24,19 +24,19 @@
 package io.github.minecraftcursedlegacy.test;
 
 import io.github.minecraftcursedlegacy.api.event.ActionResult;
-import io.github.minecraftcursedlegacy.api.event.TileInteractionCallback;
+import io.github.minecraftcursedlegacy.api.event.BlockInteractionCallback;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.player.ServerPlayer;
+import net.minecraft.server.entity.player.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 
 public class NetworkingTestServer implements DedicatedServerModInitializer {
 	@Override
 	public void onInitializeServer() {
-		TileInteractionCallback.EVENT.register((player, level, item, tile, x, y, z, face) -> {
+		BlockInteractionCallback.EVENT.register((player, world, item, block, x, y, z, face) -> {
 			// This may not trigger every time due to load order.
 			// That is ok.
-			if (face == 0 && level instanceof ServerLevel && player instanceof ServerPlayer) {
-				NetworkingTest.testPluginChannel.send(new byte[] {(byte) tile.id}, (ServerPlayer) player);
+			if (face == 0 && world instanceof ServerWorld && player instanceof ServerPlayerEntity) {
+				NetworkingTest.testPluginChannel.send(new byte[] {(byte) block.id}, (ServerPlayerEntity) player);
 			}
 
 			return ActionResult.PASS;

@@ -6,7 +6,8 @@
   "name": "Commands Test Mod",
   "description": "Tests for the commands module of Cursed Legacy API.",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
   ],
   "contact": {
     "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",

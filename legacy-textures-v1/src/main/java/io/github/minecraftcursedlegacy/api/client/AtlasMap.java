@@ -29,12 +29,12 @@ import io.github.minecraftcursedlegacy.impl.texture.AtlasMapper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.texture.TextureManager;
-import net.minecraft.item.ItemInstance;
-import net.minecraft.item.ItemType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import paulevs.corelib.registry.ModelRegistry;
 
 /**
- * Utility methods for {@link ItemType}s which use textures from other than the main item atlas.
+ * Utility methods for {@link Item}s which use textures from other than the main item atlas.
  *
  * @discouraged Unless required, the 1.1.0 model system is preferred, or directly use {@linkplain ModelRegistry paulevs' corelib}.
  * @since 0.5.0
@@ -46,34 +46,34 @@ public final class AtlasMap {
 	}
 
 	/**
-	 * Register the given atlas for use with the {@link ItemType} corresponding to the given 
-	 * {@link ItemInstance#itemId} when it has the given {@link ItemInstance#getDamage()}.
+	 * Register the given atlas for use with the {@link Item} corresponding to the given 
+	 * {@link ItemStack#itemId} when it has the given {@link ItemStack#getDamage()}.
 	 *
-	 * @param stack The item type and damage which uses the given atlas.
+	 * @param stack The item and damage which uses the given atlas.
 	 * @param atlas The location of the custom atlas.
 	 *
 	 * @throws NullPointerException If atlas is <tt>null</tt>.
 	 */
-	public static void registerAtlas(ItemInstance stack, String atlas) {
+	public static void registerAtlas(ItemStack stack, String atlas) {
 		registerAtlas(stack.itemId, stack.getDamage(), atlas);
 	}
 
 	/**
-	 * Register the given atlas for use with the given {@link ItemType},
-	 * regardless of what {@link ItemInstance#getDamage()} on an instance of it returns.
+	 * Register the given atlas for use with the given {@link Item},
+	 * regardless of what {@link ItemStack#getDamage()} on an instance of it returns.
 	 *
 	 * @param item The item which uses the given atlas.
 	 * @param atlas The location of the custom atlas.
 	 *
 	 * @throws NullPointerException If atlas is <tt>null</tt>.
 	 */
-	public static void registerAtlas(ItemType item, String atlas) {
+	public static void registerAtlas(Item item, String atlas) {
 		registerAtlas(item.id, atlas);
 	}
 
 	/**
-	 * Register the given atlas for use with the {@link ItemType} corresponding to the given ID
-	 * when {@link ItemInstance#getDamage()} on an instance of it is the same as the given meta.
+	 * Register the given atlas for use with the {@link Item} corresponding to the given ID
+	 * when {@link ItemStack#getDamage()} on an instance of it is the same as the given meta.
 	 *
 	 * @param itemID The ID of the item which uses the given atlas.
 	 * @param meta The damage value an instance must have to use this atlas.
@@ -86,8 +86,8 @@ public final class AtlasMap {
 	}
 
 	/**
-	 * Register the given atlas for use with the {@link ItemType} corresponding to the given ID,
-	 * regardless of what {@link ItemInstance#getDamage()} on an instance of it returns.
+	 * Register the given atlas for use with the {@link Item} corresponding to the given ID,
+	 * regardless of what {@link ItemStack#getDamage()} on an instance of it returns.
 	 *
 	 * @param itemID The ID of the item which uses the given atlas.
 	 * @param atlas The location of the custom atlas.
@@ -99,29 +99,29 @@ public final class AtlasMap {
 	}
 
 	/**
-	 * Register the given sprite for use with the {@link ItemType} corresponding to the given 
-	 * {@link ItemInstance#itemId} when it has the given {@link ItemInstance#getDamage()}.
+	 * Register the given sprite for use with the {@link Item} corresponding to the given 
+	 * {@link ItemStack#itemId} when it has the given {@link ItemStack#getDamage()}.
 	 *
-	 * @param stack The item type and damage which uses the given sprite.
+	 * @param stack The item and damage which uses the given sprite.
 	 * @param sprite The location of the custom sprite.
 	 *
-	 * @return The atlas positioning for use with {@link ItemType#setTexturePosition(int)}.
+	 * @return The atlas positioning for use with {@link Item#setTexturePosition(int)}.
 	 *
 	 * @throws NullPointerException If sprite is <tt>null</tt>.
 	 * @throws IllegalArgumentException If there is already an atlas or sprite registered for the given ID and meta.
 	 */
-	public static int registerSprite(ItemInstance stack, String sprite) {
+	public static int registerSprite(ItemStack stack, String sprite) {
 		return registerSprite(stack.itemId, stack.getDamage(), sprite);
 	}
 
 	/**
-	 * Register the given sprite for use with the given {@link ItemType},
-	 * regardless of what {@link ItemInstance#getDamage()} on an instance of it returns.
+	 * Register the given sprite for use with the given {@link Item},
+	 * regardless of what {@link ItemStack#getDamage()} on an instance of it returns.
 	 *
 	 * @param item The item which uses the given sprite.
 	 * @param sprite The location of the custom sprite.
 	 *
-	 * @return The atlas positioning for use with {@link ItemType#setTexturePosition(int)}.
+	 * @return The atlas positioning for use with {@link Item#setTexturePosition(int)}.
 	 *
 	 * @throws NullPointerException If sprite is <tt>null</tt>.
 	 * @throws IllegalArgumentException If there is already an atlas or sprite registered for the given ID.
@@ -129,19 +129,19 @@ public final class AtlasMap {
 	 * @deprecated in favour of the 1.1.0 model loading system.
 	 */
 	@Deprecated
-	public static int registerSprite(ItemType item, String sprite) {
+	public static int registerSprite(Item item, String sprite) {
 		return registerSprite(item.id, sprite);
 	}
 
 	/**
-	 * Register the given sprite for use with the {@link ItemType} corresponding to the given ID
-	 * when {@link ItemInstance#getDamage()} on an instance of it is the same as the given meta.
+	 * Register the given sprite for use with the {@link Item} corresponding to the given ID
+	 * when {@link ItemStack#getDamage()} on an instance of it is the same as the given meta.
 	 *
 	 * @param itemID The ID of the item which uses the given sprite.
 	 * @param meta The damage value an instance must have to use this sprite.
 	 * @param sprite The location of the custom sprite.
 	 *
-	 * @return The atlas positioning for use with {@link ItemType#setTexturePosition(int)}.
+	 * @return The atlas positioning for use with {@link Item#setTexturePosition(int)}.
 	 *
 	 * @throws NullPointerException If sprite is <tt>null</tt>.
 	 * @throws IllegalArgumentException If there is already an atlas or sprite registered for the given ID and meta.
@@ -151,13 +151,13 @@ public final class AtlasMap {
 	}
 
 	/**
-	 * Register the given sprite for use with the {@link ItemType} corresponding to the given ID,
-	 * regardless of what {@link ItemInstance#getDamage()} on an instance of it returns.
+	 * Register the given sprite for use with the {@link Item} corresponding to the given ID,
+	 * regardless of what {@link ItemStack#getDamage()} on an instance of it returns.
 	 *
 	 * @param itemID The ID of the item which uses the given sprite.
 	 * @param sprite The location of the custom sprite.
 	 *
-	 * @return The atlas positioning for use with {@link ItemType#setTexturePosition(int)}.
+	 * @return The atlas positioning for use with {@link Item#setTexturePosition(int)}.
 	 *
 	 * @throws NullPointerException If sprite is <tt>null</tt>.
 	 * @throws IllegalArgumentException If there is already an atlas or sprite registered for the given ID.
@@ -170,7 +170,7 @@ public final class AtlasMap {
 	}
 
 	/**
-	 * Get the atlas the given {@link ItemType} corresponding to the given ID has.
+	 * Get the atlas the given {@link Item} corresponding to the given ID has.
 	 *
 	 * @param manager The texture manager rendering the atlas.
 	 * @param itemID The ID of the item.
@@ -183,11 +183,11 @@ public final class AtlasMap {
 	}
 
 	/**
-	 * Get the atlas the given {@link ItemType} corresponding to the given ID has with the given damage.
+	 * Get the atlas the given {@link Item} corresponding to the given ID has with the given damage.
 	 *
 	 * @param manager The texture manager rendering the atlas.
 	 * @param itemID The ID of the item.
-	 * @param meta The damage of an {@link ItemInstance}.
+	 * @param meta The damage of an {@link ItemStack}.
 	 *
 	 * @return The texture ID of the custom atlas or {@link OptionalInt#empty()} if it uses the default one.
 	 *

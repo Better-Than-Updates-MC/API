@@ -27,7 +27,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import net.minecraft.util.io.CompoundTag;
 
 /**
@@ -46,7 +46,7 @@ public interface DataStorage {
 	 * @param id the id of the attached data
 	 * @param data the data to attach.
 	 */
-	void putAttachedData(Id id, AttachedData data);
+	void putAttachedData(Identifier id, AttachedData data);
 	/**
 	 * Retrieves the attached data for the id or attaches the default via a given supplier if it does not exist.
 	 * @param id the id of the attached data.
@@ -54,9 +54,9 @@ public interface DataStorage {
 	 * This supplier should be similar or equal to the one used in the built in {@linkplain DataManager}.
 	 * @return the data attached to the object.
 	 */
-	AttachedData getAttachedData(Id id, Supplier<AttachedData> supplier);
+	AttachedData getAttachedData(Identifier id, Supplier<AttachedData> supplier);
 	/**
 	 * Retrieves the entry set of all attached data on the object.
 	 */
-	Set<Entry<Id,AttachedData>> getAllAttachedData();
+	Set<Entry<Identifier,AttachedData>> getAllAttachedData();
 }

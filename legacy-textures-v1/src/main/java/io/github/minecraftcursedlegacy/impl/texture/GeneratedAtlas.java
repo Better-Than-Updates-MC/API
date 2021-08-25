@@ -89,11 +89,11 @@ class GeneratedAtlas implements Atlas {
 	@Environment(EnvType.CLIENT)
 	public int getTextureID(TextureManager manager) {
 		if (textureID < 0) {
-			textureID = manager.glLoadImage(image);
+			textureID = manager.getTextureId(image);
 			needsRefresh = false;
 		} else if (needsRefresh) {
 			needsRefresh = false;
-			manager.method_1089(image, textureID);
+			manager.bindImageToId(image, textureID);
 		}
 
 		CoreLib.selectedAtlas = null; // Reimplement corelib functionality in disabling corelib atlas when not necessary, since we don't trigger it in this method.

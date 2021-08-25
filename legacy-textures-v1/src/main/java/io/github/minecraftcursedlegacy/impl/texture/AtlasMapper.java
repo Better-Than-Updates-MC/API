@@ -162,7 +162,7 @@ public class AtlasMapper implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		Registries.ITEM_TYPE.getRemapEvent().register((registry, diff) -> {
+		Registries.ITEM.getRemapEvent().register((registry, diff) -> {
 			RegistryRemapper.LOGGER.info("Remapping custom texture atlases.");
 			Map<Integer, ItemAtlasUsage> displaced = new HashMap<>();
 

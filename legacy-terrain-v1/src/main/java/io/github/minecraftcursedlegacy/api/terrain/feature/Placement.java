@@ -23,12 +23,12 @@
 
 package io.github.minecraftcursedlegacy.api.terrain.feature;
 
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.feature.Feature;
+
 import java.util.Random;
 import java.util.function.Function;
-
-import net.minecraft.level.Level;
-import net.minecraft.level.structure.Feature;
-import net.minecraft.util.maths.TilePos;
 
 /**
  * Provides the locations for a {@linkplain Feature feature} to generate in the world, when used in a {@linkplain PositionedFeature}.
@@ -36,14 +36,14 @@ import net.minecraft.util.maths.TilePos;
 public abstract class Placement implements Function<Feature, PositionedFeature> {
 	/**
 	 * Retrieve the set of positions at which the feature should be generated.
-	 * @param level the level in whch to generate.
+	 * @param world the world in whch to generate.
 	 * @param rand the pseudo random number generator for worldgen.
 	 * @param startX the start X position for offseting positions.
 	 * @param startY the start Y position for offseting positions.
 	 * @param startZ the start Z position for offseting positions.
 	 * @return an Iterable of positions to generate the feature at.
 	 */
-	public abstract Iterable<TilePos> getPositions(Level level, Random rand, int startX, int startY, int startZ);
+	public abstract Iterable<BlockPos> getPositions(World world, Random rand, int startX, int startY, int startZ);
 
 	/**
 	 * Create a decorated feature from this placement and the provided feature.

@@ -26,7 +26,7 @@ package io.github.minecraftcursedlegacy.impl.command;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import io.github.minecraftcursedlegacy.api.command.Sender;
 import io.github.minecraftcursedlegacy.api.command.dispatcher.DefaultCommandDispatcher;

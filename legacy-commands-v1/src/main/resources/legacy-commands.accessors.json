@@ -3,10 +3,10 @@
   "package": "io.github.minecraftcursedlegacy.accessor.command",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "AccessorMinecraft"
+    "MinecraftAccessor"
   ],
   "server": [
-    "AccessorServerPlayPacketHandler"
+    "ServerPlayPacketHandlerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

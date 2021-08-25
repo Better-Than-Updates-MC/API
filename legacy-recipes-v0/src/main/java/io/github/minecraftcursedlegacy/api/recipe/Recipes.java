@@ -23,8 +23,8 @@
 
 package io.github.minecraftcursedlegacy.api.recipe;
 
-import io.github.minecraftcursedlegacy.accessor.recipe.AccessorRecipeRegistry;
-import net.minecraft.item.ItemInstance;
+import io.github.minecraftcursedlegacy.accessor.recipe.RecipeRegistryAccessor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.DyeRecipes;
 import net.minecraft.recipe.RecipeRegistry;
 
@@ -38,23 +38,23 @@ public final class Recipes {
 
 	/**
 	 * Adds a shaped recipe to the game.
-	 * For Example, the vanilla cake recipe:<br/>&nbsp;<b>{@code Recipes.addShapedRecipe(new ItemInstance(ItemType.cake, 1), "AAA", "BEB", "CCC", 'A', ItemType.milk, 'B', ItemType.sugar, 'C', ItemType.wheat, 'E', ItemType.egg);}</b>
+	 * For Example, the vanilla cake recipe:<br/>&nbsp;<b>{@code Recipes.addShapedRecipe(new ItemStack(Item.CAKE, 1), "AAA", "BEB", "CCC", 'A', Item.MILK_BUCKET, 'B', Item.SUGAR, 'C', Item.WHEAT, 'E', Item.EGG);}</b>
 	 * @param result the item instance the recipe crafts.
 	 * @param recipe the recipe, shaped.
-	 * @see the code in {@link RecipeRegistry} for more examples on how to use this.
+	 * @see RecipeRegistry
 	 */
-	public static void addShapedRecipe(ItemInstance result, Object... recipe) {
-		((AccessorRecipeRegistry) RecipeRegistry.getInstance()).invokeAddShapedRecipe(result, recipe);
+	public static void addShapedRecipe(ItemStack result, Object... recipe) {
+		((RecipeRegistryAccessor) RecipeRegistry.getInstance()).invokeAddShapedRecipe(result, recipe);
 	}
 
 	/**
 	 * Adds a shapeless recipe to the game.
-	 * For Example, the vanilla bonemeal recipe:<br/>&nbsp<b>{@code arg.addShapelessRecipe(new ItemInstance(ItemType.dyePowder, 3, 15), ItemType.bone);}</b>
+	 * For Example, the vanilla bonemeal recipe:<br/>&nbsp<b>{@code arg.addShapelessRecipe(new ItemStack(Item.DYE_POWDER, 3, 15), Item.BONE);}</b>
 	 * @param result the item instance the recipe crafts.
-	 * @param ingredients a list of various item instances, item types, and tiles which are the required ingredients of this recipe.
-	 * @see the code in {@link DyeRecipes} for more examples on how to use this.
+	 * @param ingredients a list of various item instances, item, and blocks which are the required ingredients of this recipe.
+	 * @see DyeRecipes
 	 */
-	public static void addShapelessRecipe(ItemInstance result, Object... ingredients) {
-		((AccessorRecipeRegistry) RecipeRegistry.getInstance()).invokeAddShapelessRecipe(result, ingredients);
+	public static void addShapelessRecipe(ItemStack result, Object... ingredients) {
+		((RecipeRegistryAccessor) RecipeRegistry.getInstance()).invokeAddShapelessRecipe(result, ingredients);
 	}
 }

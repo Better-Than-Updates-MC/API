@@ -6,7 +6,8 @@
   "name": "Lifecycle Events Test Mod",
   "description": "Test mod for the lifecycle events api",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
   ],
   "contact": {
     "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",

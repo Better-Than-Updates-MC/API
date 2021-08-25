@@ -26,8 +26,8 @@ package io.github.minecraftcursedlegacy.api.terrain.feature;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import net.minecraft.level.Level;
-import net.minecraft.util.maths.TilePos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 /**
  * {@linkplain Placement} that iterates the given feature a given number of times. Use in combination with other placements for the best results.
@@ -41,7 +41,7 @@ public class CountPlacement extends Placement {
 
 	/**
 	 * Get the count for the given position and rng.
-	 * @param rand the worldgen pseudorandom number generator.
+	 * @param rand the world gen pseudorandom number generator.
 	 * @param x the x position for worldgen.
 	 * @param y the y position for worldgen.
 	 * @param z the z position for worldgen.
@@ -52,8 +52,8 @@ public class CountPlacement extends Placement {
 	}
 
 	@Override
-	public Iterable<TilePos> getPositions(Level level, Random rand, int startX, int startY, int startZ) {
-		TilePos position = new TilePos(startX, startY, startZ);
+	public Iterable<BlockPos> getPositions(World world, Random rand, int startX, int startY, int startZ) {
+		BlockPos position = new BlockPos(startX, startY, startZ);
 		return IntStream.range(0, this.getCount(rand, startX, startY, startZ)).mapToObj(i -> position)::iterator;
 	}
 }

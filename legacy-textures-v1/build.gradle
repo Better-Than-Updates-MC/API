@@ -1,5 +1,5 @@
 archivesBaseName = 'legacy-textures-v1'
-version = getSubprojectVersion(project, '1.1.0')
+version = getSubprojectVersion(project, '2.0.0')
 
 // networking is required by registries
 // including it here cuz I don't think moduleDependencies is recursive
@@ -8,9 +8,4 @@ moduleDependencies(project, 'legacy-api-base', 'legacy-networking-v0', 'legacy-r
 dependencies {
 	testImplementation project(path: ':legacy-recipes-v0')
 	testImplementation project(path: ':legacy-translations-v0')
-
-	// CoreLib for Tile Models
-	include modApi('com.github.paulevsGitch:B.1.7.3-CoreLib:v.1.3.0') {
-		exclude(group: 'tk.valoeghese') //ZoesteriaConfig has disppeared from here
-	}
 }

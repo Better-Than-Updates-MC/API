@@ -23,8 +23,8 @@
 
 package io.github.minecraftcursedlegacy.impl.registry;
 
-import io.github.minecraftcursedlegacy.accessor.registry.AccessorEntityRegistry;
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.accessor.registry.EntityRegistryAccessor;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.api.registry.Registry;
 import net.minecraft.entity.Entity;
 
@@ -39,13 +39,13 @@ public class EntityTypeRegistry extends Registry<EntityType> {
 	 *
 	 * @param registryName the identifier for this registry.
 	 */
-	public EntityTypeRegistry(Id registryName) {
+	public EntityTypeRegistry(Identifier registryName) {
 		super(EntityType.class, registryName, null);
 
 		// add vanilla entities
-		AccessorEntityRegistry.getIdToClassMap().forEach((intId, clazz) -> {
+		EntityRegistryAccessor.getIdToClassMap().forEach((intId, clazz) -> {
 			if (clazz != null) {
-				String idPart = AccessorEntityRegistry.getClassToStringIdMap().get(clazz);
+				String idPart = EntityRegistryAccessor.getClassToStringIdMap().get(clazz);
 
 				EntityType type = new EntityType(clazz, idPart == null ? "entity" : idPart);
 				if (idPart == null) {
@@ -54,7 +54,7 @@ public class EntityTypeRegistry extends Registry<EntityType> {
 					idPart = idPart.toLowerCase();
 				}
 
-				this.byRegistryId.put(new Id(idPart), type);
+				this.byRegistryId.put(new Identifier(idPart), type);
 				this.bySerialisedId.put(intId, type);
 			}
 		});
@@ -62,7 +62,7 @@ public class EntityTypeRegistry extends Registry<EntityType> {
 
 	@Override
 	protected int getNextSerialisedId() {
-		Map<Integer, Class<? extends Entity>> idToClass = AccessorEntityRegistry.getIdToClassMap();
+		Map<Integer, Class<? extends Entity>> idToClass = EntityRegistryAccessor.getIdToClassMap();
 		while (idToClass.containsKey(currentId)) {
 			++currentId;
 		}
@@ -77,14 +77,14 @@ public class EntityTypeRegistry extends Registry<EntityType> {
 
 	@Override
 	protected void beforeRemap() {
-		AccessorEntityRegistry.setIdToClassMap(new HashMap<>());
-		AccessorEntityRegistry.setClassToIdMap(new HashMap<>());
-		AccessorEntityRegistry.setStringIdToClassMap(new HashMap<>());
-		AccessorEntityRegistry.setClassToStringIdMap(new HashMap<>());
+		EntityRegistryAccessor.setIdToClassMap(new HashMap<>());
+		EntityRegistryAccessor.setClassToIdMap(new HashMap<>());
+		EntityRegistryAccessor.setStringIdToClassMap(new HashMap<>());
+		EntityRegistryAccessor.setClassToStringIdMap(new HashMap<>());
 	}
 
 	@Override
 	protected void onRemap(EntityType remappedValue, int newSerialisedId) {
-		AccessorEntityRegistry.callRegister(remappedValue.getClazz(), remappedValue.getVanillaRegistryStringId(), newSerialisedId);
+		EntityRegistryAccessor.callRegister(remappedValue.getClazz(), remappedValue.getVanillaRegistryStringId(), newSerialisedId);
 	}
 }

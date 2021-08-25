@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"package": "paulevs.corelib.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"DrawableHelperMixin",
+		"TextureManagerMixin",
+		"ItemRendererMixin",
+		"DiggingParticleMixin",
+		"BlockRendererMixin",
+		"MinecraftMixin",
+		"HandItemRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

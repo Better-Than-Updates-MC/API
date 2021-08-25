@@ -1,16 +1,26 @@
 pluginManagement {
     repositories {
-        jcenter()
+        mavenCentral()
+        gradlePluginPortal()
         maven {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
-        gradlePluginPortal()
-		mavenLocal()
+        maven {
+            name = 'Jitpack'
+            url = 'https://jitpack.io'
+        }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "fabric-loom" && !requested.version?.endsWith("-SNAPSHOT")) {
+                useModule("com.github.Chocohead.Fabric-Loom:fabric-loom:${requested.version}")
+            }
+        }
     }
 }
 
-rootProject.name = "cursed-legacy-api"
+rootProject.name = "Fabric Beta API"
 
 include 'legacy-api-base'
 
@@ -27,3 +37,5 @@ include 'legacy-textures-v1'
 include 'legacy-tile-entities-v1'
 include 'legacy-translations-v0'
 include 'legacy-worldtypes-v1'
+
+include 'legacy-forge-hooks'

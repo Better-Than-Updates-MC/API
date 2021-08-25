@@ -23,11 +23,11 @@
 
 package io.github.minecraftcursedlegacy.api.attacheddata.v1;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import net.minecraft.util.io.CompoundTag;
 
 /**
- * Data which can be attached to various vanilla objects, such as items and levels.
+ * Data which can be attached to various vanilla objects, such as items and worlds.
  * @see {@link DataManager}.
  * @since 1.0.0
  */
@@ -35,7 +35,7 @@ public interface AttachedData {
 	/**
 	 * @return the id of this modded data.
 	 */
-	Id getId();
+	Identifier getId();
 	/**
 	 * @return a tag representation of this data.
 	 */

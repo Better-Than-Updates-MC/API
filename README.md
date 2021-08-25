@@ -1,6 +1,6 @@
-# Minecraft Cursed Legacy API
+# Fabric Beta API
 
-The (unofficial) [Fabric](https://fabricmc.net/) home for 1.2.5 and Beta 1.7.3 - if you want the newer versions see [here](https://github.com/FabricMC/fabric).
+The unofficial [Fabric](https://fabricmc.net/) fork for ***Beta 1.7.3.***
 
 ## Setup
 Run the following command (if you are not using eclipse, replace “eclipse” with your relevant ide)
@@ -27,19 +27,18 @@ If you wish to build a copy of API, you can run:
 
 Make sure to follow the code style guidelines, which can be seen in use in existing files.
 
-A General Summary of the code style:
-- Use tabs for indentation
-- Use same-line braces
-- Put a new line between “regular code lines” and if/for/while etc. statements.
+CheckStyle can help! Run `gradlew :checkstyleMain` when you're finished with your initial draft,
+or install the CheckStyle IDEA plugin and configure it for use with [checkstyle.xml](./config/checkstyle/checkstyle.xml)
 
 ## License
-This API is available under the MIT license. Feel free to learn from it and incorporate it in your own projects.
+[Unless otherwise stated](./legacy-forge-hooks/LICENSE), these APIs are available under the MIT license.
+Feel free to learn from them and incorporate them in your own projects.
 
 ## Running Tests
-If your ide runs using gradle change settings to make your ide compile it itself so you can run the test modules.
-If your ide doesn't have this feature get a better ide not a glorified text editor please kthx
+If your IDE runs using Gradle, change settings to make your IDE compile it itself, so you can run the test modules.
+If your IDE doesn't have this feature get a better IDE not a glorified text editor please. kthx
 
-## Subproject Versions
-The convention I use for subproject versions is setting it to the last api version I updated them.
-If this is stupid, please ping Valoeghese on discord to rant about it.
-
+## Versioning
+Subprojects should receive their own [semver](https://semver.org)-compatible versions
+The main project is versioned based on refactors that affect any or all of the subprojects. (This is subject to change.)
+Do you have a suggestion for better versioning? Create an issue here on GitHub, or bring it up on [Discord](https://halotroop.com/Discord.html).

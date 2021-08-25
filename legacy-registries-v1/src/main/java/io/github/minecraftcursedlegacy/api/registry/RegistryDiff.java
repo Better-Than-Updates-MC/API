@@ -23,7 +23,7 @@
 
 package io.github.minecraftcursedlegacy.api.registry;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Interface look at the difference between a registry before and after remapping.

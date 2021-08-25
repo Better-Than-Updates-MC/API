@@ -36,5 +36,5 @@ public interface RegistryEntryAddedCallback<T> {
 	 * @param id the id of the object being registered.
 	 * @param serialisedId the integer raw id of the registered object for serialisation.
 	 */
-	void onEntryAdded(T value, Id id, int serialisedId);
+	void onEntryAdded(T value, Identifier id, int serialisedId);
 }

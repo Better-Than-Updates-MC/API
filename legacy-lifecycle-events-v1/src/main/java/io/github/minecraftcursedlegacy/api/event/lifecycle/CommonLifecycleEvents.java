@@ -25,7 +25,7 @@ package io.github.minecraftcursedlegacy.api.event.lifecycle;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.entity.player.Player;
+import net.minecraft.entity.player.PlayerEntity;
 
 /**
  * Collection of common events that pertain to the game lifecycle.
@@ -48,6 +48,6 @@ public class CommonLifecycleEvents {
 		 * Called after the player respawns.
 		 * @param player the player that has respawned.
 		 */
-		void onRespawn(Player player);
+		void onRespawn(PlayerEntity player);
 	}
 }

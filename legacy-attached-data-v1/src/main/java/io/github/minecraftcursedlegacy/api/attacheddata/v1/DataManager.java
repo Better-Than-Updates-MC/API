@@ -28,23 +28,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
-import net.minecraft.item.ItemInstance;
-import net.minecraft.level.LevelProperties;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.io.CompoundTag;
+import net.minecraft.world.WorldProperties;
 
 /**
- * Manager for data which can be attached to various vanilla objects, such as items and levels.
+ * Manager for data which can be attached to various vanilla objects, such as items and worlds.
  */
-public final class DataManager<T> extends io.github.minecraftcursedlegacy.api.data.DataManager<T> {
-	private final Map<Id, Function<T, ? extends AttachedData>> attachedDataFactories = new HashMap<>();
+public final class DataManager<T> {
+	private final Map<Identifier, Function<T, ? extends AttachedData>> attachedDataFactories = new HashMap<>();
 
 	/**
 	 * Adds the specified attached data to the {@link DataManager} instance. This data can later be accessed on an instance of the object via {@link #getAttachedData}.
 	 * @return a key to use to retrieve the attached data from an object.
 	 */
-	@Override
-	public <E extends AttachedData> io.github.minecraftcursedlegacy.api.attacheddata.v1.DataManager.DataKey<E> addAttachedData(Id id, Function<T, E> dataProvider) {
+	public <E extends AttachedData> DataManager.DataKey<E> addAttachedData(Identifier id, Function<T, E> dataProvider) {
 		this.attachedDataFactories.put(id, dataProvider);
 		return new io.github.minecraftcursedlegacy.api.attacheddata.v1.DataManager.DataKey<>(id);
 	}
@@ -52,15 +51,15 @@ public final class DataManager<T> extends io.github.minecraftcursedlegacy.api.da
 	/**
 	 * Retrieves the specified attached data from the object.
 	 */
-	public <E extends AttachedData> E getAttachedData(T object, io.github.minecraftcursedlegacy.api.attacheddata.v1.DataManager.DataKey<E> key) throws ClassCastException {
+	public <E extends AttachedData> E getAttachedData(T object, DataManager.DataKey<E> key) throws ClassCastException {
 		return key.apply(((DataStorage) object).getAttachedData(key.id, () -> this.attachedDataFactories.get(key.id).apply(object)));
 	}
 
 	/**
 	 * Used by the implementation.
-	 * @return a {@linkplain Set set} of all {@linkplain Id ids} of {@link AttachedData} instances registered to this manager.
+	 * @return a {@linkplain Set set} of all {@linkplain Identifier ids} of {@link AttachedData} instances registered to this manager.
 	 */
-	public Set<Id> getDataKeys() {
+	public Set<Identifier> getDataKeys() {
 		return this.attachedDataFactories.keySet();
 	}
 
@@ -68,7 +67,7 @@ public final class DataManager<T> extends io.github.minecraftcursedlegacy.api.da
 	 * Used by the implementation.
 	 * @return an attached data instance of the given type constructed by the given tag.
 	 */
-	public AttachedData deserialize(T object, Id id, CompoundTag data) {
+	public AttachedData deserialize(T object, Identifier id, CompoundTag data) {
 		AttachedData result = this.attachedDataFactories.get(id).apply(object);
 		result.fromTag(data);
 		return result;
@@ -83,8 +82,8 @@ public final class DataManager<T> extends io.github.minecraftcursedlegacy.api.da
 		DataStorage to_ = (DataStorage) to;
 
 		((DataStorage) from).getAllAttachedData().forEach(entry -> {
-			Id dataId = entry.getKey();
-			AttachedData data = (AttachedData) entry.getValue();
+			Identifier dataId = entry.getKey();
+			AttachedData data = entry.getValue();
 			to_.putAttachedData(dataId, data.copy());
 		});
 	}
@@ -107,34 +106,23 @@ public final class DataManager<T> extends io.github.minecraftcursedlegacy.api.da
 	/**
 	 * Stores data to an item instance.
 	 */
-	public static final DataManager<ItemInstance> ITEM_INSTANCE = new DataManager<>();
+	public static final DataManager<ItemStack> ITEM_STACK = new DataManager<>();
 	
 	/**
 	 * Stores data to the Level.dat file.
 	 * @since 1.0.0
 	 */
-	public static final DataManager<LevelProperties> LEVEL_PROPERTIES = new DataManager<>();
-
-	static {
-		// Legacy compat
-		io.github.minecraftcursedlegacy.api.data.DataManager.ITEM_INSTANCE = ITEM_INSTANCE;
-	}
+	public static final DataManager<WorldProperties> WORLD_PROPERTIES = new DataManager<>();
 
 	/**
-	 * Id class that is generically bound to a subclass of attached data, for ease of access.
+	 * Identifier class that is generically bound to a subclass of attached data, for ease of access.
 	 */
-	public static final class DataKey<T extends AttachedData> extends io.github.minecraftcursedlegacy.api.data.DataManager.DataKey<T> {
-		private DataKey(Id id) throws NullPointerException {
-			super(id);
-
-			if (id == null) {
-				throw new NullPointerException("DataKey cannot store a null ID!");
-			}
-
+	public static final class DataKey<T extends AttachedData> {
+		private DataKey(Identifier id) throws NullPointerException {
 			this.id = id;
 		}
 
-		private final Id id;
+		private final Identifier id;
 
 		@SuppressWarnings("unchecked")
 		private T apply(AttachedData data) throws ClassCastException {

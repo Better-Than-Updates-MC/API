@@ -3,18 +3,18 @@
   "package": "io.github.minecraftcursedlegacy.mixin.registry",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinItemType",
-    "MixinMcRegionLevelStorage",
-    "MixinOldLevelStorage",
-    "MixinPlaceableTileItem",
-    "MixinShapedRecipe",
-    "MixinSmeltingRecipeRegistry",
-    "MixinTile",
-    "MixinTileItem"
+    "ItemMixin",
+    "McRegionWorldStorageMixin",
+    "OldWorldStorageMixin",
+    "BlockItemMixin",
+    "ShapedRecipeMixin",
+    "SmeltingRecipeRegistryMixin",
+    "BlockMixin",
+    "SugarCaneItemMixin"
   ],
   "server": [
-    "MixinMinecraftServer",
-    "MixinServerLoginPacketHandler"
+	  "MinecraftServerMixin",
+    "ServerLoginPacketHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

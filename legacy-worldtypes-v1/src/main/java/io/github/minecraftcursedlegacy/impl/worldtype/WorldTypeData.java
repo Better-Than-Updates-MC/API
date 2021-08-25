@@ -23,10 +23,10 @@
 
 package io.github.minecraftcursedlegacy.impl.worldtype;
 
-import javax.annotation.Nullable;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import io.github.minecraftcursedlegacy.api.attacheddata.v1.AttachedData;
-import io.github.minecraftcursedlegacy.api.registry.Id;
 import net.minecraft.util.io.CompoundTag;
 
 /**
@@ -34,18 +34,18 @@ import net.minecraft.util.io.CompoundTag;
  * @since 1.0.0
  */
 public class WorldTypeData implements AttachedData {
-	WorldTypeData(Id typeId) {
+	WorldTypeData(Identifier typeId) {
 		this.typeId = typeId;
 	}
 
-	private Id typeId;
+	private Identifier typeId;
 	@Nullable
 	private CompoundTag additionalData;
 
 	/**
 	 * Set the world type id in this data.
 	 */
-	public void setTypeId(Id id) {
+	public void setTypeId(Identifier id) {
 		this.typeId = id;
 	}
 
@@ -58,12 +58,12 @@ public class WorldTypeData implements AttachedData {
 	/**
 	 * @return the world type id in this data.
 	 */
-	public Id getTypeId() {
+	public Identifier getTypeId() {
 		return this.typeId;
 	}
 
 	@Override
-	public Id getId() {
+	public Identifier getId() {
 		return ID;
 	}
 
@@ -80,7 +80,7 @@ public class WorldTypeData implements AttachedData {
 
 	@Override
 	public void fromTag(CompoundTag tag) {
-		this.typeId = new Id(tag.getString("id"));
+		this.typeId = new Identifier(tag.getString("id"));
 
 		if (tag.containsKey("data")) {
 			this.additionalData = tag.getCompoundTag("data");
@@ -92,5 +92,5 @@ public class WorldTypeData implements AttachedData {
 		return new WorldTypeData(this.typeId);
 	}
 
-	public static final Id ID = new Id("api", "world_type");
+	public static final Identifier ID = new Identifier("api", "world_type");
 }

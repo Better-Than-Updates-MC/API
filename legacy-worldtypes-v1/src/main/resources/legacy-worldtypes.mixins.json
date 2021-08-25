@@ -3,13 +3,13 @@
   "package": "io.github.minecraftcursedlegacy.mixin.worldtype",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinDimension"
+    "DimensionMixin"
   ],
   "client": [
-    "MixinCreateLevelScreen"
+    "CreateWorldScreenMixin"
   ],
   "server": [
-    "MixinMinecraftServer"
+	  "MinecraftServerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "io.github.minecraftcursedlegacy.accessor.tileentities",
+  "package": "io.github.minecraftcursedlegacy.accessor.blockentities",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "AccessorTileEntity"
+    "BlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

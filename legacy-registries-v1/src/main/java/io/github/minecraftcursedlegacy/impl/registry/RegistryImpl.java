@@ -27,10 +27,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntFunction;
 
-import io.github.minecraftcursedlegacy.accessor.registry.AccessorEntityRegistry;
+import io.github.minecraftcursedlegacy.accessor.registry.EntityRegistryAccessor;
 import io.github.minecraftcursedlegacy.api.networking.PluginChannel;
 import io.github.minecraftcursedlegacy.api.networking.PluginChannelRegistry;
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.api.registry.Registry;
 import io.github.minecraftcursedlegacy.api.registry.RegistryEntryAddedCallback;
 import io.github.minecraftcursedlegacy.api.registry.RegistryRemappedCallback;
@@ -39,10 +39,12 @@ import io.github.minecraftcursedlegacy.impl.registry.sync.RegistrySyncChannelS2C
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.item.ItemType;
-import net.minecraft.tile.Tile;
+import net.minecraft.item.Item;
+import net.minecraft.block.Block;
 import net.minecraft.util.io.CompoundTag;
+import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 public class RegistryImpl implements ModInitializer {
 	@Override
 	public void onInitialize() {
@@ -52,8 +54,8 @@ public class RegistryImpl implements ModInitializer {
 	}
 	
 
-	public static <I extends ItemType> I addTileItem(Id id, Tile value, IntFunction<I> constructor) {
-		return ((ItemTypeRegistry) ITEM_TYPE).addTileItem(id, value, constructor);
+	public static <I extends Item> I addBlockItem(Identifier id, Block value, IntFunction<I> constructor) {
+		return ((ItemRegistry) ITEM).addBlockItem(id, value, constructor);
 	}
 
 	public static <T> Event<RegistryEntryAddedCallback<T>> createEvent(Class<T> clazz) {
@@ -72,30 +74,30 @@ public class RegistryImpl implements ModInitializer {
 		});
 	}
 
-	static int nextItemTypeId() {
-		while (ItemType.byId[currentItemtypeId] != null) {
-			++currentItemtypeId;
+	static int nextItemId() {
+		while (Item.byId[currentItemId] != null) {
+			++currentItemId;
 		}
 
-		return currentItemtypeId;
+		return currentItemId;
 	}
 
-	static int nextTileId() {
-		while (Tile.BY_ID[currentTileId] != null) {
-			++currentTileId;
+	static int nextBlockId() {
+		while (Block.BY_ID[currentBlockId] != null) {
+			++currentBlockId;
 		}
 
-		return currentTileId;
+		return currentBlockId;
 	}
 
-	public static final Registry<ItemType> ITEM_TYPE;
-	public static final Registry<Tile> TILE;
-	public static final Registry<EntityType> ENTITY_TYPE;
+	public static final Registry<@NotNull Item> ITEM;
+	public static final Registry<@NotNull Block> BLOCK;
+	public static final Registry<@NotNull EntityType> ENTITY_TYPE;
 
-	private static int currentItemtypeId = Tile.BY_ID.length;
-	private static int currentTileId = 1;
+	private static int currentItemId = Block.BY_ID.length;
+	private static int currentBlockId = 1;
 
-	static final Map<Tile, ItemType> T_2_TI = new HashMap<>();
+	static final Map<Block, Item> T_2_TI = new HashMap<>();
 
 	// Sync Stuff
 	public static PluginChannel syncChannel;
@@ -103,10 +105,10 @@ public class RegistryImpl implements ModInitializer {
 
 	static {
 		//noinspection ResultOfMethodCallIgnored
-		Tile.BED.hashCode(); // make sure tiles are initialised
-		AccessorEntityRegistry.getIdToClassMap(); // make sure entities are initialised
-		TILE = new TileRegistry(new Id("api:tile")); // TILES BEFORE ITEMS SO ITEM TYPE REMAPPING HAPPENS LATER AND TILE IDS ARE PROPERLY ADDED TO THE VANILLA ID SET!
-		ITEM_TYPE = new ItemTypeRegistry(new Id("api:item_type"));
-		ENTITY_TYPE = new EntityTypeRegistry(new Id("api:entity_type"));
+		Block.BED.hashCode(); // make sure blocks are initialised
+		EntityRegistryAccessor.getIdToClassMap(); // make sure entities are initialised
+		BLOCK = new BlockRegistry(new Identifier("api:block")); // BLOCKS BEFORE ITEMS SO ITEM REMAPPING HAPPENS LATER AND BLOCK IDS ARE PROPERLY ADDED TO THE VANILLA ID SET!
+		ITEM = new ItemRegistry(new Identifier("api:item"));
+		ENTITY_TYPE = new EntityTypeRegistry(new Identifier("api:entity_type"));
 	}
 }

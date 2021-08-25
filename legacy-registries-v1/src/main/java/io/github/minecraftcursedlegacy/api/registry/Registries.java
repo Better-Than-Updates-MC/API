@@ -25,24 +25,25 @@ package io.github.minecraftcursedlegacy.api.registry;
 
 import io.github.minecraftcursedlegacy.impl.registry.EntityType;
 import io.github.minecraftcursedlegacy.impl.registry.RegistryImpl;
-import net.minecraft.item.ItemType;
-import net.minecraft.tile.Tile;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Class containing the {@link Registry registries} that are part of the api.
  */
 public final class Registries {
 	/**
-	 * Registry for Item Types.
+	 * Registry for Item.
 	 */
-	public static final Registry<ItemType> ITEM_TYPE = RegistryImpl.ITEM_TYPE;
+	public static final Registry<@NotNull Item> ITEM = RegistryImpl.ITEM;
 	/**
-	 * Registry for Tiles.
+	 * Registry for Blocks.
 	 */
-	public static final Registry<Tile> TILE = RegistryImpl.TILE;
+	public static final Registry<@NotNull Block> BLOCK = RegistryImpl.BLOCK;
 
 	/**
 	 * Registry for Entity types.
 	 */
-	public static final Registry<EntityType> ENTITY_TYPE = RegistryImpl.ENTITY_TYPE;
+	public static final Registry<@NotNull EntityType> ENTITY_TYPE = RegistryImpl.ENTITY_TYPE;
 }

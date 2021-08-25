@@ -6,7 +6,8 @@
   "name": "Networking Test Mod",
   "description": "Tests for the networking module of Cursed Legacy API.",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
   ],
   "contact": {
     "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",

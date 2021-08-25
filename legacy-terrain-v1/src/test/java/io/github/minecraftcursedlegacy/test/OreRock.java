@@ -25,15 +25,15 @@ package io.github.minecraftcursedlegacy.test;
 
 import java.util.Random;
 
-import net.minecraft.level.Level;
-import net.minecraft.level.structure.Feature;
-import net.minecraft.tile.Tile;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.feature.Feature;
 
 public class OreRock extends Feature {
 
 	@Override
-	public boolean generate(Level level, Random rand, int x, int y, int z) {
-		if (level.getTileId(x, y - 1, z) == Tile.GRASS.id) {
+	public boolean generate(World world, Random rand, int x, int y, int z) {
+		if (world.getBlockId(x, y - 1, z) == Block.GRASS.id) {
 			if (rand.nextInt(4) == 0) { // big boi
 				for (int xo = -1; xo <= 1; ++xo) {
 					for (int zo = -1; zo <= 1; ++zo) {
@@ -42,7 +42,7 @@ public class OreRock extends Feature {
 								continue;
 							}
 
-							level.setTile(x + xo, y + yo, z + zo, rand.nextInt(3) == 0 ? Tile.IRON_ORE.id : Tile.STONE.id);
+							world.setBlock(x + xo, y + yo, z + zo, rand.nextInt(3) == 0 ? Block.IRON_ORE.id : Block.STONE.id);
 						}
 					}
 				}
@@ -50,7 +50,7 @@ public class OreRock extends Feature {
 				for (int xo = 0; xo < 2; ++xo) {
 					for (int zo = 0; zo < 2; ++zo) {
 						for (int yo = 0; yo < 2; ++yo) {
-							level.setTile(x + xo, y + yo, z + zo, rand.nextInt(3) == 0 ? Tile.IRON_ORE.id : Tile.STONE.id);
+							world.setBlock(x + xo, y + yo, z + zo, rand.nextInt(3) == 0 ? Block.IRON_ORE.id : Block.STONE.id);
 						}
 					}
 				}

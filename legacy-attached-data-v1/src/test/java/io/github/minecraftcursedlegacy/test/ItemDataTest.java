@@ -23,35 +23,33 @@
 
 package io.github.minecraftcursedlegacy.test;
 
-import javax.annotation.Nullable;
-
 import io.github.minecraftcursedlegacy.api.attacheddata.v1.AttachedData;
 import io.github.minecraftcursedlegacy.api.attacheddata.v1.DataManager;
 import io.github.minecraftcursedlegacy.api.attacheddata.v1.DataManager.DataKey;
 import io.github.minecraftcursedlegacy.api.event.ActionResult;
-import io.github.minecraftcursedlegacy.api.event.TileInteractionCallback;
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.event.BlockInteractionCallback;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.api.registry.Registries;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.item.ItemType;
+import net.minecraft.item.Item;
 import net.minecraft.util.io.CompoundTag;
+import org.jetbrains.annotations.NotNull;
 
-// Adds data attached to wooden axes. When a wooden axe is first right clicked on a tile, it picks up that tile's essence.
-// Subsequent right clicks change the tiles interacted with to the stored essence.
+import java.util.Objects;
+
+// Adds data attached to wooden axes. When a wooden axe is first right-clicked on a block, it picks up that block's essence.
+// Subsequent right clicks change the blocks interacted with to the stored essence.
 public class ItemDataTest implements ModInitializer {
 	@Override
 	public void onInitialize() {
-		test_axe = DataManager.ITEM_INSTANCE.addAttachedData(TestAxeData.ID, item -> new TestAxeData(null));
+		test_axe = DataManager.ITEM_STACK.addAttachedData(TestAxeData.ID, item ->
+				new TestAxeData(TestAxeData.ID));
 
-		TileInteractionCallback.EVENT.register((player, level, item, tile, x, y, z, i1) -> {
-			if (tile != null && item != null && item.getType() == ItemType.hatchetWood) {
-				TestAxeData data = DataManager.ITEM_INSTANCE.getAttachedData(item, test_axe);
+		BlockInteractionCallback.EVENT.register((player, world, item, block, x, y, z, i1) -> {
+			if (block != null && item != null && item.getType() == Item.WOOD_AXE) {
+				TestAxeData data = DataManager.ITEM_STACK.getAttachedData(item, test_axe);
 
-				if (data.tile == null) {
-					data.tile = Registries.TILE.getId(tile);
-				} else {
-					level.setTile(x, y, z, Registries.TILE.getById(data.tile).id);
-				}
+				world.setBlock(x, y, z, Objects.requireNonNull(Registries.BLOCK.getById(data.blockId)).id);
 			}
 
 			return ActionResult.PASS;
@@ -61,40 +59,40 @@ public class ItemDataTest implements ModInitializer {
 	public static DataKey<TestAxeData> test_axe;
 
 	public static class TestAxeData implements AttachedData {
-		public TestAxeData(Id tileId) {
-			this.tile = tileId;
+		public TestAxeData(@NotNull Identifier blockId) {
+			this.blockId = blockId;
 		}
 
-		@Nullable
-		public Id tile;
+
+		public @NotNull Identifier blockId;
 
 		@Override
-		public Id getId() {
+		public Identifier getId() {
 			return ID;
 		}
 
 		@Override
 		public CompoundTag toTag(CompoundTag tag) {
-			tag.put("tile", this.tile == null ? "NULL" : this.tile.toString());
+			tag.put("block", this.blockId.toString());
 			return tag;
 		}
 
 		@Override
 		public void fromTag(CompoundTag tag) {
-			String tile = tag.getString("tile");
+			String block = tag.getString("block");
 
-			if (tile.equals("NULL")) {
-				this.tile = null;
+			if (block.equals("NULL")) {
+				this.blockId = ID;
 			} else {
-				this.tile = new Id(tile);
+				this.blockId = new Identifier(block);
 			}
 		}
 
 		@Override
 		public AttachedData copy() {
-			return new TestAxeData(this.tile);
+			return new TestAxeData(this.blockId);
 		}
 
-		public static final Id ID = new Id("modid", "test_axe");
+		public static final Identifier ID = new Identifier("modid", "test_axe");
 	}
 }

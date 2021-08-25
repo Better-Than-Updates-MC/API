@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import net.minecraft.util.io.CompoundTag;
 
 /**
@@ -48,22 +48,22 @@ public interface SimpleDataStorage extends DataStorage {
 	}
 
 	@Override
-	default Set<Entry<Id,AttachedData>> getAllAttachedData() {
+	default Set<Entry<Identifier,AttachedData>> getAllAttachedData() {
 		return this.getRawAttachedDataMap().entrySet();
 	}
 
 	@Override
-	default void putAttachedData(Id id, AttachedData data) {
+	default void putAttachedData(Identifier id, AttachedData data) {
 		this.getRawAttachedDataMap().put(id, data);
 	}
 
 	@Override
-	default AttachedData getAttachedData(Id id, Supplier<AttachedData> supplier) {
+	default AttachedData getAttachedData(Identifier id, Supplier<AttachedData> supplier) {
 		return this.getRawAttachedDataMap().computeIfAbsent(id, i -> supplier.get());
 	}
 
 	/**
 	 * @return the raw map of ids to attached data that underlies this {@link SimpleDataStorage}.
 	 */
-	Map<Id, AttachedData> getRawAttachedDataMap();
+	Map<Identifier, AttachedData> getRawAttachedDataMap();
 }

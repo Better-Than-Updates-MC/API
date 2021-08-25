@@ -23,9 +23,9 @@
 
 package io.github.minecraftcursedlegacy.test;
 
-import net.minecraft.item.ItemType;
+import net.minecraft.item.Item;
 
-public class BasicItem extends ItemType {
+public class BasicItem extends Item {
 	public BasicItem(int i) {
 		super(i);
 	}

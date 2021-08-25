@@ -39,7 +39,7 @@ public class CommandsImpl implements ModInitializer {
 		// Client
 		ChatEvent.SINGLEPLAYER.register((sender, message) -> {
 			// isClient is only true when a client connected to the server
-			if (message.length() > 1 && message.startsWith("/") && !sender.getPlayer().level.isClient) {
+			if (message.length() > 1 && message.startsWith("/") && (sender.getPlayer() != null && !sender.getPlayer().world.isClient)) {
 				message = message.substring(1);
 				String[] args = message.split(" ", 2);
 

@@ -26,8 +26,8 @@ package io.github.minecraftcursedlegacy.api.terrain.feature;
 import java.util.Arrays;
 import java.util.Random;
 
-import net.minecraft.level.Level;
-import net.minecraft.util.maths.TilePos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 /**
  * {@linkplain Placement} that scatters along the x and z of the given region, and offsets the height (typically from 0) based on a given range.
@@ -47,10 +47,10 @@ public class ScatteredYRangePlacement extends Placement {
 	private final int rangeY;
 
 	@Override
-	public Iterable<TilePos> getPositions(Level level, Random rand, int startX, int startY, int startZ) {
+	public Iterable<BlockPos> getPositions(World world, Random rand, int startX, int startY, int startZ) {
 		int xToGen = startX + rand.nextInt(16) + 8;
 		int yToGen = startY + rand.nextInt(this.rangeY) + this.minY;
 		int zToGen = startZ + rand.nextInt(16) + 8;
-		return Arrays.asList(new TilePos(xToGen, yToGen, zToGen));
+		return Arrays.asList(new BlockPos(xToGen, yToGen, zToGen));
 	}
 }

@@ -27,13 +27,13 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
 import io.github.minecraftcursedlegacy.api.networking.PluginChannel;
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import net.minecraft.network.PacketHandler;
 import net.minecraft.util.io.NBTIO;
 
 public class RegistrySyncChannelS2C extends PluginChannel {
 	@Override
-	public Id getChannelIdentifier() {
+	public Identifier getChannelIdentifier() {
 		return ID;
 	}
 
@@ -44,5 +44,5 @@ public class RegistrySyncChannelS2C extends PluginChannel {
 		RegistryRemapper.remap(NBTIO.readGzipped(data), null);
 	}
 
-	public static final Id ID = new Id("legacy-registries", "sync");
+	public static final Identifier ID = new Identifier("legacy-registries", "sync");
 }

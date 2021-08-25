@@ -25,15 +25,15 @@ package io.github.minecraftcursedlegacy.impl.texture;
 
 import java.awt.image.BufferedImage;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.api.registry.Registries;
 import io.github.minecraftcursedlegacy.impl.texture.resource.ModelJson;
 import io.github.minecraftcursedlegacy.impl.texture.resource.ModelType;
 import io.github.minecraftcursedlegacy.impl.texture.resource.ResourceLoader;
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.item.ItemType;
-import net.minecraft.item.PlaceableTileItem;
-import net.minecraft.tile.Tile;
+import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
+import net.minecraft.block.Block;
 import paulevs.corelib.model.prefab.FullCubeModel;
 import paulevs.corelib.model.prefab.GrasslikeModel;
 import paulevs.corelib.registry.ModelRegistry;
@@ -41,51 +41,51 @@ import paulevs.corelib.registry.ModelRegistry;
 public class ModelDiscoverer implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		ResourceLoader.addModelSetup(new Id("item/generated"), (id, obj, data) -> {
-			BufferedImage image = ResourceLoader.getTexture(new Id(data.textures.get("")));
+		ResourceLoader.addModelSetup(new Identifier("item/generated"), (id, obj, data) -> {
+			BufferedImage image = ResourceLoader.getTexture(new Identifier(data.textures.get("")));
 
 			if (image != null) {
-				ItemType item = (ItemType) obj;
-				item.setTexturePosition(AtlasMapper.registerDefaultSprite(((ItemType) item).id, image));
+				Item item = (Item) obj;
+				item.setTexturePosition(AtlasMapper.registerDefaultSprite(item.id, image));
 			}
 		});
 
-		ResourceLoader.addModelSetup(new Id("tile/cube_all"), (id, obj, data) -> {
+		ResourceLoader.addModelSetup(new Identifier("block/cube_all"), (id, obj, data) -> {
 			String image = getValidatedTextureLocation(data.textures.get("all"));
 
 			if (image != null) {
 				// I don't know why. I don't want to know why (well - actually I do, because wtf)
 				// But corelib does not load textures *at all* without a slash
 				// before every texture location specifier
-				image = "/" + image;
+				if (!image.startsWith("/")) image = "/" + image;
 
-				if (obj instanceof ItemType) {
-					ItemType item = (ItemType) obj;
+				if (obj instanceof Item) {
+					Item item = (Item) obj;
 					ModelRegistry.addItemModel(item, new FullCubeModel(image));
 				} else {
-					Tile tile = (Tile) obj;
-					ModelRegistry.addTileModel(tile, new FullCubeModel(image));
+					Block block = (Block) obj;
+					ModelRegistry.addBlockModel(block, new FullCubeModel(image));
 				}
 			}
 		});
 
-		ResourceLoader.addModelSetup(new Id("tile/cross"), (id, obj, data) -> {
+		ResourceLoader.addModelSetup(new Identifier("block/cross"), (id, obj, data) -> {
 			String image = getValidatedTextureLocation(data.textures.get("cross"));
 
 			if (image != null) {
 				image = "/" + image;
 
-				if (obj instanceof ItemType) {
-					ItemType item = (ItemType) obj;
+				if (obj instanceof Item) {
+					Item item = (Item) obj;
 					ModelRegistry.addItemModel(item, new CrossModel(image));
 				} else {
-					Tile tile = (Tile) obj;
-					ModelRegistry.addTileModel(tile, new CrossModel(image));
+					Block block = (Block) obj;
+					ModelRegistry.addBlockModel(block, new CrossModel(image));
 				}
 			}
 		});
 
-		ResourceLoader.addModelSetup(new Id("tile/cube_bottom_top"), (id, obj, data) -> {
+		ResourceLoader.addModelSetup(new Identifier("block/cube_bottom_top"), (id, obj, data) -> {
 			String top = getValidatedTextureLocation(data.textures.get("top"));
 			String side = getValidatedTextureLocation(data.textures.get("side"));
 			String bottom = getValidatedTextureLocation(data.textures.get("bottom"));
@@ -95,32 +95,30 @@ public class ModelDiscoverer implements ClientModInitializer {
 				side = "/" + side;
 				bottom = "/" + bottom;
 
-				if (obj instanceof ItemType) {
-					ItemType item = (ItemType) obj;
+				if (obj instanceof Item) {
+					Item item = (Item) obj;
 					ModelRegistry.addItemModel(item, new GrasslikeModel(top, side, bottom));
 				} else {
-					Tile tile = (Tile) obj;
-					ModelRegistry.addTileModel(tile, new GrasslikeModel(top, side, bottom));
+					Block block = (Block) obj;
+					ModelRegistry.addBlockModel(block, new GrasslikeModel(top, side, bottom));
 				}
 			}
 		});
 
-		Registries.TILE.forEach((id, tile) -> {
-			if (tile != null) {
-				ModelJson model = ResourceLoader.getModel(id, ModelType.TILE);
-				model.root.setupModel(id, tile, model);
-			}
+		Registries.BLOCK.forEach((id, block) -> {
+			if (id == null) throw new IllegalArgumentException(block.getTranslatedName());
+			ModelJson model = ResourceLoader.getModel(id, ModelType.BLOCK);
+			model.root.setupModel(id, block, model);
 		});
 
-		Registries.ITEM_TYPE.forEach((id, item) -> {
-			if (item != null) {
-				ModelJson model = ResourceLoader.getModel(id, (item instanceof PlaceableTileItem) ? ModelType.TILEITEM : ModelType.ITEM);
-				model.root.setupModel(id, item, model);
-			}
+		Registries.ITEM.forEach((id, item) -> {
+			if (id == null) throw new IllegalArgumentException(item.getTranslatedName());
+			ModelJson model = ResourceLoader.getModel(id, (item instanceof BlockItem) ? ModelType.BLOCK_ITEM : ModelType.ITEM);
+			model.root.setupModel(id, item, model);
 		});
 	}
 
 	private static String getValidatedTextureLocation(String provided) {
-		return provided == null ? null : ResourceLoader.getValidatedTextureLocation(new Id(((String) provided)));
+		return provided == null ? null : ResourceLoader.getValidatedTextureLocation(new Identifier(provided));
 	}
 }

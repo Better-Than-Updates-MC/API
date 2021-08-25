@@ -23,7 +23,7 @@
 
 package io.github.minecraftcursedlegacy.api.terrain.feature;
 
-import net.minecraft.level.structure.Feature;
+import net.minecraft.world.feature.Feature;
 
 /**
  * Class with utility methods for utilising {@linkplain PositionedFeature positioned features}.
@@ -39,7 +39,7 @@ public final class PositionedFeatures {
 	 * @param count the number of times to generate the feature.
 	 * @return the created positioned feature instance.
 	 */
-	public static final PositionedFeature withCountScatteredHeightmap(Feature feature, int count) {
+	public static PositionedFeature withCountScatteredHeightmap(Feature feature, int count) {
 		// Generation has the outermost layer run first in generating the positions,
 		// then passes those positions to the next feature in.
 		// Therefore, we start with a count placement and use it to iterate scattered heightmap multiple times.

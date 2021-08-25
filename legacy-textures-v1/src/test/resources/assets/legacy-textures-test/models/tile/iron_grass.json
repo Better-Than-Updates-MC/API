@@ -1,6 +1,6 @@
 {
-  "parent": "tile/cross",
+  "parent": "block/cross",
   "textures": {
-    "cross": "legacy-textures-test:tile/iron_grass"
+    "cross": "legacy-textures-test:block/iron_grass"
   }
 }

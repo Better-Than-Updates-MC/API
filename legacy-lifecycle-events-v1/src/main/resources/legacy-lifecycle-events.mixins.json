@@ -3,11 +3,11 @@
   "package": "io.github.minecraftcursedlegacy.mixin.event.lifecycle",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinMinecraft"
+	  "MinecraftMixin"
   ],
   "server": [
-    "MixinMinecraftServer",
-    "MixinPlayerManager"
+    "MinecraftServerMixin",
+    "ServerPlayerConnectionManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

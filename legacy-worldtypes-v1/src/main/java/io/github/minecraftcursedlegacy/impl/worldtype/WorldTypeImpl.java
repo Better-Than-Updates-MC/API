@@ -36,7 +36,7 @@ public class WorldTypeImpl implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// Create world type attached data
-		worldTypeData = DataManager.LEVEL_PROPERTIES.addAttachedData(WorldTypeData.ID, properties -> new WorldTypeData(getSelected().getId()));
+		worldTypeData = DataManager.WORLD_PROPERTIES.addAttachedData(WorldTypeData.ID, properties -> new WorldTypeData(getSelected().getId()));
 
 		// Translate default
 		Translations.addTranslation(WorldType.DEFAULT.toString(), "Default");

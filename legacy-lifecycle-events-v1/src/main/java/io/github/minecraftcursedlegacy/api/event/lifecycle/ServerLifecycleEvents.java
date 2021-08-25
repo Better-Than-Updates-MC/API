@@ -28,8 +28,8 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.entity.player.ServerPlayerEntity;
 import net.minecraft.server.network.ServerLoginPacketHandler;
-import net.minecraft.server.player.ServerPlayer;
 
 /**
  * Lifecycle events for the server.
@@ -99,9 +99,9 @@ public class ServerLifecycleEvents {
 		 * Called when a player successfully logs in to the server.
 		 * @param player the player that has just logged in.
 		 * @param packetHandler the login packetHandler.
-		 * @apiNote {@linkplain ServerLoginPacketHandler#drop(String)} can be used to prevent the player connecting.
+		 * @apiNote {@linkplain ServerLoginPacketHandler#disconnect(String)} can be used to prevent the player connecting.
 		 */
-		void onPlayerLogin(ServerPlayer player, ServerLoginPacketHandler packetHandler);
+		void onPlayerLogin(ServerPlayerEntity player, ServerLoginPacketHandler packetHandler);
 	}
 
 	@FunctionalInterface
@@ -110,6 +110,6 @@ public class ServerLifecycleEvents {
 		 * Called when a player disconnects from the server.
 		 * @param player the player that has disconnected.
 		 */
-		void onPlayerDisconnect(ServerPlayer player);
+		void onPlayerDisconnect(ServerPlayerEntity player);
 	}
 }

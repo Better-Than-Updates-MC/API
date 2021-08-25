@@ -1,25 +1,21 @@
 buildscript {
 	repositories {
 		mavenCentral()
-		maven {
-			name = 'Fabric'
-			url = 'https://maven.fabricmc.net/'
-		}
-		maven { 
-			name = 'Jitpack'
-			url 'https://jitpack.io/'
-		}
 	}
 	dependencies {
-		classpath 'com.github.Chocohead:Fabric-Loom:d823377'
+		classpath 'org.codehaus.groovy:groovy-all:3.0.8'
 	}
 }
 
 plugins {
+	id 'fabric-loom' version '361cd1c'
 	id 'checkstyle'
+	id 'eclipse'
+	id 'idea'
+	id 'java'
 }
 
-def getSubprojectVersion(project, ver) {
+static String getSubprojectVersion(project, ver) {
 	return "${project.mod_version}-$ver"
 }
 
@@ -45,7 +41,7 @@ def moduleDependencies(Project project, String... projectNames) {
 }
 
 void addDependency(XmlProvider xml, String scope, Object... dependencies) {
-	def dependenciesNode = net.fabricmc.loom.util.GroovyXmlUtil.getOrCreateNode(xml.asNode(), 'dependencies')
+	Node dependenciesNode = GroovyXmlUtil.getOrCreateNode(xml.asNode(), 'dependencies')
 
 	dependencies.each {dependency ->
 		dependenciesNode.appendNode('dependency').with {
@@ -61,6 +57,8 @@ void addDependency(XmlProvider xml, String scope, Object... dependencies) {
 allprojects {
 	apply plugin: 'maven-publish'
 	apply plugin: 'fabric-loom'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
 
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
@@ -69,7 +67,7 @@ allprojects {
 	group = project.maven_group
 
 	repositories {
-		maven { 
+		maven {
 			name = 'Jitpack'
 			url 'https://jitpack.io/'
 		}
@@ -83,14 +81,15 @@ allprojects {
 		implementationOnly //A non-transitive implementation
 		runtimeClasspath.extendsFrom implementationOnly
 		compileClasspath.extendsFrom implementationOnly
-		
+
 	}
 
 	minecraft {
+		//Skip old versions of libraries which Mojang use but we don't need
 		addLibraryFilter {library ->
 			return !(library.startsWith('net.minecraft:launchwrapper:') ||
-						library.startsWith('net.sf.jopt-simple:jopt-simple:') ||
-						library.startsWith('org.ow2.asm:asm-all:'))
+					library.startsWith('net.sf.jopt-simple:jopt-simple:') ||
+					library.startsWith('org.ow2.asm:asm-all:'))
 		}
 	}
 
@@ -98,14 +97,16 @@ allprojects {
 		//to change the versions see the gradle.properties file
 		minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
-		mappings "io.github.minecraft-cursed-legacy:plasma:b1.7.3-build.${project.plasma_build}"
+		mappings loom.fromCommit("Better-Than-Updates-MC/Mappings", "${project.mappings}") {spec ->
+			spec.version = "b1.7.3-${project.mappings}"
+		}
 
 		modImplementation("io.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}") {
 			transitive false //Avoid leaking Loader's dependencies forwards
 		}
 
-		//For @Nullable and @Nonnull
-		compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+		//For @Nullable and @NotNull
+		compileOnly 'org.jetbrains:annotations:22.0.0'
 	}
 
 	sourceSets {
@@ -117,15 +118,9 @@ allprojects {
 
 	afterEvaluate {
 		processResources {
-			inputs.property 'version', project.version
-
-			from(sourceSets.main.resources.srcDirs) {
-				include 'fabric.mod.json'
-				expand 'version': project.version
-			}
-
-			from(sourceSets.main.resources.srcDirs) {
-				exclude 'fabric.mod.json'
+			inputs.property "version", project.version
+			filesMatching("fabric.mod.json") {
+				expand "version": project.version
 			}
 		}
 	}
@@ -141,7 +136,7 @@ allprojects {
 	// if it is present.
 	// If you remove this task, sources will not be generated.
 	task sourcesJar(type: Jar, dependsOn: classes) {
-		classifier = 'sources'
+		archiveClassifier.set 'sources'
 		from sourceSets.main.allSource
 	}
 
@@ -164,6 +159,7 @@ allprojects {
 
 import net.fabricmc.loom.task.RunClientTask
 import net.fabricmc.loom.task.RunServerTask
+import net.fabricmc.loom.util.GroovyXmlUtil
 
 subprojects {subproject ->
 	task runTestmodClient(type: RunClientTask) {
@@ -229,4 +225,5 @@ archivesBaseName = archives_base_name
 version = mod_version
 
 dependencies {
+	// TODO add modmenu to runtimeOnly
 }

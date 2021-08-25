@@ -6,7 +6,19 @@
   "name": "Minecraft Cursed Legacy API",
   "description": "A set of useful hooks and features to be used by modders.",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contributors": [
+    {
+      "name": "halotroop2288",
+      "contact": {
+        "email": "mailto://carolinejoybell@gmail.com",
+        "homepage": "https://halotroop.com",
+        "discord": "https://discord.com/channels/@me/231214143808602112",
+        "discord-tag": "halotroop#2288"
+      }
+    }
   ],
   "contact": {
     "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",

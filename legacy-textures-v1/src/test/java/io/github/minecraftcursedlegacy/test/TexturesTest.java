@@ -25,100 +25,105 @@ package io.github.minecraftcursedlegacy.test;
 
 import io.github.minecraftcursedlegacy.api.client.AtlasMap;
 import io.github.minecraftcursedlegacy.api.recipe.Recipes;
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.api.registry.Registries;
-import io.github.minecraftcursedlegacy.api.registry.TileItems;
+import io.github.minecraftcursedlegacy.api.registry.BlockItems;
 import io.github.minecraftcursedlegacy.api.registry.Translations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.item.ItemInstance;
-import net.minecraft.item.ItemType;
-import net.minecraft.tile.PlantTile;
-import net.minecraft.tile.Tile;
-import net.minecraft.tile.material.Material;
+import net.minecraft.block.Block;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class TexturesTest implements ModInitializer {
-	private static ItemType item, alsoItem;
-	private static Tile cross, betterCross;
-	private static Tile cube, redgrass;
+	private static Item item, alsoItem;
+	private static Block cross, betterCross;
+	private static Block cube, redgrass;
 
 	@Override
 	public void onInitialize() {
 		// Choco Atlas Mapping api
-		item = Registries.ITEM_TYPE.register(new Id("legacy-textures-test:item_texture"),
-				id -> new BasicItem(id).setTexturePosition(2, 0).setName("exampleTextureItem"));
+		item = Registries.ITEM.register(new Identifier("legacy-textures-test:item_texture"),
+				id -> new BasicItem(id).setTexturePosition(2, 0).setTranslationKey("exampleTextureItem"));
 		AtlasMap.registerAtlas(item, "/assets/legacy-textures-test/bc/item_textures.png");
 
 		// set with the 1.1.0 model discovery api which uses choco's 0.x api generated atlas impl under the hood
-		alsoItem = Registries.ITEM_TYPE.register(new Id("legacy-textures-test:item_texture_too"), id -> new BasicItem(id).setName("exampleTextureItemAlso"));
+		alsoItem = Registries.ITEM.register(new Identifier("legacy-textures-test:item_texture_too"),
+				id -> new BasicItem(id).setTranslationKey("exampleTextureItemAlso"));
 
-		// This one doesn't mess with the item texture and uses parented texture (you have to re-override a client side method to do this with PlantTile however)
-		cross = Registries.TILE.register(new Id("legacy-textures-test:iron_grass"), id -> new TallGrassTile2(id).name("ironGrass"));
-		TileItems.registerTileItem(new Id("legacy-textures-test:iron_grass"), cross);
+		// This one doesn't mess with the item texture and uses parented texture (you have to re-override a client side method to do this with PlantBlock however)
+		cross = Registries.BLOCK.register(new Identifier("legacy-textures-test:iron_grass"),
+				id -> new TallGrassBlock2(id).setTranslationKey("ironGrass"));
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:iron_grass"), cross);
 
 		// This one does
-		betterCross = Registries.TILE.register(new Id("legacy-textures-test:malachite_grass"), id -> new TallGrassTile(id).name("malachiteGrass"));
-		TileItems.registerTileItem(new Id("legacy-textures-test:malachite_grass"), betterCross);
+		betterCross = Registries.BLOCK.register(new Identifier("legacy-textures-test:malachite_grass"),
+				id -> new TallGrassBlock(id).setTranslationKey("malachiteGrass"));
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:malachite_grass"), betterCross);
 
-		cube = Registries.TILE.register(new Id("legacy-textures-test:cursed_legacy_block"), id -> new BasicTile(id).name("cursedLegacyBlock"));
-		TileItems.registerTileItem(new Id("legacy-textures-test:cursed_legacy_block"), cube);
+		cube = Registries.BLOCK.register(new Identifier("legacy-textures-test:cursed_legacy_block"),
+				id -> new BasicBlock(id).setTranslationKey("cursedLegacyBlock"));
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:cursed_legacy_block"), cube);
 
-		redgrass = Registries.TILE.register(new Id("legacy-textures-test:red_grass"), id -> new CustomGrassBlockTile(id).name("redGrass"));
-		TileItems.registerTileItem(new Id("legacy-textures-test:red_grass"), redgrass);
+		redgrass = Registries.BLOCK.register(new Identifier("legacy-textures-test:red_grass"),
+				id -> new CustomGrassBlockBlock(id).setTranslationKey("redGrass"));
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:red_grass"), redgrass);
 
-		Recipes.addShapelessRecipe(new ItemInstance(item), Tile.WOOD);
-		Recipes.addShapelessRecipe(new ItemInstance(alsoItem), item);
-		Recipes.addShapelessRecipe(new ItemInstance(cross), alsoItem);
-		Recipes.addShapelessRecipe(new ItemInstance(betterCross), cross);
-		Recipes.addShapelessRecipe(new ItemInstance(cube), ItemType.stick);
-		Recipes.addShapelessRecipe(new ItemInstance(redgrass), cube);
+		Recipes.addShapelessRecipe(new ItemStack(item), Block.WOOD);
+		Recipes.addShapelessRecipe(new ItemStack(alsoItem), item);
+		Recipes.addShapelessRecipe(new ItemStack(cross), alsoItem);
+		Recipes.addShapelessRecipe(new ItemStack(betterCross), cross);
+		Recipes.addShapelessRecipe(new ItemStack(cube), Item.STICK);
+		Recipes.addShapelessRecipe(new ItemStack(redgrass), cube);
 
 		Translations.addItemTranslation(item, "Example Item");
 		Translations.addItemTranslation(alsoItem, "Example Item Too");
-		Translations.addTileTranslation(cross, "Example Cross Model Tile");
-		Translations.addTileTranslation(betterCross, "Malachite Grass");
-		Translations.addTileTranslation(cube, "Cursed Legacy Block");
-		Translations.addTileTranslation(redgrass, "Red Grass");
+		Translations.addBlockTranslation(cross, "Example Cross Model Block");
+		Translations.addBlockTranslation(betterCross, "Malachite Grass");
+		Translations.addBlockTranslation(cube, "Cursed Legacy Block");
+		Translations.addBlockTranslation(redgrass, "Red Grass");
 	}
 
-	static class BasicItem extends ItemType {
+	static class BasicItem extends Item {
 		BasicItem(int i) {
 			super(i);
 		}
 	}
 
-	static class TallGrassTile extends PlantTile {
-		TallGrassTile(int id) {
+	static class TallGrassBlock extends PlantBlock {
+		TallGrassBlock(int id) {
 			super(id, 69);
-			this.hardness(0.0F);
-			this.sounds(GRASS_SOUNDS);
+			this.setHardness(0.0F);
+			this.setSounds(GRASS_SOUNDS);
 		}
 	}
 
-	static class TallGrassTile2 extends TallGrassTile {
-		public TallGrassTile2(int id) {
+	static class TallGrassBlock2 extends TallGrassBlock {
+		public TallGrassBlock2(int id) {
 			super(id);
 		}
 
 		@Override
 		@Environment(EnvType.CLIENT)
-		public int method_1621() {
+		public int getRenderType() {
 			return 0;
 		}
 	}
 
-	static class CustomGrassBlockTile extends Tile { // I would extend GrassTile but that tints the whole block based on grass colour which is cursed
-		CustomGrassBlockTile(int id) {
+	static class CustomGrassBlockBlock extends Block { // I would extend GrassBlock but that tints the whole block based on grass colour which is cursed
+		CustomGrassBlockBlock(int id) {
 			super(id, Material.ORGANIC);
 
-			this.hardness(0.6F);
-			this.sounds(GRASS_SOUNDS);
+			this.setHardness(0.6F);
+			this.setSounds(GRASS_SOUNDS);
 		}
 	}
 
-	class BasicTile extends Tile {
-		BasicTile(int i) {
+	static class BasicBlock extends Block {
+		BasicBlock(int i) {
 			super(i, 69, Material.DIRT);
 		}
 	}

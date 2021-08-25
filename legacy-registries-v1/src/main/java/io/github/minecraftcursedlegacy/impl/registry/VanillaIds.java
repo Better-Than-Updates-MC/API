@@ -23,16 +23,13 @@
 
 package io.github.minecraftcursedlegacy.impl.registry;
 
-import static net.minecraft.item.ItemType.*;
-import static net.minecraft.tile.Tile.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.minecraftcursedlegacy.accessor.registry.AccessorCompoundTag;
-import io.github.minecraftcursedlegacy.api.registry.Id;
-import net.minecraft.item.ItemType;
-import net.minecraft.tile.Tile;
+import io.github.minecraftcursedlegacy.accessor.registry.CompoundTagAccessor;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.util.io.CompoundTag;
 
 /**
@@ -41,34 +38,34 @@ import net.minecraft.util.io.CompoundTag;
  * @since 1.1.0
  */
 class VanillaIds {
-	private static final Map<Tile, Id> TILE_IDS = new HashMap<>();
-	private static final Map<ItemType, Id> ITEM_IDS = new HashMap<>();
+	private static final Map<Block, Identifier> BLOCK_IDS = new HashMap<>();
+	private static final Map<Item, Identifier> ITEM_IDS = new HashMap<>();
 
-	private static final Map<Id, Id> TILE_LEGACY_COMPAT = new HashMap<>();
-	private static final Map<Id, Id> ITEM_LEGACY_COMPAT = new HashMap<>();
+	private static final Map<Identifier, Identifier> BLOCK_LEGACY_COMPAT = new HashMap<>();
+	private static final Map<Identifier, Identifier> ITEM_LEGACY_COMPAT = new HashMap<>();
 
-	static Id getVanillaId(Tile tile) {
-		return TILE_IDS.get(tile);
+	static Identifier getVanillaId(Block block) {
+		return BLOCK_IDS.get(block);
 	}
 
-	// do not use with tile items, instead look up the tile and call getVanillaId(Tile)
-	static Id getVanillaId(ItemType item) {
+	// do not use with block items, instead look up the tile and call getVanillaId(Block)
+	static Identifier getVanillaId(Item item) {
 		return ITEM_IDS.get(item);
 	}
 
-	static Id correctLegacyTileId(Id existing) {
-		return TILE_LEGACY_COMPAT.getOrDefault(existing, existing);
+	static Identifier correctLegacyBlockId(Identifier existing) {
+		return BLOCK_LEGACY_COMPAT.getOrDefault(existing, existing);
 	}
 
-	static Id correctLegacyItemId(Id existing) {
+	static Identifier correctLegacyItemId(Identifier existing) {
 		return ITEM_LEGACY_COMPAT.getOrDefault(existing, existing);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	static void fixOldIds(CompoundTag registryData, boolean tile) {
-		Map data = ((AccessorCompoundTag) registryData).getData();
+	static void fixOldIds(CompoundTag registryData, boolean block) {
+		Map data = ((CompoundTagAccessor) registryData).getData();
 
-		for (Map.Entry<Id, Id> idPair : (tile ? TILE_LEGACY_COMPAT : ITEM_LEGACY_COMPAT).entrySet()) {
+		for (Map.Entry<Identifier, Identifier> idPair : (block ? BLOCK_LEGACY_COMPAT : ITEM_LEGACY_COMPAT).entrySet()) {
 			String key = idPair.getKey().toString();
 
 			if (data.containsKey(key)) { // swap key to new one
@@ -77,112 +74,112 @@ class VanillaIds {
 		}
 	}
 
-	static void initialiseTiles() {
+	static void initialiseBlocks() {
 		// ===========
-		//    Tiles
+		//    Blocks
 		// ===========
 
 		// The first few ids
-		set(STONE, "stone");
-		set(GRASS, "grass");
-		set(DIRT, "dirt");
-		set(COBBLESTONE, "cobblestone");
-		set(WOOD, "planks"); // Making it different due to the game calling it thus.
-		set(SAPLING, "sapling");
-		set(BEDROCK, "bedrock");
+		set(Block.STONE, "stone");
+		set(Block.GRASS, "grass");
+		set(Block.DIRT, "dirt");
+		set(Block.COBBLESTONE, "cobblestone");
+		set(Block.WOOD, "planks"); // Making it different due to the game calling it thus.
+		set(Block.SAPLING, "sapling");
+		set(Block.BEDROCK, "bedrock");
 
 		// Fluids
-		set(FLOWING_WATER, "flowing_water");
-		set(STILL_WATER, "water"); // this is basically convention
-		set(FLOWING_LAVA, "flowing_lava");
-		set(STILL_LAVA, "lava");
+		set(Block.FLOWING_WATER, "flowing_water");
+		set(Block.STILL_WATER, "water"); // this is basically convention
+		set(Block.FLOWING_LAVA, "flowing_lava");
+		set(Block.STILL_LAVA, "lava");
 
 		// Let's continue
-		set(SAND, "sand");
-		set(GRAVEL, "gravel");
-		set(GOLD_ORE, "gold_ore");
-		set(IRON_ORE, "iron_ore");
-		set(COAL_ORE, "coal_ore");
-		set(LOG, "log");
-		set(LEAVES, "leaves");
-		set(SPONGE, "sponge");
-		set(GLASS, "glass");
-		set(LAPIS_LAZULI_ORE, "lapis_lazuli_ore");
-		set(LAPIS_LAZULI_BLOCK, "lapis_lazuli_block");
-		set(DISPENSER, "dispenser");
-		set(SANDSTONE, "sandstone");
-		set(NOTEBLOCK, "noteblock");
-		set(BED, "bed", true);
-		set(GOLDEN_RAIL, "powered_rail");
-		set(DETECTOR_RAIL, "detector_rail");
-		set(STICKY_PISTON, "sticky_piston");
-		set(WEB, "web");
-		set(TALLGRASS, "tallgrass");
-		set(DEADBUSH, "deadbush");
-		set(PISTON, "piston");
-		set(PISTON_HEAD, "piston_head");
-		set(WOOL, "wool");
-		set(MOVING_PISTON, "moving_piston");
-		set(DANDELION, "dandelion");
-		set(ROSE, "rose");
-		set(BROWN_MUSHROOM, "brown_mushroom");
-		set(RED_MUSHROOM, "red_mushroom");
-		set(BLOCK_GOLD, "block_gold");
-		set(BLOCK_IRON, "block_iron");
-		set(DOUBLE_STONE_SLAB, "double_stone_slab");
-		set(STONE_SLAB, "stone_slab");
-		set(BRICK, "bricks");
-		set(TNT, "tnt");
-		set(BOOKSHELF, "bookshelf");
-		set(MOSSY_COBBLESTONE, "mossy_cobblestone");
-		set(OBSIDIAN, "obsidian");
-		set(TORCH, "torch");
-		set(FIRE, "fire");
-		set(MOB_SPAWNER, "mob_spawner");
-		set(STAIRS_WOOD, "wooden_stairs");
-		set(CHEST, "chest");
-		set(REDSTONE_DUST, "redstone_dust");
-		set(DIAMOND_ORE, "diamond_ore");
-		set(BLOCK_DIAMOND, "diamond_block");
-		set(WORKBENCH, "workbench");
-		set(CROPS, "crops");
-		set(FARMLAND, "farmland");
-		set(FURNACE, "furnace");
-		set(FURNACE_LIT, "lit_furnace");
-		set(STANDING_SIGN, "standing_sign");
-		set(DOOR_WOOD, "wooden_door", true);
-		set(LADDER, "ladder");
-		set(RAIL, "rail");
-		set(STAIRS_STONE, "stone_stairs");
-		set(WALL_SIGN, "wall_sign");
-		set(LEVER, "lever");
-		set(WOODEN_PRESSURE_PLATE, "wooden_pressure_plate");
-		set(DOOR_IRON, "iron_door", true);
-		set(STONE_PRESSURE_PLATE, "stone_pressure_plate");
-		set(REDSTONE_ORE, "redstone_ore");
-		set(REDSTONE_ORE_LIT, "lit_redstone_ore");
-		set(REDSTONE_TORCH, "redstone_torch");
-		set(REDSTONE_TORCH_LIT, "lit_redstone_torch");
-		set(BUTTON, "button");
-		set(SNOW, "snow");
-		set(ICE, "ice");
-		set(SNOW_BLOCK, "snow_block");
-		set(CACTUS, "cactus");
-		set(CLAY, "clay_block");
-		set(REEDS, "reeds", true);
-		set(JUKEBOX, "jukebox");
-		set(FENCE, "fence");
-		set(PUMPKIN, "pumpkin");
-		set(NETHERRACK, "netherrack");
-		set(SOUL_SAND, "soul_sand");
-		set(GLOWSTONE, "glowstone");
-		set(PORTAL, "portal");
-		set(LIT_PUMPKIN, "lit_pumpkin");
-		set(CAKE, "cake", true);
-		set(REDSTONE_REPEATER, "redstone_repeater", true);
-		set(REDSTONE_REPEATER_LIT, "lit_redstone_repeater", true);
-		set(LOCKED_CHEST, "locked_chest");
-		set(TRAPDOOR, "trapdoor");
+		set(Block.SAND, "sand");
+		set(Block.GRAVEL, "gravel");
+		set(Block.GOLD_ORE, "gold_ore");
+		set(Block.IRON_ORE, "iron_ore");
+		set(Block.COAL_ORE, "coal_ore");
+		set(Block.LOG, "log");
+		set(Block.LEAVES, "leaves");
+		set(Block.SPONGE, "sponge");
+		set(Block.GLASS, "glass");
+		set(Block.LAPIS_LAZULI_ORE, "lapis_lazuli_ore");
+		set(Block.LAPIS_LAZULI_BLOCK, "lapis_lazuli_block");
+		set(Block.DISPENSER, "dispenser");
+		set(Block.SANDSTONE, "sandstone");
+		set(Block.NOTEBLOCK, "noteblock");
+		set(Block.BED, "bed", true);
+		set(Block.GOLDEN_RAIL, "powered_rail");
+		set(Block.DETECTOR_RAIL, "detector_rail");
+		set(Block.STICKY_PISTON, "sticky_piston");
+		set(Block.COBWEB, "web");
+		set(Block.TALLGRASS, "tallgrass");
+		set(Block.DEADBUSH, "deadbush");
+		set(Block.PISTON, "piston");
+		set(Block.PISTON_HEAD, "piston_head");
+		set(Block.WOOL, "wool");
+		set(Block.MOVING_PISTON, "moving_piston");
+		set(Block.DANDELION, "dandelion");
+		set(Block.ROSE, "rose");
+		set(Block.BROWN_MUSHROOM, "brown_mushroom");
+		set(Block.RED_MUSHROOM, "red_mushroom");
+		set(Block.GOLD_BLOCK, "block_gold");
+		set(Block.IRON_BLOCK, "block_iron");
+		set(Block.DOUBLE_STONE_SLAB, "double_stone_slab");
+		set(Block.STONE_SLAB, "stone_slab");
+		set(Block.BRICKS, "bricks");
+		set(Block.TNT, "tnt");
+		set(Block.BOOKSHELF, "bookshelf");
+		set(Block.MOSSY_COBBLESTONE, "mossy_cobblestone");
+		set(Block.OBSIDIAN, "obsidian");
+		set(Block.TORCH, "torch");
+		set(Block.FIRE, "fire");
+		set(Block.MOB_SPAWNER, "mob_spawner");
+		set(Block.WOOD_STAIRS, "wooden_stairs");
+		set(Block.CHEST, "chest");
+		set(Block.REDSTONE_DUST, "redstone_dust");
+		set(Block.DIAMOND_ORE, "diamond_ore");
+		set(Block.DIAMOND_BLOCK, "diamond_block");
+		set(Block.WORKBENCH, "workbench");
+		set(Block.CROPS, "crops");
+		set(Block.FARMLAND, "farmland");
+		set(Block.FURNACE, "furnace");
+		set(Block.FURNACE_LIT, "lit_furnace");
+		set(Block.STANDING_SIGN, "standing_sign");
+		set(Block.WOOD_DOOR, "wooden_door", true);
+		set(Block.LADDER, "ladder");
+		set(Block.RAIL, "rail");
+		set(Block.COBBLESTONE_STAIRS, "stone_stairs");
+		set(Block.WALL_SIGN, "wall_sign");
+		set(Block.LEVER, "lever");
+		set(Block.WOODEN_PRESSURE_PLATE, "wooden_pressure_plate");
+		set(Block.IRON_DOOR, "iron_door", true);
+		set(Block.STONE_PRESSURE_PLATE, "stone_pressure_plate");
+		set(Block.REDSTONE_ORE, "redstone_ore");
+		set(Block.REDSTONE_ORE_LIT, "lit_redstone_ore");
+		set(Block.REDSTONE_TORCH, "redstone_torch");
+		set(Block.REDSTONE_TORCH_LIT, "lit_redstone_torch");
+		set(Block.BUTTON, "button");
+		set(Block.SNOW, "snow");
+		set(Block.ICE, "ice");
+		set(Block.SNOW_BLOCK, "snow_block");
+		set(Block.CACTUS, "cactus");
+		set(Block.CLAY, "clay_block");
+		set(Block.SUGAR_CANES, "reeds", true);
+		set(Block.JUKEBOX, "jukebox");
+		set(Block.FENCE, "fence");
+		set(Block.PUMPKIN, "pumpkin");
+		set(Block.NETHERRACK, "netherrack");
+		set(Block.SOUL_SAND, "soul_sand");
+		set(Block.GLOWSTONE, "glowstone");
+		set(Block.PORTAL, "portal");
+		set(Block.JACK_O_LANTERN, "lit_pumpkin");
+		set(Block.CAKE, "cake", true);
+		set(Block.REDSTONE_REPEATER, "redstone_repeater", true);
+		set(Block.REDSTONE_REPEATER_LIT, "lit_redstone_repeater", true);
+		set(Block.LOCKED_CHEST, "locked_chest");
+		set(Block.TRAPDOOR, "trapdoor");
 	}
 
 	static void initialiseItems() {
@@ -190,153 +187,153 @@ class VanillaIds {
 		//    Items
 		// ===========
 
-		set(shovelIron, "iron_shovel");
-		set(pickaxeIron, "iron_pickaxe");
-		set(hatchetIron, "iron_axe");
-		set(flintAndSteel, "flint_and_steel");
-		set(apple, "apple");
-		set(bow, "bow");
-		set(arrow, "arrow");
-		set(coal, "coal");
-		set(diamond, "diamond");
-		set(ingotIron, "iron_ingot");
-		set(ingotGold, "gold_ingot");
-		set(swordIron, "iron_sword");
-		set(swordWood, "wooden_sword");
-		set(shovelWood, "wooden_shovel");
-		set(pickaxeWood, "wooden_pickaxe");
-		set(hatchetWood, "wooden_hatchet");
-		set(swordStone, "stone_sword");
-		set(shovelStone, "stone_shovel");
-		set(pickaxeStone, "stone_pickaxe");
-		set(hatchetStone, "stone_hatchet");
-		set(swordDiamond, "sword_diamond");
-		set(shovelDiamond, "shovel_diamond");
-		set(pickaxeDiamond, "diamond_pickaxe");
-		set(hatchetDiamond, "diamond_hatchet");
-		set(stick, "stick");
-		set(bowl, "bowl");
-		set(mushroomStew, "mushroom_stew");
-		set(swordGold, "gold_sword");
-		set(shovelGold, "gold_shovel");
-		set(pickaxeGold, "gold_pickaxe");
-		set(hatchetGold, "gold_hatchet");
-		set(string, "string");
-		set(feather, "feather");
-		set(sulphur, "sulphur");
-		set(hoeWood, "wooden_hoe");
-		set(hoeStone, "stone_hoe");
-		set(hoeIron, "iron_hoe");
-		set(hoeDiamond, "diamond_hoe");
-		set(hoeGold, "gold_hoe");
-		set(seeds, "seeds");
-		set(wheat, "wheat");
-		set(bread, "bread");
-		set(helmetCloth, "cloth_helmet");
-		set(chestplateCloth, "cloth_chestplate");
-		set(leggingsCloth, "cloth_leggings");
-		set(bootsCloth, "cloth_boots");
-		set(helmetChain, "chain_helmet");
-		set(chestplateChain, "chain_chestplate");
-		set(leggingsChain, "chain_leggings");
-		set(bootsChain, "chain_boots");
-		set(helmetIron, "iron_helmet");
-		set(chestplateIron, "iron_chestplate");
-		set(leggingsIron, "iron_leggings");
-		set(bootsIron, "iron_boots");
-		set(helmetDiamond, "diamond_helmet");
-		set(chestplateDiamond, "diamond_chestplate");
-		set(leggingsDiamond, "diamond_leggings");
-		set(bootsDiamond, "diamond_boots");
-		set(helmetGold, "gold_helmet");
-		set(chestplateGold, "gold_chestplate");
-		set(leggingsGold, "gold_leggings");
-		set(bootsGold, "gold_boots");
-		set(flint, "flint");
-		set(porkchopRaw, "raw_porkchop");
-		set(porkchopCooked, "cooked_porkchop");
-		set(painting, "painting");
-		set(appleGold, "gold_apple");
-		set(sign, "sign");
-		set(doorWood, "wooden_door");
-		set(bucket, "bucket");
-		set(bucketWater, "water_bucket");
-		set(bucketLava, "lava_bucket");
-		set(minecart, "minecart");
-		set(saddle, "saddle");
-		set(doorIron, "iron_door");
-		set(redstone, "redstone");
-		set(snowball, "snowball");
-		set(boat, "boat");
-		set(leather, "leather");
-		set(milk, "milk");
-		set(brick, "brick");
-		set(clay, "clay");
-		set(reeds, "reeds");
-		set(paper, "paper");
-		set(book, "book");
-		set(slimeball, "slimeball");
-		set(minecartChest, "minecart_chest");
-		set(minecartFurnace, "minecart_furnace");
-		set(egg, "egg");
-		set(compass, "compass");
-		set(fishingRod, "fishing_rod");
-		set(clock, "clock");
-		set(yellowDust, "glowstone_dust");
-		set(fishRaw, "raw_fish");
-		set(fishCooked, "cooked_fish");
-		set(dyePowder, "dye_powder");
-		set(bone, "bone");
-		set(sugar, "sugar");
-		set(cake, "cake");
-		set(bed, "bed");
-		set(diode, "redstone_repeater");
-		set(cookie, "cookie");
-		set(map, "map");
-		set(shears, "shears");
-		set(record_13, "record_13");
-		set(record_cat, "record_cat");
+		set(Item.IRON_SHOVEL, "iron_shovel");
+		set(Item.IRON_PICKAXE, "iron_pickaxe");
+		set(Item.IRON_AXE, "iron_axe");
+		set(Item.FLINT_AND_STEEL, "flint_and_steel");
+		set(Item.APPLE, "apple");
+		set(Item.BOW, "bow");
+		set(Item.ARROW, "arrow");
+		set(Item.COAL, "coal");
+		set(Item.DIAMOND, "diamond");
+		set(Item.IRON_INGOT, "iron_ingot");
+		set(Item.GOLD_INGOT, "gold_ingot");
+		set(Item.IRON_SWORD, "iron_sword");
+		set(Item.WOOD_SWORD, "wooden_sword");
+		set(Item.WOOD_SHOVEL, "wooden_shovel");
+		set(Item.WOOD_PICKAXE, "wooden_pickaxe");
+		set(Item.WOOD_AXE, "wooden_hatchet");
+		set(Item.STONE_SWORD, "stone_sword");
+		set(Item.STONE_SHOVEL, "stone_shovel");
+		set(Item.STONE_PICKAXE, "stone_pickaxe");
+		set(Item.STONE_AXE, "stone_hatchet");
+		set(Item.DIAMOND_SWORD, "sword_diamond");
+		set(Item.DIAMOND_SHOVEL, "shovel_diamond");
+		set(Item.DIAMOND_PICKAXE, "diamond_pickaxe");
+		set(Item.DIAMOND_AXE, "diamond_hatchet");
+		set(Item.STICK, "stick");
+		set(Item.BOWL, "bowl");
+		set(Item.MUSHROOM_STEW, "mushroom_stew");
+		set(Item.GOLD_SWORD, "gold_sword");
+		set(Item.GOLD_SHOVEL, "gold_shovel");
+		set(Item.GOLD_PICKAXE, "gold_pickaxe");
+		set(Item.GOLD_AXE, "gold_hatchet");
+		set(Item.STRING, "string");
+		set(Item.FEATHER, "feather");
+		set(Item.GUNPOWDER, "sulphur");
+		set(Item.WOOD_HOE, "wooden_hoe");
+		set(Item.STONE_HOE, "stone_hoe");
+		set(Item.IRON_HOE, "iron_hoe");
+		set(Item.DIAMOND_HOE, "diamond_hoe");
+		set(Item.GOLD_HOE, "gold_hoe");
+		set(Item.SEEDS, "seeds");
+		set(Item.WHEAT, "wheat");
+		set(Item.BREAD, "bread");
+		set(Item.LEATHER_HELMET, "cloth_helmet");
+		set(Item.LEATHER_CHESTPLATE, "cloth_chestplate");
+		set(Item.LEATHER_LEGGINGS, "cloth_leggings");
+		set(Item.LEATHER_BOOTS, "cloth_boots");
+		set(Item.CHAIN_HELMET, "chain_helmet");
+		set(Item.CHAIN_CHESTPLATE, "chain_chestplate");
+		set(Item.CHAIN_LEGGINGS, "chain_leggings");
+		set(Item.CHAIN_BOOTS, "chain_boots");
+		set(Item.IRON_HELMENT, "iron_helmet");
+		set(Item.IRON_CHESTPLATE, "iron_chestplate");
+		set(Item.IRON_LEGGINGS, "iron_leggings");
+		set(Item.IRON_BOOTS, "iron_boots");
+		set(Item.DIAMOND_HELMET, "diamond_helmet");
+		set(Item.DIAMOND_CHESTPLATE, "diamond_chestplate");
+		set(Item.DIAMOND_LEGGINGS, "diamond_leggings");
+		set(Item.DIAMOND_BOOTS, "diamond_boots");
+		set(Item.GOLD_HELMET, "gold_helmet");
+		set(Item.GOLD_CHESTPLATE, "gold_chestplate");
+		set(Item.GOLD_LEGGINGS, "gold_leggings");
+		set(Item.GOLD_BOOTS, "gold_boots");
+		set(Item.FLINT, "flint");
+		set(Item.RAW_PORKCHOP, "raw_porkchop");
+		set(Item.COOKED_PORKCHOP, "cooked_porkchop");
+		set(Item.PAINTING, "painting");
+		set(Item.GOLDEN_APPLE, "gold_apple");
+		set(Item.SIGN, "sign");
+		set(Item.WOOD_DOOR, "wooden_door");
+		set(Item.BUCKET, "bucket");
+		set(Item.WATER_BUCKET, "water_bucket");
+		set(Item.LAVA_BUCKET, "lava_bucket");
+		set(Item.MINECART, "minecart");
+		set(Item.SADDLE, "saddle");
+		set(Item.IRON_DOOR, "iron_door");
+		set(Item.REDSTONE_DUST, "redstone");
+		set(Item.SNOWBALL, "snowball");
+		set(Item.BOAT, "boat");
+		set(Item.LEATHER, "leather");
+		set(Item.MILK, "milk");
+		set(Item.BRICK, "brick");
+		set(Item.CLAY, "clay");
+		set(Item.SUGAR_CANE, "reeds");
+		set(Item.PAPER, "paper");
+		set(Item.BOOK, "book");
+		set(Item.SLIMEBALL, "slimeball");
+		set(Item.MINECART_CHEST, "minecart_chest");
+		set(Item.MINECART_FURNACE, "minecart_furnace");
+		set(Item.EGG, "egg");
+		set(Item.COMPASS, "compass");
+		set(Item.FISHING_ROD, "fishing_rod");
+		set(Item.CLOCK, "clock");
+		set(Item.GLOWSTONE_DUST, "glowstone_dust");
+		set(Item.RAW_FISH, "raw_fish");
+		set(Item.COOKED_FISH, "cooked_fish");
+		set(Item.DYE_POWDER, "dye_powder");
+		set(Item.BONE, "bone");
+		set(Item.SUGAR, "sugar");
+		set(Item.CAKE, "cake");
+		set(Item.BED, "bed");
+		set(Item.REDSTONE_REPEATER, "redstone_repeater");
+		set(Item.COOKIE, "cookie");
+		set(Item.MAP, "map");
+		set(Item.SHEARS, "shears");
+		set(Item.RECORD_13, "record_13");
+		set(Item.RECORD_CAT, "record_cat");
 	}
 
-	private static void set(Tile tile, String id) {
-		set(tile, id, false);
+	private static void set(Block block, String id) {
+		set(block, id, false);
 	}
 
-	private static void set(Tile tile, String id, boolean alterPlaceableId) {
-		Id id_ = new Id(id);
-		Id item_id_ = alterPlaceableId ? new Id(id + "_block") : id_;
+	private static void set(Block block, String id, boolean alterPlaceableId) {
+		Identifier id_ = new Identifier(id);
+		Identifier item_id_ = alterPlaceableId ? new Identifier(id + "_block") : id_;
 
-		TILE_IDS.put(tile, id_);
-		ITEM_IDS.put(ItemType.byId[tile.id], item_id_);
+		BLOCK_IDS.put(block, id_);
+		ITEM_IDS.put(Item.byId[block.id], item_id_);
 
 		// legacy
-		String idPart = tile.method_1597();
+		String idPart = block.getTranslationKey();
 
 		if (idPart == null) {
-			idPart = "tile";
+			idPart = "block";
 		} else {
-			idPart = idPart.substring(5); // remove "tile."
+			idPart = idPart.substring(5); // remove "block."
 		}
 
-		Id legacy = new Id(idPart + "_" + tile.id);
+		Identifier legacy = new Identifier(idPart + "_" + block.id);
 
-		TILE_LEGACY_COMPAT.put(legacy, id_);
-		ITEM_LEGACY_COMPAT.put(legacy, item_id_); // for tile items
+		BLOCK_LEGACY_COMPAT.put(legacy, id_);
+		ITEM_LEGACY_COMPAT.put(legacy, item_id_); // for block items
 	}
 
-	private static void set(ItemType item, String id) {
-		Id id_ = new Id(id);
+	private static void set(Item item, String id) {
+		Identifier id_ = new Identifier(id);
 		ITEM_IDS.put(item, id_);
 
 		// legacy
 		String idPart = item.getTranslationKey();
 
 		if (idPart == null) {
-			idPart = "itemtype";
+			idPart = "item";
 		} else {
 			idPart = idPart.substring(5); // remove "item."
 		}
 
-		ITEM_LEGACY_COMPAT.put(new Id(idPart + "_" + item.id), id_);
+		ITEM_LEGACY_COMPAT.put(new Identifier(idPart + "_" + item.id), id_);
 	}
 }

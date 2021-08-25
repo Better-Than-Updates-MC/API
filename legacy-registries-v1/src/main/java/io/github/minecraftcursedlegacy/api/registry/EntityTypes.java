@@ -32,7 +32,7 @@ public class EntityTypes {
 	 * @param clazz the entity class.
 	 * @param id the identifier used in the EntityType registry.
 	 */
-	public static EntityType createEntityType(Class<? extends Entity> clazz, Id id) {
+	public static EntityType createEntityType(Class<? extends Entity> clazz, Identifier id) {
 		return new EntityType(clazz, id);
 	}
 }

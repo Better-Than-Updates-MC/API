@@ -3,9 +3,9 @@
   "package": "io.github.minecraftcursedlegacy.mixin.attacheddata",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinItemInstance",
-    "MixinLevelProperties",
-    "MixinPlayerInventory"
+	  "ItemStackMixin",
+    "WorldPropertiesMixin",
+    "PlayerInventoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

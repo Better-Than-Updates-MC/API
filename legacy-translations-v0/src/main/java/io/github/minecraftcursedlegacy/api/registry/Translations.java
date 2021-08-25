@@ -27,12 +27,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import io.github.minecraftcursedlegacy.accessor.translations.AccessorTranslationStorage;
+import io.github.minecraftcursedlegacy.accessor.translations.TranslationStorageAccessor;
 import net.minecraft.achievement.Achievement;
+import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.resource.language.TranslationStorage;
-import net.minecraft.item.ItemType;
-import net.minecraft.tile.Tile;
+import net.minecraft.item.Item;
 
 /**
  * Utilities for adding translations for things.
@@ -47,27 +47,27 @@ public final class Translations {
 	}
 
 	/**
-	 * Add a translation for the given {@link Tile}.
+	 * Add a translation for the given {@link Block}.
 	 *
-	 * @param tile The tile to add the translation for
-	 * @param translation The translated name for the tile
+	 * @param block The block to add the translation for
+	 * @param translation The translated name for the block
 	 *
-	 * @throws IllegalArgumentException If the given tile has not had {@link Tile#name(String)} called
+	 * @throws IllegalArgumentException If the given block has not had {@link Block#setTranslationKey(String)}} called
 	 */
-	public static void addTileTranslation(Tile tile, String translation) {
-		if (tile.method_1597() == null) throw new IllegalArgumentException("Given tile doesn't have a name: " + tile);
-		addTranslation(tile.method_1597().concat(".name"), translation);
+	public static void addBlockTranslation(Block block, String translation) {
+		if (block.getTranslationKey() == null) throw new IllegalArgumentException("Given block doesn't have a name: " + block);
+		addTranslation(block.getTranslationKey().concat(".name"), translation);
 	}
 
 	/**
-	 * Add translation for the given {@link ItemType}.
+	 * Add translation for the given {@link Item}.
 	 * 
 	 * @param item The item to add the translation for
 	 * @param translation The translated name for the item
 	 *
-	 * @throws IllegalArgumentException If the given item has not had {@link ItemType#setName(String)} called
+	 * @throws IllegalArgumentException If the given item has not had {@link Item#setTranslationKey(String)}} called
 	 */
-	public static void addItemTranslation(ItemType item, String translation) {
+	public static void addItemTranslation(Item item, String translation) {
 		if (item.getTranslationKey() == null) throw new IllegalArgumentException("Given item doesn't have a name: " + item);
 		addTranslation(item.getTranslationKey().concat(".name"), translation);
 	}
@@ -107,7 +107,7 @@ public final class Translations {
 	 * @param translation The translated text for the key
 	 */
 	public static void addTranslation(String key, String translation) {
-		((AccessorTranslationStorage) TranslationStorage.getInstance()).getTranslations().put(key, translation);
+		((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations().put(key, translation);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public final class Translations {
 	 */
 	public static void loadLangFile(String file) throws IOException {
 		try (InputStream in = Translations.class.getResourceAsStream(file)) {
-			((AccessorTranslationStorage) TranslationStorage.getInstance()).getTranslations().load(in);
+			((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations().load(in);
 		}
 	}
 
@@ -131,6 +131,6 @@ public final class Translations {
 	 * @throws IOException If there is an error reading the translations
 	 */
 	public static void loadLangFile(Reader reader) throws IOException {
-		((AccessorTranslationStorage) TranslationStorage.getInstance()).getTranslations().load(reader);
+		((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations().load(reader);
 	}
 }

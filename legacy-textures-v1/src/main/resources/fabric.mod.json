@@ -4,13 +4,15 @@
   "version": "${version}",
 
   "name": "Minecraft Cursed Legacy Textures",
-  "description": "A set of useful hooks and features to be used by modders.",
+  "description": "Implementation of CoreLib.",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team",
+    "paulevs"
   ],
   "contact": {
-    "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",
-    "sources": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API"
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
 
   "license": "MIT",
@@ -24,7 +26,8 @@
   },
   
   "mixins": [
-    "legacy-textures.mixins.json"
+    "legacy-textures.mixins.json",
+    "corelib.mixins.json"
   ],
 
   "depends": {

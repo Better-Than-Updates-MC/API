@@ -6,7 +6,8 @@
   "name": "Minecraft Cursed Legacy Terrain",
   "description": "A set of useful hooks and features to be used by modders.",
   "authors": [
-    "The Cursed Legacy Team"
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
   ],
   "contact": {
     "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",
@@ -18,7 +19,7 @@
   
   "entrypoints": {
     "init": [
-      "io.github.minecraftcursedlegacy.impl.terrain.LevelGenImpl"
+	    "io.github.minecraftcursedlegacy.impl.terrain.WorldGenImpl"
     ],
     "postInit": [
       "io.github.minecraftcursedlegacy.impl.terrain.BiomeRecomputer"

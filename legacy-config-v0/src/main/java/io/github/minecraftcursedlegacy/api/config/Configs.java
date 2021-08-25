@@ -26,7 +26,7 @@ package io.github.minecraftcursedlegacy.api.config;
 import java.io.File;
 import java.io.IOException;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import net.fabricmc.loader.api.FabricLoader;
 import tk.valoeghese.zoesteriaconfig.api.ZoesteriaConfig;
 import tk.valoeghese.zoesteriaconfig.api.container.WritableConfig;
@@ -50,7 +50,7 @@ public final class Configs {
 	 * @throws IOException if there is an error creating the config file.
 	 * @throws NullPointerException if {@code configId} is null
 	 */
-	public static WritableConfig loadOrCreate(Id configId, ConfigTemplate defaults) throws IOException {
+	public static WritableConfig loadOrCreate(Identifier configId, ConfigTemplate defaults) throws IOException {
 		File directory = new File(FabricLoader.getInstance().getConfigDirectory(), configId.getNamespace());
 		directory.mkdirs();
 		File configFile = new File(directory, configId.getName() + ".cfg");

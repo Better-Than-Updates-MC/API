@@ -24,36 +24,36 @@
 package io.github.minecraftcursedlegacy.test;
 
 import io.github.minecraftcursedlegacy.api.recipe.Recipes;
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 import io.github.minecraftcursedlegacy.api.registry.Registries;
-import io.github.minecraftcursedlegacy.api.registry.TileItems;
+import io.github.minecraftcursedlegacy.api.registry.BlockItems;
 import io.github.minecraftcursedlegacy.api.registry.Translations;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.item.ItemInstance;
-import net.minecraft.item.ItemType;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.SmeltingRecipeRegistry;
-import net.minecraft.tile.Tile;
 
 public class RegistryTest implements ModInitializer {
+	public static Item item;
+	public static Block block;
+	public static Item blockItem;
+
 	@Override
 	public void onInitialize() {
 		System.out.println("Hello, Fabric World!");
-		item = Registries.ITEM_TYPE.register(new Id("modid:item"),
-				i -> new BasicItem(i).setTexturePosition(5, 0).setName("exampleItem"));
-		tile = Registries.TILE.register(new Id("modid:tile"),
-				i -> new BasicTile(i, false).name("exampleBlock"));
-		tileItem = TileItems.registerTileItem(new Id("modid:tile"), tile);
+		item = Registries.ITEM.register(new Identifier("modid:item"),
+				i -> new BasicItem(i).setTexturePosition(5, 0).setTranslationKey("exampleItem"));
+		block = Registries.BLOCK.register(new Identifier("modid:block"),
+				i -> new BasicBlock(i, false).setTranslationKey("exampleBlock"));
+		blockItem = BlockItems.registerBlockItem(new Identifier("modid:block"), block);
 
-		SmeltingRecipeRegistry.getInstance().addSmeltingRecipe(item.id, new ItemInstance(tile));
+		SmeltingRecipeRegistry.getInstance().addSmeltingRecipe(item.id, new ItemStack(block));
 
-		Recipes.addShapelessRecipe(new ItemInstance(item, 2), Tile.DIRT, Tile.SAND);
-		Recipes.addShapedRecipe(new ItemInstance(tile), "##", '#', Tile.DIRT);
+		Recipes.addShapelessRecipe(new ItemStack(item, 2), Block.DIRT, Block.SAND);
+		Recipes.addShapedRecipe(new ItemStack(block), "##", '#', Block.DIRT);
 
-		Translations.addTileTranslation(tile, "Example Block");
+		Translations.addBlockTranslation(block, "Example Block");
 		Translations.addItemTranslation(item, "Example Item");
 	}
-
-	public static ItemType item;
-	public static Tile tile;
-	public static ItemType tileItem;
 }

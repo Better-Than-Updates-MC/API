@@ -3,11 +3,11 @@
   "package": "io.github.minecraftcursedlegacy.mixin.command",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinMinecraft"
+    "MinecraftMixin"
   ],
   "server": [
-    "MixinCommandManager",
-    "MixinServerPlayPacketHandler"
+	  "CommandManagerMixin",
+	  "ServerPlayPacketHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

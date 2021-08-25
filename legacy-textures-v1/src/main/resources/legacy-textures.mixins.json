@@ -3,8 +3,8 @@
   "package": "io.github.minecraftcursedlegacy.mixin.texture",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinHandItemRenderer",
-    "MixinItemRenderer"
+    "HandItemRendererMixin",
+    "ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

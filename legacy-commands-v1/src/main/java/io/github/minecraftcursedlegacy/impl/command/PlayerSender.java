@@ -1,17 +1,17 @@
 package io.github.minecraftcursedlegacy.impl.command;
 
-import io.github.minecraftcursedlegacy.accessor.command.AccessorMinecraft;
+import io.github.minecraftcursedlegacy.accessor.command.MinecraftAccessor;
 import io.github.minecraftcursedlegacy.api.command.Sender;
-import net.minecraft.entity.player.Player;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class PlayerSender implements Sender {
-	private final Player player;
+	private final PlayerEntity player;
 
-	public PlayerSender(Player player) {
+	public PlayerSender(PlayerEntity player) {
 		this.player = player;
 	}
 
-	public Player getPlayer() {
+	public PlayerEntity getPlayer() {
 		return this.player;
 	}
 
@@ -20,6 +20,6 @@ public class PlayerSender implements Sender {
 	}
 
 	public void sendCommandFeedback(String message) {
-		AccessorMinecraft.getInstance().overlay.addChatMessage(message);
+		MinecraftAccessor.getInstance().overlay.addChatMessage(message);
 	}
 }

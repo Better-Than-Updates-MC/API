@@ -23,11 +23,11 @@
 
 package io.github.minecraftcursedlegacy.api.terrain.feature;
 
-import java.util.Arrays;
-import java.util.Random;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-import net.minecraft.level.Level;
-import net.minecraft.util.maths.TilePos;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  * {@linkplain Placement} that scatters along the x and z of the given region, and sets the height based on the heightmap.
@@ -38,9 +38,9 @@ public class ScatteredHeightmapPlacement extends Placement {
 	}
 
 	@Override
-	public Iterable<TilePos> getPositions(Level level, Random rand, int startX, int startY, int startZ) {
+	public Iterable<BlockPos> getPositions(World world, Random rand, int startX, int startY, int startZ) {
 		int xToGen = startX + rand.nextInt(16) + 8;
 		int zToGen = startZ + rand.nextInt(16) + 8;
-		return Arrays.asList(new TilePos(xToGen, level.getHeight(xToGen, zToGen), zToGen));
+		return Collections.singletonList(new BlockPos(xToGen, world.getHeight(xToGen, zToGen), zToGen));
 	}
 }

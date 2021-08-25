@@ -23,10 +23,10 @@
 
 package io.github.minecraftcursedlegacy.api.command;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import io.github.minecraftcursedlegacy.impl.command.PlayerSender;
-import net.minecraft.entity.player.Player;
+import net.minecraft.entity.player.PlayerEntity;
 
 /**
  * Information about and utility methods for handling incoming commands and chat messages.
@@ -36,7 +36,7 @@ public interface Sender {
 	/**
 	 * @return the player executing the command. Will be null if it is the console.
 	 */
-	@Nullable Player getPlayer();
+	@Nullable PlayerEntity getPlayer();
 	/**
 	 * Sends a chat message to the command source as feedback.
 	 * @param message the message to send. 
@@ -55,7 +55,7 @@ public interface Sender {
 	 * @param player the player who is responsible for sending.
 	 * @return the new sender instance.
 	 */
-	static Sender fromPlayer(Player player) {
+	static Sender fromPlayer(PlayerEntity player) {
 		return new PlayerSender(player);
 	}
 }

@@ -26,19 +26,19 @@ package io.github.minecraftcursedlegacy.test;
 import java.util.Random;
 
 import io.github.minecraftcursedlegacy.api.terrain.ExtendedBiome;
-import net.minecraft.level.biome.Biome;
-import net.minecraft.level.structure.Feature;
-import net.minecraft.level.structure.SpruceTree;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.feature.Feature;
+import net.minecraft.world.feature.SpruceTreeFeature;
 
 public class TestBiome extends Biome implements ExtendedBiome {
 	public TestBiome(String name) {
-		this.setGrassColour(14278691);
+		this.setGrassColor(14278691);
 		this.setName(name);
 	}
 
 	@Override
 	public Feature getTree(Random random) {
-		return new SpruceTree();
+		return new SpruceTreeFeature();
 	}
 
 	@Override

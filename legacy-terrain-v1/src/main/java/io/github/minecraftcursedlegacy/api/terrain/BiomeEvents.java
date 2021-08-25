@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import io.github.minecraftcursedlegacy.api.event.ActionResult;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.level.biome.Biome;
+import net.minecraft.world.biome.Biome;
 
 /**
  * Class of events pertaining to biome placement and biomes.

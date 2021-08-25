@@ -23,9 +23,9 @@
 
 package io.github.minecraftcursedlegacy.impl.texture.resource;
 
-import io.github.minecraftcursedlegacy.api.registry.Id;
+import io.github.minecraftcursedlegacy.api.registry.Identifier;
 
 @FunctionalInterface
 public interface ModelSetup {
-	void setupModel(Id id, Object object, ModelJson parameters);
+	void setupModel(Identifier id, Object object, ModelJson parameters);
 }
