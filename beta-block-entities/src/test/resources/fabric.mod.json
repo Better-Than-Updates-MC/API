@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-tile-entities-test",
+  "version": "${version}",
+
+  "name": "Block Entities Test Mod",
+  "description": "Tests for the Fabric Beta Block Entities API.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "init": [
+	    "com.halotroop.fabric.test.BlockEntityTest"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-registries": "*",
+    "beta-tile-entities": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

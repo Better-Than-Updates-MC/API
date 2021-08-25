@@ -1,7 +1,0 @@
-archivesBaseName = 'legacy-forge-hooks-v999'
-version = getSubprojectVersion(project, '1.0.7')
-
-apply plugin: 'java-library'
-
-dependencies {
-}

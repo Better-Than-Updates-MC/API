@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-interaction-events",
+  "version": "${version}",
+
+  "name": "Fabric Beta Interaction Events API",
+  "description": "A set of events revolving around interactions.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+
+  "mixins": [
+    "beta-interaction-events.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.0.0-beta.7.3",
+    "beta-api-base": "*"
+  }
+}

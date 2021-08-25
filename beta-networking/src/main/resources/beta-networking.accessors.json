@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.accessor.networking",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "AbstractPacketAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-lifecycle-events",
+  "version": "${version}",
+
+  "name": " Lifecycle Events",
+  "description": "A set of events revolving around the startup, joining, leaving, and shutdown of the game.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+  
+  "mixins": [
+    "beta-lifecycle-events.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

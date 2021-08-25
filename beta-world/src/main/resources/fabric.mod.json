@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-world",
+  "version": "${version}",
+
+  "name": "Fabric Beta World API",
+  "description": "An API useful for terrain generation and world type creation.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+  
+  "entrypoints": {
+    "init": [
+      "com.halotroop.fabric.impl.worldtype.WorldTypeImpl",
+      "com.halotroop.fabric.impl.terrain.WorldGenImpl"
+    ],
+    "postInit": [
+      "com.halotroop.fabric.impl.terrain.BiomeRecomputer"
+    ]
+  },
+
+  "mixins": [
+    "beta-terrain.mixins.json",
+    "beta-world-types.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-attached-data": "*",
+    "beta-translations": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

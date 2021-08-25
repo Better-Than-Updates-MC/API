@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-lifecycle-events-test",
+  "version": "${version}",
+
+  "name": "Lifecycle Events Test Mod",
+  "description": "Test mod for the lifecycle events api",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "init": [
+      "com.halotroop.fabric.test.LifecycleEventsTest"
+    ],
+    "server": [
+      "com.halotroop.fabric.test.LifecycleEventsTestServer"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-lifecycle-events": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

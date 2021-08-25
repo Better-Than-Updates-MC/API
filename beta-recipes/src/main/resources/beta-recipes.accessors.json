@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.accessor.recipe",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "RecipeRegistryAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

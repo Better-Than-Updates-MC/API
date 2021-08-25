@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-world-type-test",
+  "version": "${version}",
+
+  "name": "World Type Test Mod",
+  "description": "Tests world type of the Fabric Beta World API.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "init": [
+      "com.halotroop.fabric.test.WorldTypeTest",
+      "com.halotroop.fabric.test.WorldGenTest"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-attached-data": "*",
+    "beta-translations": "*",
+    "beta-world": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

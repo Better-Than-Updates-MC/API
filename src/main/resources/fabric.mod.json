@@ -3,8 +3,8 @@
   "id": "api",
   "version": "${version}",
 
-  "name": "Minecraft Cursed Legacy API",
-  "description": "A set of useful hooks and features to be used by modders.",
+  "name": "Fabric Beta Essentials",
+  "description": "A set of useful hooks and features for modders.",
   "authors": [
     "The Cursed Legacy Team",
     "The Better Than Updates Team"
@@ -21,8 +21,8 @@
     }
   ],
   "contact": {
-    "issues": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API/issues",
-    "sources": "https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API"
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
 
   "license": "MIT",
@@ -37,16 +37,16 @@
   "depends": {
     "fabricloader": "*",
     "minecraft": "1.0.0-beta.7.3",
-    "legacy-api-base": "*",
-    "legacy-attached-data": "*",
-    "legacy-commands": "*",
-    "legacy-config": "*",
-    "legacy-interaction-events": "*",
-    "legacy-lifecycle-events": "*",
-    "legacy-networking": "*",
-    "legacy-recipes": "*",
-    "legacy-registries": "*",
-    "legacy-terrain": "*",
-    "legacy-translations": "*"
+    "beta-api-base": "*",
+    "beta-attached-data": "*",
+    "beta-commands": "*",
+    "beta-config": "*",
+    "beta-interaction-events": "*",
+    "beta-lifecycle-events": "*",
+    "beta-networking": "*",
+    "beta-recipes": "*",
+    "beta-registries": "*",
+    "beta-translations": "*",
+    "beta-world": "*"
   }
 }

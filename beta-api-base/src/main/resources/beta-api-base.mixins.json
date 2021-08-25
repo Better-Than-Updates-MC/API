@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+	  "LoginRequestPacketClientMixin",
+	  "InGameHudMixin",
+	  "TitleScreenMixin",
+	  "ResourceDownloadThreadMixin"
+  ],
+  "server": [
+	  "ServerLoginPacketHandlerMixin",
+	  "ServerPlayNetworkHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

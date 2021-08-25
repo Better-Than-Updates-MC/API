@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.event.lifecycle",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+	  "MinecraftMixin"
+  ],
+  "server": [
+	  "MinecraftServerMixin",
+	  "ServerPlayerConnectionManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

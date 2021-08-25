@@ -1,8 +1,0 @@
-archivesBaseName = 'legacy-attached-data-v1'
-version = getSubprojectVersion(project, '2.0.0')
-
-moduleDependencies(project, 'legacy-api-base')
-dependencies {
-	testImplementation project(path: ':legacy-interaction-events-v0')
-	testImplementation project(path: ':legacy-registries-v1')
-}

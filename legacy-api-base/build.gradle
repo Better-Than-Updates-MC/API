@@ -1,5 +1,0 @@
-archivesBaseName = 'legacy-api-base'
-version = rootProject.version
-
-dependencies {
-}

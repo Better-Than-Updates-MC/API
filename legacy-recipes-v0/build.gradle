@@ -1,6 +1,0 @@
-archivesBaseName = 'legacy-recipes-v0'
-version = getSubprojectVersion(project, '2.0.0')
-
-moduleDependencies(project, 'legacy-api-base')
-dependencies {
-}

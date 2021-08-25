@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-textures",
+  "version": "${version}",
+
+  "name": "Minecraft Cursed Legacy Textures",
+  "description": "Implementation of CoreLib.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team",
+    "paulevs"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+  
+  "entrypoints": {
+    "client": [
+      "com.halotroop.fabric.impl.texture.AtlasMapper",
+      "com.halotroop.fabric.impl.texture.ModelDiscoverer"
+    ]
+  },
+  
+  "mixins": [
+	  "beta-textures.mixins.json",
+    "corelib.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-registries": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

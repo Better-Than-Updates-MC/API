@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.events.interaction",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+	  "ClientInteractionManagerMixin"
+  ],
+  "server": [
+	  "ServerInteractionManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

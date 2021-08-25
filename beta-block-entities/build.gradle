@@ -1,0 +1,10 @@
+archivesBaseName = 'beta-block-entities'
+version = getSubprojectVersion(project, '1.0.0')
+
+apply plugin: 'java-library'
+
+moduleDependencies(project, 'beta-api-base')
+
+dependencies {
+	testImplementation project(path: ':beta-registries')
+}

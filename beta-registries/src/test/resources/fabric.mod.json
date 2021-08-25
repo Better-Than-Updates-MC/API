@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-registries-test",
+  "version": "${version}",
+
+  "name": "Registries Test Mod",
+  "description": "Tests for the registry module of Cursed Legacy API.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "init": [
+      "com.halotroop.fabric.test.RegistryTest"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-registries": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

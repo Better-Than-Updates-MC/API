@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.attacheddata",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	  "ItemStackMixin",
+	  "WorldPropertiesMixin",
+	  "PlayerInventoryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

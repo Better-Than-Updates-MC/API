@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-attached-data",
+  "version": "${version}",
+
+  "name": "Fabric Beta Attached Data API",
+  "description": "An API useful for attaching data to new or existing game objects.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+
+  "mixins": [
+	  "beta-attached-data.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.0.0-beta.7.3",
+    "beta-api-base": "*"
+  }
+}

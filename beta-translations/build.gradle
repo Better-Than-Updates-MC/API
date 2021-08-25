@@ -1,0 +1,6 @@
+archivesBaseName = 'beta-translations'
+version = getSubprojectVersion(project, '1.0.0')
+
+moduleDependencies(project, 'beta-api-base')
+dependencies {
+}

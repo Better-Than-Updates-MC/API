@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.command",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+	  "MinecraftMixin"
+  ],
+  "server": [
+	  "CommandManagerMixin",
+	  "ServerPlayPacketHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

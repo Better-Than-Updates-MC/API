@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.terrain",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	  "BiomeMixin",
+	  "DimensionMixin",
+	  "WorldMixin",
+	  "NetherWorldSourceMixin",
+	  "OverworldWorldSourceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,5 @@
+archivesBaseName = 'beta-api-base'
+version = rootProject.version
+
+dependencies {
+}

@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.registry",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	  "ItemMixin",
+	  "McRegionWorldStorageMixin",
+	  "OldWorldStorageMixin",
+	  "BlockItemMixin",
+	  "ShapedRecipeMixin",
+	  "SmeltingRecipeRegistryMixin",
+	  "BlockMixin",
+	  "SugarCaneItemMixin"
+  ],
+  "server": [
+	  "MinecraftServerMixin",
+	  "ServerLoginPacketHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

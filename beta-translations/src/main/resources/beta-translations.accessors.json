@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.accessor.translations",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "TranslationStorageAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

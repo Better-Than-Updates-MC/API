@@ -1,0 +1,42 @@
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+
+archivesBaseName = 'beta-config'
+version = getSubprojectVersion(project, '1.0.0')
+
+apply plugin: 'java-library'
+
+moduleDependencies(project, 'beta-api-base')
+
+dependencies {
+	include api('valoeghese:ZoesteriaConfig:1.3.6')
+}
+
+minecraft {
+	addIncludeTweaker {dependency, json ->
+		if ('ZoesteriaConfig' == dependency.name) {
+			json.addProperty('description', 'Config format and library designed for Zoesteria 2, but also useable by other projects')
+			json.addProperty('license', 'MIT')
+
+			def authors = new JsonArray()
+			authors.add('Valoeghese')
+			json.add('authors', authors)
+
+			def contact = new JsonObject()
+			contact.addProperty('sources', 'https://github.com/valoeghese/ZoesteriaConfig')
+			contact.addProperty('issues', 'https://github.com/valoeghese/ZoesteriaConfig/issues')
+			json.add('contact', contact)
+		}
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			pom.withXml {
+				//Workaround from java.components including everything (including the game)
+				addDependency(it, 'compile', project.configurations.api.dependencies)
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-config",
+  "version": "${version}",
+
+  "name": "Fabric Beta Config API",
+  "description": "A config library focused around being quick and easy to use.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.0.0-beta.7.3",
+    "beta-api-base": "*"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-attached-data-test",
+  "version": "${version}",
+
+  "name": "Attached Data Test Mod",
+  "description": "Tests for the Fabric Beta Attached Data API.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "init": [
+	    "com.halotroop.fabric.test.ItemDataTest",
+	    "com.halotroop.fabric.test.WorldPropertiesDataTest"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": "*",
+    "beta-api-base": "*",
+    "beta-attached-data": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}
