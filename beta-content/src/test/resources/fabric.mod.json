@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-commands-test",
+  "version": "${version}",
+
+  "name": "Fabric Beta Commands Test Mod",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "init": [
+      "com.halotroop.fabric.test.CommandsTest"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=1.0.0",
+    "beta-api-base": "*",
+    "beta-content": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
+  }
+}

@@ -1,6 +1,0 @@
-archivesBaseName = 'beta-recipes'
-version = getSubprojectVersion(project, '1.0.0')
-
-moduleDependencies(project, 'beta-api-base')
-dependencies {
-}

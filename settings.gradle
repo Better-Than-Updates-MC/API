@@ -1,42 +1,39 @@
 pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        maven {
-            name = 'Jitpack'
-            url = 'https://jitpack.io'
-        }
-    }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "fabric-loom" && !requested.version?.endsWith("-SNAPSHOT")) {
-                useModule("com.github.Chocohead.Fabric-Loom:fabric-loom:${requested.version}")
-            }
-        }
-    }
+	repositories {
+		mavenCentral()
+		gradlePluginPortal()
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		maven {
+			name = 'Jitpack'
+			url = 'https://jitpack.io'
+		}
+	}
+	resolutionStrategy {
+		eachPlugin {
+			if (requested.id.id == "fabric-loom" && !requested.version?.endsWith("-SNAPSHOT")) {
+				useModule("com.github.Chocohead.Fabric-Loom:fabric-loom:${requested.version}")
+			}
+		}
+	}
 }
 
 rootProject.name = "Fabric Beta API"
 
 include 'beta-api-base'
 
+include 'beta-accessibility' // -> accessibility
 include 'beta-attached-data'
-include 'beta-block-entities'
-include 'beta-commands'
+include 'beta-content' // <- block-entities, commands, recipes
 include 'beta-config'
+include 'beta-events'
 include 'beta-forge-hooks'
-include 'beta-interaction-events'
-include 'beta-lifecycle-events'
 include 'beta-networking'
-include 'beta-recipes'
 include 'beta-registries'
 include 'beta-textures'
-include 'beta-translations'
-include 'beta-world'
+include 'beta-world' // <- terrain, world-types
 
 include 'roughly-enough-items'
 include 'modmenu'

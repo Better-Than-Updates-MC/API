@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Registries Test Mod",
-  "description": "Tests for the registry module of Cursed Legacy API.",
+  "description": "Tests for the Fabric Beta Registry API.",
   "authors": [
     "The Cursed Legacy Team",
     "The Better Than Updates Team"
@@ -24,9 +24,13 @@
   },
 
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": ">=1.0.0",
     "beta-api-base": "*",
     "beta-registries": "*",
     "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
   }
 }

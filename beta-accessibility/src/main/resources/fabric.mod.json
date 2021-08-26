@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-accessibility",
+  "version": "${version}",
+
+  "name": "Fabric Beta Translations API",
+  "description": "An API useful for adding localization to your mod.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+  
+  "mixins": [
+	  "beta-translations.accessors.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=1.0.0",
+    "beta-api-base": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
+  }
+}

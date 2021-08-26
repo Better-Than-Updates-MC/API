@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "api",
+  "id": "beta-essentials",
   "version": "${version}",
 
   "name": "Fabric Beta Essentials",
@@ -35,18 +35,27 @@
   ],
 
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": ">=1.0.0",
     "minecraft": "1.0.0-beta.7.3",
+    "beta-accessibility": "*",
     "beta-api-base": "*",
     "beta-attached-data": "*",
-    "beta-commands": "*",
+    "beta-content": "*",
     "beta-config": "*",
-    "beta-interaction-events": "*",
-    "beta-lifecycle-events": "*",
+    "beta-events": "*",
     "beta-networking": "*",
-    "beta-recipes": "*",
     "beta-registries": "*",
-    "beta-translations": "*",
     "beta-world": "*"
+  },
+  "suggests": {
+    "roughlyenoughitems": "*",
+    "modmenu": "*"
+  },
+  "conflicts": {
+    "beta-forge-hooks": "*"
+  },
+  "breaks": {
+    "stationapi": "*",
+    "api": "*"
   }
 }

@@ -27,8 +27,16 @@
 	"icon": "assets/forge/icon.png",
 	
 	"depends": {
-		"fabricloader": "*",
+		"fabricloader": ">=1.0.0",
 		"minecraft": "1.0.0-beta.7.3",
-		"beta-api-base": "*"
+		"beta-api-base": "*",
+		"beta-events": "*"
+	},
+	"breaks": {
+		"stationloader": "*",
+		"api": "*"
+	},
+	"conflicts": {
+		"beta-api": "*"
 	}
 }

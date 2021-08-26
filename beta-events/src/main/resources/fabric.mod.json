@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-events",
+  "version": "${version}",
+
+  "name": "Fabric Beta Events",
+  "description": "A set of events useful for triggering functionality while maintaining mod compatibility.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+
+  "mixins": [
+    "beta-interaction-events.mixins.json",
+    "beta-lifecycle-events.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=1.0.0",
+    "minecraft": "1.0.0-beta.7.3",
+    "beta-api-base": "*"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
+  }
+}

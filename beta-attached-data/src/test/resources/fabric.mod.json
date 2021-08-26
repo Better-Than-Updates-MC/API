@@ -25,9 +25,13 @@
   },
 
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": ">=1.0.0",
     "beta-api-base": "*",
     "beta-attached-data": "*",
     "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
   }
 }

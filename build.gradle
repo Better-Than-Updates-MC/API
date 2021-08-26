@@ -1,14 +1,16 @@
 buildscript {
+	def loom_version = project.loom_version
+
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.codehaus.groovy:groovy-all:3.0.8'
+		classpath "org.codehaus.groovy:groovy-all:${project.groovy_version}"
 	}
 }
 
 plugins {
-	id 'fabric-loom' version '361cd1c'
+	id 'fabric-loom' version "${loom_version}"
 	id 'checkstyle'
 	id 'eclipse'
 	id 'idea'
@@ -67,13 +69,14 @@ allprojects {
 	group = project.maven_group
 
 	repositories {
-		maven {
-			name = 'Jitpack'
-			url 'https://jitpack.io/'
-		}
+		mavenCentral()
 		maven {
 			name = 'HalfOf2'
 			url = 'https://storage.googleapis.com/devan-maven/'
+		}
+		maven {
+			name = 'Jitpack'
+			url 'https://jitpack.io/'
 		}
 	}
 
@@ -102,7 +105,7 @@ allprojects {
 		}
 
 		modImplementation("io.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}") {
-			transitive false //Avoid leaking Loader's dependencies forwards
+			transitive false // Avoid leaking Loader's dependencies forwards
 		}
 
 		//For @Nullable and @NotNull
@@ -215,10 +218,12 @@ subprojects {subproject ->
 	}
 }
 
-//Subprojects will set these themselves
+// Subprojects will set these themselves
 archivesBaseName = archives_base_name
 version = mod_version
 
+repositories {
+}
+
 dependencies {
-	// TODO add modmenu to runtimeOnly
 }

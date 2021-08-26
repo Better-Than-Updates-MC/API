@@ -40,6 +40,6 @@ public class ServerPlayNetworkHandlerMixin {
 
 	@Inject(at= @At("HEAD"), method = "onClose")
 	public void method_1473(String string, Object[] objects, CallbackInfo ci) {
-		VanillaCheckerImpl.playermap.remove(serverPlayer.name);
+		VanillaCheckerImpl.playerMap.remove(serverPlayer.name);
 	}
 }

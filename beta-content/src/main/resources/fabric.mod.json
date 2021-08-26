@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "beta-content",
+  "version": "${version}",
+
+  "name": "Fabric Beta Content API",
+  "description": "An API useful for adding custom content into the game.",
+  "authors": [
+    "The Cursed Legacy Team",
+    "The Better Than Updates Team"
+  ],
+  "contact": {
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+
+  "license": "MIT",
+  "icon": "assets/api/icon.png",
+
+  "entrypoints": {
+    "init": [
+      "com.halotroop.fabric.impl.command.CommandsImpl"
+    ]
+  },
+
+  "mixins": [
+    "beta-block-entities.accessors.json",
+    "beta-commands.mixins.json",
+    "beta-commands.accessors.json",
+    "beta-recipes.accessors.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=1.0.0",
+    "beta-api-base": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
+  }
+}

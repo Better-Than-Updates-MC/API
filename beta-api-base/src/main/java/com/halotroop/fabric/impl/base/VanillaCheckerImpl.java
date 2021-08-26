@@ -29,7 +29,7 @@ public final class VanillaCheckerImpl {
 	private VanillaCheckerImpl() {
 	}
 	
-	public static HashMap<String, Boolean> playermap = new HashMap<String, Boolean>();
+	public static HashMap<String, Boolean> playerMap = new HashMap<>();
 
-	public static final long FABRIC_IDENTIFIER_CONSTANT = -9223372036854775808l;
+	public static final long FABRIC_IDENTIFIER_CONSTANT = -9223372036854775808L;
 }

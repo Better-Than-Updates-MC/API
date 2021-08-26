@@ -3,7 +3,45 @@
 The unofficial [Fabric](https://fabricmc.net/) fork for ***Beta 1.7.3.***
 Also includes some essentials as modules.
 
-For more information, see each module's README.md file.
+The goal for the module structure of this API (still up for discussion) currently looks like this:
+
+- [beta-api-base](./beta-api-base):
+  - Essential hooks (events)
+  - Common API classes (like `Identifier`)
+  - Fixes for beta weirdness
+- [beta-content](./beta-content):
+  - Custom audio
+  - Custom commands
+  - Custom textures
+  - Custom recipes
+  - Custom content (blocks, entities, block entities, items, particles, etc.)
+- [beta-forge-hooks](./beta-forge-hooks):
+  - Full implementation of Forge API version 1.2.1
+  - Possible support for Risugami's ModLoader API and ModLoaderMP (Licensing issue)
+- [beta-events](./beta-events):
+  - Lifecycle events (startup, shutdown, login, disconnect)
+  - Interaction events (interactions between the player and other in-game objects)
+  - Entity events (sleep, combat, dimension-change, death and respawning, etc.)
+- [beta-networking](./beta-networking):
+  - Packet sending/receiving and handling
+- [beta-accessibility](./beta-accessibility)
+  - Localization
+  - Sound Categories
+- [beta-world](./beta-world):
+  - Dimensions
+  - Terrain generation
+  - World types
+- [modmenu](./modmenu):
+  - Mod list showcasing mod metadata
+  - Full support for all modern features
+  - Robust API for adding custom metadata
+- [roughly-enough-items](./roughly-enough-items):
+  - In-game item list
+  - Recipes accessible from the aforementioned list
+  - API for adding custom recipe types
+
+For more information, or for help in using the APIs,
+see the [wiki](https://github.com/Better-Than-Updates-MC/API/wiki).
 
 ## Setup
 Import the `build.gradle` file as a project in Intellij IDEA. (Or Eclipse, if supported. Not recommended.)
@@ -13,7 +51,7 @@ or run `gradlew genSources` via commandline.
 
 To be able to run the API as a whole in an API dev environment, ensure the root project has been set up in your ide. This should be automatic, but it pays to make sure.
 
-If you wish to build a copy of API, you can either click the Gradle task `Tasks -> build -> build`,
+If you wish to build a copy of FBE, you can either click the Gradle task `Tasks -> build -> build`,
 or run `./gradlew build` via commandline.
 
 ## Contributing
@@ -32,7 +70,7 @@ If your IDE doesn't have this feature get a better IDE not a glorified text edit
 
 Subprojects should receive their own [semver](https://semver.org)-compatible versions
 The main project is versioned based on refactors that affect any or all of the subprojects. (This is subject to change.)
-Do you have a suggestion for better versioning? [Create an issue](https://github.com/Better-Than-Updates-MC/API)
+Do you have a suggestion for better versioning? [Create an issue](https://github.com/Better-Than-Updates-MC/API/issues)
 here on GitHub, or bring it up on [Discord](https://halotroop.com/Discord.html).
 
 ## License
@@ -40,8 +78,10 @@ here on GitHub, or bring it up on [Discord](https://halotroop.com/Discord.html).
 [Unless otherwise stated](./beta-forge-hooks/LICENSE), these APIs are available under the [MIT] license.
 Feel free to learn from them and incorporate them in your own projects.
 
-Fabric Beta Essentials is based ***heavily*** on [Cursed Legacy API] and also "borrows" code from [Station API].
-Both of which share the [MIT] license of Beta Fabric Essentials.
+Fabric Beta Essentials is based ***heavily*** on [Cursed Legacy API]
+which shares the [MIT] license of FBE.
+
+FBE also "borrows" code from [Station API] which is licensed under Creative Commons Zero.
 
 [Roughly Enough Items] and [ModMenu] are included as optional modules, and [CoreLib] is included with the Textures API.
 They all also share the [MIT] license.
@@ -57,12 +97,15 @@ contributions to the modding community.
 Better Than Updates is dedicated to providing ***one*** stable modding platform for mods and overhauls,
 free from the tyranny of closed-source Minecraft updates.
 
-Better Than Updates has chosen beta 1.7.3 for its community, it's existing overhauls.
+Better Than Updates has chosen beta 1.7.3 for its community, and it's existing overhauls.
 ([Better Than Wolves] and [New Frontier Craft]). They are currently being ported to Better Than Updates to maintain
 compatibility.
 
 Better Than Updates will *not* be supporting other versions, to keep focus on ***modding*** *rather than updates.*
 
+[Roughly Enough Items]:(https://github.com/shedaniel/RoughlyEnoughItems)
+[ModMenu]:(https://github.com/TerraformersMC/ModMenu)
+[CoreLib]:(https://github.com/paulevsGitch/B.1.7.3-CoreLib)
 [Better Than Wolves]:(https://sargunster.com/btw/index.php)
 [New Frontier Craft]:(https://newfrontiercraft.net)
 [Cursed Legacy API]:(https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API)

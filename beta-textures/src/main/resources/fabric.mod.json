@@ -3,7 +3,7 @@
   "id": "beta-textures",
   "version": "${version}",
 
-  "name": "Minecraft Cursed Legacy Textures",
+  "name": "Fabric Beta Textures API",
   "description": "Implementation of CoreLib.",
   "authors": [
     "The Cursed Legacy Team",
@@ -31,9 +31,13 @@
   ],
 
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": ">=1.0.0",
     "beta-api-base": "*",
     "beta-registries": "*",
     "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
   }
 }

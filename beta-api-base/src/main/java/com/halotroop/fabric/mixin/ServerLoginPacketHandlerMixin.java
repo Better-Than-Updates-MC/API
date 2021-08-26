@@ -38,10 +38,10 @@ public class ServerLoginPacketHandlerMixin {
 	public void handleHandshake(LoginRequestPacket arg, CallbackInfo ci) {
 		if (arg.worldSeed == VanillaCheckerImpl.FABRIC_IDENTIFIER_CONSTANT) {
 			System.out.println("Fabric Client Connecting");
-			VanillaCheckerImpl.playermap.put(arg.username, false);
+			VanillaCheckerImpl.playerMap.put(arg.username, false);
 		} else {
 			System.out.println("Vanilla Client Connecting");
-			VanillaCheckerImpl.playermap.put(arg.username, true);
+			VanillaCheckerImpl.playerMap.put(arg.username, true);
 		}
 	}
 }

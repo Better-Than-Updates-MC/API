@@ -23,15 +23,39 @@
 
 package com.halotroop.fabric.mixin;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.menu.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(TitleScreen.class)
-public class TitleScreenMixin {
+public abstract class TitleScreenMixin extends Screen {
+	private static boolean REALLY_IS_APPLET = false;
+
+	@Inject(method = "init", at = @At(value = "HEAD"))
+	private void showQuitButton(CallbackInfo ci) {
+		REALLY_IS_APPLET = this.client.isApplet;
+		this.client.isApplet = false;
+	}
+
+	@Inject(method = "init", at = @At(value = "TAIL"))
+	private void avoidUndefinedBehavior(CallbackInfo ci) {
+		this.client.isApplet = REALLY_IS_APPLET;
+	}
+
 	@ModifyConstant(method = "render", constant = @Constant(stringValue="Minecraft Beta 1.7.3"))
 	private String render(String original) {
-		return "Minecraft Beta 1.7.3 / Fabric";
+		AtomicReference<String> version = new AtomicReference<>("");
+		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+			version.set("Dev");
+		} else {
+			FabricLoader.getInstance().getModContainer("beta-api-base").ifPresent(modContainer ->
+					version.set(modContainer.getMetadata().getVersion().getFriendlyString().split("-")[0]));
+		}
+		return "Fabric Beta Essentials " + version;
 	}
 }

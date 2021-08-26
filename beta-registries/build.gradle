@@ -4,6 +4,6 @@ version = getSubprojectVersion(project, '1.0.0')
 moduleDependencies(project, 'beta-api-base', 'beta-networking')
 
 dependencies {
-	testImplementation project(path: ':beta-recipes')
-	testImplementation project(path: ':beta-translations')
+	testImplementation project(path: ':beta-accessibility')
+	testImplementation project(path: ':beta-content')
 }

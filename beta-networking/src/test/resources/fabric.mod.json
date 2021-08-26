@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Networking Test Mod",
-  "description": "Tests for the networking module of Cursed Legacy API.",
+  "description": "Tests for the Fabric Beta Networking API.",
   "authors": [
     "The Cursed Legacy Team",
     "The Better Than Updates Team"
@@ -27,9 +27,13 @@
   },
 
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": ">=1.0.0",
     "beta-api-base": "*",
     "beta-networking": "*",
     "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*",
+    "api": "*"
   }
 }

@@ -34,6 +34,6 @@ public final class VanillaChecker {
 	 * Checks if a player is using a Vanilla Client.
 	 */
 	public static boolean isVanilla(PlayerEntity player) {
-		return VanillaCheckerImpl.playermap.get(player.name);
+		return VanillaCheckerImpl.playerMap.get(player.name);
 	}
 }
