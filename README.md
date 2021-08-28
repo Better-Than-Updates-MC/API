@@ -5,28 +5,39 @@ Also includes some essentials as modules.
 
 The goal for the module structure of this API (still up for discussion) currently looks like this:
 
+- [beta-accessibility](./beta-accessibility)
+  - Full localization support (with selector menu)
+  - Sound categories (via SoundCategory registry)
+  - Closed caption support
 - [beta-api-base](./beta-api-base):
   - Essential hooks (events)
   - Common API classes (like `Identifier`)
   - Fixes for beta weirdness
+  - Credits entries for mod authors and contributors
+- [beta-config](./beta-config):
+  - Properties for basic configs
+  - JSON5 for more advanced configs
+  - Automatic ModMenu screen generator (optional)
 - [beta-content](./beta-content):
   - Custom audio
   - Custom commands
-  - Custom textures
   - Custom recipes
   - Custom content (blocks, entities, block entities, items, particles, etc.)
 - [beta-forge-hooks](./beta-forge-hooks):
-  - Full implementation of Forge API version 1.2.1
+  - Full implementation of Forge API version 1.2.1 as a compatibility layer
   - Possible support for Risugami's ModLoader API and ModLoaderMP (Licensing issue)
+- [beta-fukkit](./beta-fukkit):
+  - Full implementation of CraftBukkit API version 1060 as a compatibility layer
 - [beta-events](./beta-events):
   - Lifecycle events (startup, shutdown, login, disconnect)
   - Interaction events (interactions between the player and other in-game objects)
   - Entity events (sleep, combat, dimension-change, death and respawning, etc.)
 - [beta-networking](./beta-networking):
   - Packet sending/receiving and handling
-- [beta-accessibility](./beta-accessibility)
-  - Localization
-  - Sound Categories
+- [beta-registries](./beta-registries):
+  - Identifier-based registry system to destroy integer-based ID conflicts.
+- [beta-textures](./beta-textures):
+  - Automatic custom texture and texture atlas handling
 - [beta-world](./beta-world):
   - Dimensions
   - Terrain generation
