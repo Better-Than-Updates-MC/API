@@ -197,15 +197,6 @@ subprojects {subproject ->
 		test testJar
 	}
 
-	//Attach the subproject to the root project
-	this.dependencies {
-		implementationOnly project(path: ":$name", configuration: 'dev')
-		testImplementation project(path: ":$name", configuration: 'test')
-		afterEvaluate {//Do this after Loom tries to work out how included projects relate to remapJar tasks
-			include project(path: ":$name", configuration: 'out')
-		}
-	}
-
 	//Mark the subproject as a compile time dependency of the root project
 	this.publishing {
 		publications {
