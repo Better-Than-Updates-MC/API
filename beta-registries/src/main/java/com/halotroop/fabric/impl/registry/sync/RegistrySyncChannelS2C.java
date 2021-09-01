@@ -24,12 +24,13 @@
 package com.halotroop.fabric.impl.registry.sync;
 
 import java.io.ByteArrayInputStream;
+import java.io.DataInput;
 import java.io.DataInputStream;
 
 import com.halotroop.fabric.api.networking.PluginChannel;
 import com.halotroop.fabric.api.registry.Identifier;
 import net.minecraft.network.PacketHandler;
-import net.minecraft.util.io.NBTIO;
+import net.minecraft.util.io.TagInputOutput;
 
 public class RegistrySyncChannelS2C extends PluginChannel {
 	@Override
@@ -41,7 +42,7 @@ public class RegistrySyncChannelS2C extends PluginChannel {
 	public void onReceive(PacketHandler arg, byte[] buf) {
 		// Client side stuff
 		DataInputStream data = new DataInputStream(new ByteArrayInputStream(buf));
-		RegistryRemapper.remap(NBTIO.readGzipped(data), null);
+		RegistryRemapper.remap(TagInputOutput.readNBT((DataInput) data), null);
 	}
 
 	public static final Identifier ID = new Identifier("legacy-registries", "sync");

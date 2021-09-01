@@ -30,6 +30,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(ServerPlayPacketHandler.class)
 public interface ServerPlayPacketHandlerAccessor {
-    @Accessor("serverPlayer")
+    @Accessor("player")
     ServerPlayerEntity getPlayer();
 }

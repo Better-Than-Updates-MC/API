@@ -40,7 +40,7 @@ public class ItemRendererMixin {
 	 */
 	@Inject(method = "render", at = @At("HEAD"), cancellable = true)
 	private void renderEntity(ItemEntity entity, double posX, double posY, double posZ, float pitch, float yaw, CallbackInfo info) {
-		Model model = ModelRegistry.getItemModel(entity.stack.getType(), entity.stack.getDamage());
+		Model model = ModelRegistry.getItemModel(entity.stack.getItem(), entity.stack.getDamage());
 		if (model != null && model.hasItem()) {
 			CoreLib.ITEM_VIEW.setBlockId(0);
 			Shape.setBlockView(CoreLib.ITEM_VIEW);

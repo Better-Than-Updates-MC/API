@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "beta-forge-patches",
+	"version": "${version}",
+	"name": "Forge Patches",
+	"description": "Provides extensions to vanilla classes which may be appreciated by former Forge mod developers.",
+	"authors": [
+		"Better Than Updates"
+	],
+	"contact": {
+		"homepage": "https://halotroop.com",
+		"sources": "https://github.com/Better-Than-Updates-MC/API"
+	},
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+	},
+	"depends": {
+		"minecraft": "1.0.0-beta.7.3",
+		"fabricloader": ">=1.0.0",
+		"beta-forge-hooks": "*"
+	}
+}

@@ -37,6 +37,7 @@ public final class Registries {
 	 * Registry for Item.
 	 */
 	public static final Registry<@NotNull Item> ITEM = RegistryImpl.ITEM;
+
 	/**
 	 * Registry for Blocks.
 	 */

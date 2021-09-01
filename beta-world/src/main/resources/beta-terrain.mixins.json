@@ -9,7 +9,10 @@
 	  "NetherWorldSourceMixin",
 	  "OverworldWorldSourceMixin"
   ],
-  "injectors": {
+	"client": [
+		"client.WorldMixin"
+	],
+	"injectors": {
     "defaultRequire": 1
   }
 }

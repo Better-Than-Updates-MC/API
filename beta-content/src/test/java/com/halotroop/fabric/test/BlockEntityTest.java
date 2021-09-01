@@ -24,9 +24,9 @@
 package com.halotroop.fabric.test;
 
 import com.halotroop.fabric.api.registry.Identifier;
-import com.halotroop.fabric.api.registry.BlockItems;
+import com.halotroop.fabric.api.content.BlockItems;
 import com.halotroop.fabric.api.registry.Registries;
-import com.halotroop.fabric.api.blockentities.BlockEntities;
+import com.halotroop.fabric.api.content.BlockEntities;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWithEntity;

@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Interface look at the difference between a registry before and after remapping.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface RegistryDiff<T> {
 	/**

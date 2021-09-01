@@ -30,7 +30,7 @@ import com.halotroop.fabric.api.command.Sender;
 
 /**
  * Registry for for mapping commands to the relevant {@linkplain CommandDispatcher command dispatchers}.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class DispatcherRegistry {
 	private static final Map<String, CommandDispatcher> SINGLEPLAYER_COMMANDS = new HashMap<>();

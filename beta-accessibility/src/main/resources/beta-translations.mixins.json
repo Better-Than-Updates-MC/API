@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.translations",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "TranslationStorageMixin",
+    "TitleScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

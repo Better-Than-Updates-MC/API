@@ -1,26 +1,30 @@
+//file:noinspection GroovyAssignabilityCheck, SpellCheckingInspection
 buildscript {
-	def loom_version = project.loom_version
-
 	repositories {
 		mavenCentral()
+		gradlePluginPortal()
+		maven { url 'https://maven.fabricmc.net/' }
+		maven { url 'https://jitpack.io' }
 	}
 	dependencies {
 		classpath "org.codehaus.groovy:groovy-all:${project.groovy_version}"
+		classpath "com.github.Chocohead.Fabric-Loom:fabric-loom:${project.loom_version}"
 	}
 }
 
 plugins {
-	id 'fabric-loom' version "${loom_version}"
 	id 'checkstyle'
 	id 'eclipse'
 	id 'idea'
 	id 'java'
 }
 
+@SuppressWarnings('unused')
 static String getSubprojectVersion(project, ver) {
 	return "${project.mod_version}-$ver"
 }
 
+@SuppressWarnings('unused')
 def moduleDependencies(Project project, String... projectNames) {
 	project.with {
 		def modules = projectNames.collect { dependencies.project(path: ":$it", configuration: 'dev') }
@@ -55,7 +59,6 @@ void addDependency(XmlProvider xml, String scope, Object... dependencies) {
 	}
 }
 
-
 allprojects {
 	apply plugin: 'maven-publish'
 	apply plugin: 'fabric-loom'
@@ -65,7 +68,7 @@ allprojects {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 
-	//Group is common for all API modules
+	// Group is common for all API modules
 	group = project.maven_group
 
 	repositories {
@@ -168,7 +171,7 @@ subprojects {subproject ->
 		classpath sourceSets.test.runtimeClasspath
 	}
 
-	assert this.remapJar != remapJar //No accidents moving this around
+	assert this.remapJar != remapJar // No accidents moving this around
 	this.remapJar.dependsOn(remapJar)
 
 	configurations {
@@ -209,12 +212,20 @@ subprojects {subproject ->
 	}
 }
 
+
+
 // Subprojects will set these themselves
 archivesBaseName = archives_base_name
 version = mod_version
 
-repositories {
-}
-
 dependencies {
+	afterEvaluate {
+		//Attach the subproject to the root project
+		subprojects.each {
+			implementationOnly project(path: ":${it.name}", configuration: "dev")
+			testImplementation project(path: ":${it.name}", configuration: 'test')
+			include project("${it.name}:")
+			runtimeOnly project(path: it.name, configuration: "dev")
+		}
+	}
 }

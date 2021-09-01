@@ -42,7 +42,7 @@ import com.google.gson.Gson;
 
 /**
  * Resource Loader for models and textures.
- * @since 1.1.0
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public class ResourceLoader {

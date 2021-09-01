@@ -6,21 +6,22 @@
   "name": "Fabric Beta Essentials",
   "description": "A set of useful hooks and features for modders.",
   "authors": [
-    "The Cursed Legacy Team",
-    "The Better Than Updates Team"
+    "Cursed Legacy",
+    "Better Than Updates"
   ],
   "contributors": [
     {
       "name": "halotroop2288",
       "contact": {
         "email": "mailto://carolinejoybell@gmail.com",
-        "homepage": "https://halotroop.com",
+        "homepage": "https://better-than-updates.halotroop.com/",
         "discord": "https://discord.com/channels/@me/231214143808602112",
         "discord-tag": "halotroop#2288"
       }
     }
   ],
   "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
     "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
     "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
@@ -55,7 +56,6 @@
     "beta-forge-hooks": "*"
   },
   "breaks": {
-    "stationapi": "*",
-    "api": "*"
+    "stationloader": "*"
   }
 }

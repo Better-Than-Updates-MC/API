@@ -68,7 +68,7 @@ public class WorldTypeData implements AttachedData {
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag) {
+	public CompoundTag writeNBT(CompoundTag tag) {
 		tag.put("id", this.typeId.toString());
 
 		if (this.additionalData != null) {
@@ -79,7 +79,7 @@ public class WorldTypeData implements AttachedData {
 	}
 
 	@Override
-	public void fromTag(CompoundTag tag) {
+	public void readNBT(CompoundTag tag) {
 		this.typeId = new Identifier(tag.getString("id"));
 
 		if (tag.containsKey("data")) {

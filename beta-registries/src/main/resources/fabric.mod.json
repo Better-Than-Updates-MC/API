@@ -4,12 +4,13 @@
   "version": "${version}",
 
   "name": "Fabric Beta Registries API",
-  "description": "The API required to safely register new game objects.",
+  "description": "An API required to safely register new game objects without conflicts.",
   "authors": [
-    "The Cursed Legacy Team",
-    "The Better Than Updates Team"
+    "Cursed Legacy",
+    "Better Than Updates"
   ],
   "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
     "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
     "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
@@ -34,7 +35,6 @@
     "minecraft": "1.0.0-beta.7.3"
   },
   "breaks": {
-    "stationloader": "*",
-    "api": "*"
+    "stationloader": "*"
   }
 }

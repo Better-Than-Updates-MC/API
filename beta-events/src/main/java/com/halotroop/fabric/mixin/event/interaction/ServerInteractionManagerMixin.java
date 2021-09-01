@@ -23,7 +23,7 @@
 
 package com.halotroop.fabric.mixin.event.interaction;
 
-import com.halotroop.fabric.impl.events.interaction.BlockInteractionImpl;
+import com.halotroop.fabric.impl.event.interaction.BlockInteractionImpl;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.player.ServerInteractionManager;

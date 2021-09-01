@@ -23,8 +23,8 @@
 
 package com.halotroop.fabric.test;
 
-import com.halotroop.fabric.api.recipe.Recipes;
-import com.halotroop.fabric.api.registry.BlockItems;
+import com.halotroop.fabric.api.content.Recipes;
+import com.halotroop.fabric.api.content.BlockItems;
 import com.halotroop.fabric.api.registry.Registries;
 import com.halotroop.fabric.api.registry.Identifier;
 import com.halotroop.fabric.api.registry.Translations;
@@ -48,7 +48,7 @@ public class RegistryTest implements ModInitializer {
 				i -> new BasicBlock(i, false).setTranslationKey("exampleBlock"));
 		blockItem = BlockItems.registerBlockItem(new Identifier("modid:block"), block);
 
-		SmeltingRecipeRegistry.getInstance().addSmeltingRecipe(item.id, new ItemStack(block));
+		Recipes.addFurnaceRecipe(item.id, new ItemStack(block));
 
 		Recipes.addShapelessRecipe(new ItemStack(item, 2), Block.DIRT, Block.SAND);
 		Recipes.addShapedRecipe(new ItemStack(block), "##", '#', Block.DIRT);

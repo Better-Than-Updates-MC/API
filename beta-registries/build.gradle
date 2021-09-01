@@ -3,6 +3,10 @@ version = getSubprojectVersion(project, '1.0.0')
 
 moduleDependencies(project, 'beta-api-base', 'beta-networking')
 
+repositories {
+	mavenLocal()
+}
+
 dependencies {
 	testImplementation project(path: ':beta-accessibility')
 	testImplementation project(path: ':beta-content')

@@ -28,7 +28,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 
 /**
  * Event for when a command is issued on the server. Used by the command implementation for multiplayer commands.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface CommandDispatchEvent {
 	Event<CommandDispatchEvent> INSTANCE = EventFactory.createArrayBacked(CommandDispatchEvent.class, listeners -> (sender, command) -> {

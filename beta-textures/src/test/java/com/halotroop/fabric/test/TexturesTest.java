@@ -24,10 +24,10 @@
 package com.halotroop.fabric.test;
 
 import com.halotroop.fabric.api.client.AtlasMap;
-import com.halotroop.fabric.api.recipe.Recipes;
+import com.halotroop.fabric.api.content.Recipes;
 import com.halotroop.fabric.api.registry.Identifier;
 import com.halotroop.fabric.api.registry.Registries;
-import com.halotroop.fabric.api.registry.BlockItems;
+import com.halotroop.fabric.api.content.BlockItems;
 import com.halotroop.fabric.api.registry.Translations;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -39,52 +39,55 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TexturesTest implements ModInitializer {
-	private static Item item, alsoItem;
-	private static Block cross, betterCross;
-	private static Block cube, redgrass;
+	private static final Item ITEM, ALSO_ITEM;
+	private static final Block CROSS, BETTER_CROSS;
+	private static final Block CUBE, REDGRASS;
 
-	@Override
-	public void onInitialize() {
+	static {
 		// Choco Atlas Mapping api
-		item = Registries.ITEM.register(new Identifier("legacy-textures-test:item_texture"),
+		ITEM = Registries.ITEM.register(new Identifier("legacy-textures-test:item_texture"),
 				id -> new BasicItem(id).setTexturePosition(2, 0).setTranslationKey("exampleTextureItem"));
-		AtlasMap.registerAtlas(item, "/assets/legacy-textures-test/bc/item_textures.png");
+		AtlasMap.registerAtlas(ITEM, "/assets/legacy-textures-test/bc/item_textures.png");
 
-		// set with the 1.1.0 model discovery api which uses choco's 0.x api generated atlas impl under the hood
-		alsoItem = Registries.ITEM.register(new Identifier("legacy-textures-test:item_texture_too"),
+		// set with the 1.1.0 model discovery api which uses Chocohead's 0.x API generated atlas impl under the hood
+		ALSO_ITEM = Registries.ITEM.register(new Identifier("legacy-textures-test:item_texture_too"),
 				id -> new BasicItem(id).setTranslationKey("exampleTextureItemAlso"));
 
 		// This one doesn't mess with the item texture and uses parented texture (you have to re-override a client side method to do this with PlantBlock however)
-		cross = Registries.BLOCK.register(new Identifier("legacy-textures-test:iron_grass"),
+		CROSS = Registries.BLOCK.register(new Identifier("legacy-textures-test:iron_grass"),
 				id -> new TallGrassBlock2(id).setTranslationKey("ironGrass"));
-		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:iron_grass"), cross);
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:iron_grass"), CROSS);
 
 		// This one does
-		betterCross = Registries.BLOCK.register(new Identifier("legacy-textures-test:malachite_grass"),
+		BETTER_CROSS = Registries.BLOCK.register(new Identifier("legacy-textures-test:malachite_grass"),
 				id -> new TallGrassBlock(id).setTranslationKey("malachiteGrass"));
-		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:malachite_grass"), betterCross);
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:malachite_grass"), BETTER_CROSS);
 
-		cube = Registries.BLOCK.register(new Identifier("legacy-textures-test:cursed_legacy_block"),
+		CUBE = Registries.BLOCK.register(new Identifier("legacy-textures-test:cursed_legacy_block"),
 				id -> new BasicBlock(id).setTranslationKey("cursedLegacyBlock"));
-		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:cursed_legacy_block"), cube);
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:cursed_legacy_block"), CUBE);
 
-		redgrass = Registries.BLOCK.register(new Identifier("legacy-textures-test:red_grass"),
+		REDGRASS = Registries.BLOCK.register(new Identifier("legacy-textures-test:red_grass"),
 				id -> new CustomGrassBlockBlock(id).setTranslationKey("redGrass"));
-		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:red_grass"), redgrass);
+		BlockItems.registerBlockItem(new Identifier("legacy-textures-test:red_grass"), REDGRASS);
 
-		Recipes.addShapelessRecipe(new ItemStack(item), Block.WOOD);
-		Recipes.addShapelessRecipe(new ItemStack(alsoItem), item);
-		Recipes.addShapelessRecipe(new ItemStack(cross), alsoItem);
-		Recipes.addShapelessRecipe(new ItemStack(betterCross), cross);
-		Recipes.addShapelessRecipe(new ItemStack(cube), Item.STICK);
-		Recipes.addShapelessRecipe(new ItemStack(redgrass), cube);
+		Recipes.addShapelessRecipe(new ItemStack(ITEM), Block.WOOD);
+		Recipes.addShapelessRecipe(new ItemStack(ALSO_ITEM), ITEM);
+		Recipes.addShapelessRecipe(new ItemStack(CROSS), ALSO_ITEM);
+		Recipes.addShapelessRecipe(new ItemStack(BETTER_CROSS), CROSS);
+		Recipes.addShapelessRecipe(new ItemStack(CUBE), Item.STICK);
+		Recipes.addShapelessRecipe(new ItemStack(REDGRASS), CUBE);
 
-		Translations.addItemTranslation(item, "Example Item");
-		Translations.addItemTranslation(alsoItem, "Example Item Too");
-		Translations.addBlockTranslation(cross, "Example Cross Model Block");
-		Translations.addBlockTranslation(betterCross, "Malachite Grass");
-		Translations.addBlockTranslation(cube, "Cursed Legacy Block");
-		Translations.addBlockTranslation(redgrass, "Red Grass");
+		Translations.addItemTranslation(ITEM, "Example Item");
+		Translations.addItemTranslation(ALSO_ITEM, "Example Item Too");
+		Translations.addBlockTranslation(CROSS, "Example Cross Model Block");
+		Translations.addBlockTranslation(BETTER_CROSS, "Malachite Grass");
+		Translations.addBlockTranslation(CUBE, "Cursed Legacy Block");
+		Translations.addBlockTranslation(REDGRASS, "Red Grass");
+	}
+
+	@Override
+	public void onInitialize() {
 	}
 
 	static class BasicItem extends Item {

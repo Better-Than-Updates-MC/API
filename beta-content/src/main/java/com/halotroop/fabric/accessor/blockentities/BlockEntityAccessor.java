@@ -33,7 +33,8 @@ import java.util.Map;
 @Mixin(BlockEntity.class)
 public interface BlockEntityAccessor {
 	@Invoker("register")
-	static void register(Class<? extends BlockEntity> clazz, String id) {}
+	static void register(Class<? extends BlockEntity> clazz, String id) {
+	}
 
 	@Accessor("ID_TO_CLASS")
 	static Map<String, Class<? extends BlockEntity>> getIdToClassMap() { throw new UnsupportedOperationException("mixin"); }

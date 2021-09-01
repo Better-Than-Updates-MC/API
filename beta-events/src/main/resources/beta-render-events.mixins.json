@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.halotroop.fabric.mixin.event.render",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"BlockRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

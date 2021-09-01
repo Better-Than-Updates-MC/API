@@ -1,4 +1,4 @@
-/**
+/*
  * This software is provided under the terms of the Minecraft Forge Public 
  * License v1.0.
  */
@@ -14,7 +14,6 @@ import org.lwjgl.opengl.GL11;
 import java.util.*;
 
 public class ForgeHooksClient {
-
 	public static boolean onBlockHighlight(RenderGlobal renderglobal,
 	                                       PlayerEntity player, MovingObjectPosition mop, int i,
 	                                       ItemStack itemstack, float f) {
@@ -29,7 +28,7 @@ public class ForgeHooksClient {
 	static LinkedList<IHighlightHandler> highlightHandlers = new LinkedList<IHighlightHandler>();
 
 	public static boolean canRenderInPass(Block block, int pass) {
-		if(block instanceof IMultipassRender) {
+		if (block instanceof IMultipassRender) {
 			IMultipassRender impr = (IMultipassRender) block;
 			return impr.canRenderInPass(pass);
 		}
@@ -39,7 +38,7 @@ public class ForgeHooksClient {
 
 	static HashMap tessellators=new HashMap();
 	static HashMap textures=new HashMap();
-	static boolean inWorld=false;
+	static boolean activeRenderPass = false;
 	static HashSet renderTextureTest=new HashSet();
 	static ArrayList<List> renderTextureList=new ArrayList();
 	static Tessellator defaultTessellator=null;
@@ -53,7 +52,7 @@ public class ForgeHooksClient {
 		} else {
 			t=(Tessellator)tessellators.get(key);
 		}
-		if(inWorld && !renderTextureTest.contains(key)) {
+		if(activeRenderPass && !renderTextureTest.contains(key)) {
 			renderTextureTest.add(key);
 			renderTextureList.add(key);
 			t.startDrawingQuads();
@@ -73,7 +72,7 @@ public class ForgeHooksClient {
 		} else {
 			n=(Integer)textures.get(name);
 		}
-		if(!inWorld) {
+		if(!activeRenderPass) {
 			if(Tessellator.instance.isDrawing) {
 				int mode=Tessellator.instance.drawMode;
 				Tessellator.instance.draw();
@@ -86,7 +85,7 @@ public class ForgeHooksClient {
 	}
 
 	protected static void unbindTexture() {
-		if(inWorld) {
+		if(activeRenderPass) {
 			Tessellator.instance=defaultTessellator;
 		} else {
 			if(Tessellator.instance.isDrawing) {
@@ -101,7 +100,8 @@ public class ForgeHooksClient {
 		}
 	}
 
-	static int renderPass=-1;
+	static int renderPass = -1;
+
 	public static void beforeRenderPass(int pass) {
 		renderPass=pass;
 		defaultTessellator=Tessellator.instance;
@@ -111,12 +111,12 @@ public class ForgeHooksClient {
 			.getTexture("/terrain.png"));
 		renderTextureTest.clear();
 		renderTextureList.clear();
-		inWorld=true;
+		activeRenderPass = true;
 	}
 
 	public static void afterRenderPass(int pass) {
 		renderPass=-1;
-		inWorld=false;
+		activeRenderPass = false;
 		for(List l : renderTextureList) {
 			// TODO: call appropriate client hooks
 			Integer[] tn=(Integer[])l.toArray();

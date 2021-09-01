@@ -5,12 +5,13 @@ Also includes some essentials as modules.
 
 The goal for the module structure of this API (still up for discussion) currently looks like this:
 
-- [beta-accessibility](./beta-accessibility)
+- [beta-accessibility](./beta-accessibility):
   - Full localization support (with selector menu)
   - Sound categories (via SoundCategory registry)
   - Closed caption support
-- [beta-api-base](./beta-api-base):
-  - Essential hooks (events)
+- [beta-essentials]:
+  - Events
+    - Essential hooks (events)
   - Common API classes (like `Identifier`)
   - Fixes for beta weirdness
   - Credits entries for mod authors and contributors
@@ -23,25 +24,47 @@ The goal for the module structure of this API (still up for discussion) currentl
   - Custom commands
   - Custom recipes
   - Custom content (blocks, entities, block entities, items, particles, etc.)
-- [beta-forge-hooks](./beta-forge-hooks):
-  - Full implementation of Forge API version 1.2.1 as a compatibility layer
-  - Possible support for Risugami's ModLoader API and ModLoaderMP (Licensing issue)
-- [beta-fukkit](./beta-fukkit):
-  - Full implementation of CraftBukkit API version 1060 as a compatibility layer
+  - [beta-registries](./beta-registries):
+    - Identifier-based registry system to destroy integer-based ID conflicts.
+    - Built-in registries for:
+      - [ ] Achievements
+      - [x] Blocks
+      - [x] Items
+      - [x] Entity types
+      - [ ] Block entity types
+      - [ ] Painting "motives"
+      - [ ] Sound categories
+      - [ ] Sound events
+- [beta-mod-loader-support]:
+  - Support for loading old mods with Quilt Loader
+  - Stepping stones for porting old mods.
+  - [beta-mod-adapter]:
+    - [ ] Adapter for loading Risugami's ModLoader mods with Fabric
+  - [beta-forge-hooks]:
+    - [ ] Full implementation of Forge API version 1.0.X as a compatibility layer
+  - [beta-risugami-hooks]:
+    - [ ] Full implementation of Risugami's ModLoader & ModLoaderMP API v2 as a compatibility layer
+  - beta-fukkit:
+    - [ ] Full implementation of CraftBukkit API version 1060 as a compatibility layer
 - [beta-events](./beta-events):
-  - Lifecycle events (startup, shutdown, login, disconnect)
-  - Interaction events (interactions between the player and other in-game objects)
-  - Entity events (sleep, combat, dimension-change, death and respawning, etc.)
+  - [beta-lifecycle-events]:
+    - [x] Events for startup, shutdown, login, and disconnect
+    - [ ] Events for saving and loading the world.
+  - [beta-interaction-events]:
+    - [x] Events for interactions between the player and other in-game objects.
+  - [beta-entity-events]:
+    - [x] Events for sleep, combat, dimension-change, death and respawning, etc.
 - [beta-networking](./beta-networking):
   - Packet sending/receiving and handling
-- [beta-registries](./beta-registries):
-  - Identifier-based registry system to destroy integer-based ID conflicts.
-- [beta-textures](./beta-textures):
+- [beta-resources](./beta-textures):
   - Automatic custom texture and texture atlas handling
 - [beta-world](./beta-world):
-  - Dimensions
-  - Terrain generation
-  - World types
+  - [beta-dimension-types]:
+    - Dimensions
+  - [beta-terrain-gen]:
+    - Terrain generation
+  - [beta-world-types]:
+    - World types
 - [modmenu](./modmenu):
   - Mod list showcasing mod metadata
   - Full support for all modern features

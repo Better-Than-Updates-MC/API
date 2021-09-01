@@ -26,7 +26,7 @@ package com.halotroop.fabric.api.registry;
 /**
  * Runs after registry entries are remapped to allow for mods to dynamically handle registry objects. <br/>
  * Get the event for this callback from a given registry using {@linkplain Registry#getRemapEvent}.
- * @since 1.1.0
+ * @since 1.0.0
  */
 @FunctionalInterface
 public interface RegistryRemappedCallback<T> {

@@ -28,7 +28,7 @@ import com.halotroop.fabric.impl.command.DefaultCommandDispatcherImpl;
 
 /**
  * Interface for an object in charge of registering and dispatching commands issued to the game.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface CommandDispatcher {
 	/**

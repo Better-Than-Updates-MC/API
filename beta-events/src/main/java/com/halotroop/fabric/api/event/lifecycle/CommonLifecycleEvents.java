@@ -29,7 +29,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 /**
  * Collection of common events that pertain to the game lifecycle.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class CommonLifecycleEvents {
 	/**

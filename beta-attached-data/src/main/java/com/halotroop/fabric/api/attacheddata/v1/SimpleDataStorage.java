@@ -41,7 +41,7 @@ public interface SimpleDataStorage extends DataStorage {
 		CompoundTag tag = new CompoundTag();
 
 		this.getRawAttachedDataMap().forEach((id, data) -> {
-			tag.put(id.toString(), data.toTag(new CompoundTag()));
+			tag.put(id.toString(), data.writeNBT(new CompoundTag()));
 		});
 
 		return tag;

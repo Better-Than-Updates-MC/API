@@ -33,7 +33,7 @@ import net.minecraft.server.network.ServerLoginPacketHandler;
 
 /**
  * Lifecycle events for the server.
- * @since 1.1.0
+ * @since 1.0.0
  * @apiNote Remember: None of these events run in singleplayer!
  */
 @Environment(EnvType.SERVER)

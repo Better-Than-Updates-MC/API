@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(Minecraft.class)
 public interface MinecraftAccessor {
     @Accessor
-    public static Minecraft getInstance() {
+    static Minecraft getInstance() {
         throw new UnsupportedOperationException("mixin");
     }
 }

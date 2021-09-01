@@ -27,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 
 import com.halotroop.fabric.impl.registry.RegistryImpl;
 import net.minecraft.server.entity.player.ServerPlayerEntity;
+import net.minecraft.util.io.TagInputOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,7 +37,6 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import com.halotroop.fabric.impl.registry.sync.RegistryRemapper;
 import net.minecraft.packet.login.LoginRequestPacket;
 import net.minecraft.server.network.ServerLoginPacketHandler;
-import net.minecraft.util.io.NBTIO;
 
 @Mixin(ServerLoginPacketHandler.class)
 public class ServerLoginPacketHandlerMixin {
@@ -44,7 +44,7 @@ public class ServerLoginPacketHandlerMixin {
 	private void onConnectPlayer(LoginRequestPacket arg, CallbackInfo info, ServerPlayerEntity player) {
 		RegistryRemapper.LOGGER.info("Sending registry remap packet to connecting client.");
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		NBTIO.writeGzipped(RegistryImpl.registryData, bos);
+		TagInputOutput.writeNBT(RegistryImpl.registryData, bos);
 		RegistryImpl.syncChannel.send(bos.toByteArray(), player);
 	}
 }

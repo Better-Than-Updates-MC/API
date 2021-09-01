@@ -32,7 +32,7 @@ import net.fabricmc.api.EnvType;
  * Interface to the default command dispatcher in cursed legacy API.
  * Yes, this is where you register your commands to.
  * Access the instance from {@code CommandDispatcher.DEFAULT}.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface DefaultCommandDispatcher extends CommandDispatcher {
 	/**

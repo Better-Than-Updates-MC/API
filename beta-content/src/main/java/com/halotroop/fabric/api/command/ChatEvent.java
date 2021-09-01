@@ -29,7 +29,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 
 /**
  * Event for when a chat message is sent. Used by the command implementation, but also has uses in chat filtering, etc.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface ChatEvent {
 	/**

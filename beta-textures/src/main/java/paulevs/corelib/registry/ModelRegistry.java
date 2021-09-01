@@ -58,11 +58,7 @@ public class ModelRegistry {
 
 	public static List<Model> getItemModels() {
 		List<Model> list = Lists.newArrayList();
-		ITEM_REGISTRY.forEach((id, models) -> {
-			models.forEach((meta, model) -> {
-				list.add(model);
-			});
-		});
+		ITEM_REGISTRY.forEach((id, models) -> models.forEach((meta, model) -> list.add(model)));
 		return list;
 	}
 }

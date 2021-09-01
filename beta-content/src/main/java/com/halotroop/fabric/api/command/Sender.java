@@ -30,7 +30,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 /**
  * Information about and utility methods for handling incoming commands and chat messages.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface Sender {
 	/**

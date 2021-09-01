@@ -27,7 +27,7 @@ import com.halotroop.fabric.api.attacheddata.v1.AttachedData;
 import com.halotroop.fabric.api.attacheddata.v1.DataManager;
 import com.halotroop.fabric.api.attacheddata.v1.DataManager.DataKey;
 import com.halotroop.fabric.api.event.ActionResult;
-import com.halotroop.fabric.api.event.BlockInteractionCallback;
+import com.halotroop.fabric.api.event.interaction.BlockInteractionCallback;
 import com.halotroop.fabric.api.registry.Identifier;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
@@ -38,9 +38,9 @@ public class WorldPropertiesDataTest implements ModInitializer {
 	public void onInitialize() {
 		test_world = DataManager.WORLD_PROPERTIES.addAttachedData(TestWorldData.ID, properties -> new TestWorldData(false));
 
-		BlockInteractionCallback.EVENT.register((player, world, item, block, x, y, z, face) -> {
+		BlockInteractionCallback.EVENT.register((player, world, stack, block, x, y, z, face) -> {
 			if (!world.isClient) {
-				if (item != null && item.getType() == Item.STICK) {
+				if (stack != null && stack.getItem() == Item.STICK) {
 					TestWorldData data = DataManager.WORLD_PROPERTIES.getAttachedData(world.getProperties(), test_world);
 					data.active = !data.active;
 				} else if (DataManager.WORLD_PROPERTIES.getAttachedData(world.getProperties(), test_world).active) {
@@ -68,13 +68,13 @@ public class WorldPropertiesDataTest implements ModInitializer {
 		}
 
 		@Override
-		public CompoundTag toTag(CompoundTag tag) {
+		public CompoundTag writeNBT(CompoundTag tag) {
 			tag.put("active", this.active);
 			return tag;
 		}
 
 		@Override
-		public void fromTag(CompoundTag tag) {
+		public void readNBT(CompoundTag tag) {
 			this.active = tag.getBoolean("active");
 		}
 

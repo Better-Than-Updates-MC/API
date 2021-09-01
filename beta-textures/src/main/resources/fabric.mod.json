@@ -2,15 +2,16 @@
   "schemaVersion": 1,
   "id": "beta-textures",
   "version": "${version}",
-
+  "environment": "client",
   "name": "Fabric Beta Textures API",
   "description": "Implementation of CoreLib.",
   "authors": [
-    "The Cursed Legacy Team",
-    "The Better Than Updates Team",
+    "Cursed Legacy",
+    "Better Than Updates",
     "paulevs"
   ],
   "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
     "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
     "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
@@ -37,7 +38,6 @@
     "minecraft": "1.0.0-beta.7.3"
   },
   "breaks": {
-    "stationloader": "*",
-    "api": "*"
+    "stationloader": "*"
   }
 }

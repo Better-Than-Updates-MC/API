@@ -39,11 +39,11 @@ public interface AttachedData {
 	/**
 	 * @return a tag representation of this data.
 	 */
-	CompoundTag toTag(CompoundTag tag);
+	CompoundTag writeNBT(CompoundTag tag);
 	/**
 	 * @param tag the tag from which to load data.
 	 */
-	void fromTag(CompoundTag tag);
+	void readNBT(CompoundTag tag);
 	/**
 	 * Creates a deep copy of this {@link AttachedData}, similar to the recommendations for {@link Object#clone}.
 	 */

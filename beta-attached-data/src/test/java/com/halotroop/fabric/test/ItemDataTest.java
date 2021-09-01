@@ -27,7 +27,7 @@ import com.halotroop.fabric.api.attacheddata.v1.AttachedData;
 import com.halotroop.fabric.api.attacheddata.v1.DataManager;
 import com.halotroop.fabric.api.attacheddata.v1.DataManager.DataKey;
 import com.halotroop.fabric.api.event.ActionResult;
-import com.halotroop.fabric.api.event.BlockInteractionCallback;
+import com.halotroop.fabric.api.event.interaction.BlockInteractionCallback;
 import com.halotroop.fabric.api.registry.Identifier;
 import com.halotroop.fabric.api.registry.Registries;
 import net.fabricmc.api.ModInitializer;
@@ -45,9 +45,9 @@ public class ItemDataTest implements ModInitializer {
 		test_axe = DataManager.ITEM_STACK.addAttachedData(TestAxeData.ID, item ->
 				new TestAxeData(TestAxeData.ID));
 
-		BlockInteractionCallback.EVENT.register((player, world, item, block, x, y, z, i1) -> {
-			if (block != null && item != null && item.getType() == Item.WOOD_AXE) {
-				TestAxeData data = DataManager.ITEM_STACK.getAttachedData(item, test_axe);
+		BlockInteractionCallback.EVENT.register((player, world, stack, block, x, y, z, i1) -> {
+			if (block != null && stack != null && stack.getItem() == Item.WOOD_AXE) {
+				TestAxeData data = DataManager.ITEM_STACK.getAttachedData(stack, test_axe);
 
 				world.setBlock(x, y, z, Objects.requireNonNull(Registries.BLOCK.getById(data.blockId)).id);
 			}
@@ -72,13 +72,13 @@ public class ItemDataTest implements ModInitializer {
 		}
 
 		@Override
-		public CompoundTag toTag(CompoundTag tag) {
+		public CompoundTag writeNBT(CompoundTag tag) {
 			tag.put("block", this.blockId.toString());
 			return tag;
 		}
 
 		@Override
-		public void fromTag(CompoundTag tag) {
+		public void readNBT(CompoundTag tag) {
 			String block = tag.getString("block");
 
 			if (block.equals("NULL")) {

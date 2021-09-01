@@ -36,8 +36,8 @@ import paulevs.corelib.registry.ModelRegistry;
 /**
  * Utility methods for {@link Item}s which use textures from other than the main item atlas.
  *
- * @discouraged Unless required, the 1.1.0 model system is preferred, or directly use {@linkplain ModelRegistry paulevs' corelib}.
- * @since 0.5.0
+ * @deprecated Unless required, use {@linkplain ModelRegistry CoreLib}.
+ * @since 1.0.0
  *
  * @author Chocohead
  */

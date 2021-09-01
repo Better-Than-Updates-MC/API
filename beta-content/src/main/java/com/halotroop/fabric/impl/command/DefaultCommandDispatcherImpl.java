@@ -35,7 +35,7 @@ import net.fabricmc.api.EnvType;
 
 /**
  * The implementation for the default command dispatcher.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class DefaultCommandDispatcherImpl implements DefaultCommandDispatcher {
 	private final Map<String, Command> singleplayerCommands = new HashMap<>();

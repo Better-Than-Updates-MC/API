@@ -309,5 +309,4 @@ public class Configuration {
             buffer.write("\r\n");
         }
     }
-
 }

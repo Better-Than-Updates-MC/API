@@ -24,7 +24,7 @@
 package com.halotroop.fabric.test;
 
 import com.halotroop.fabric.api.event.ActionResult;
-import com.halotroop.fabric.api.event.BlockInteractionCallback;
+import com.halotroop.fabric.api.event.interaction.BlockInteractionCallback;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.minecraft.server.entity.player.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;

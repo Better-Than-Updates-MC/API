@@ -26,10 +26,17 @@ package com.halotroop.fabric.api.registry;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import com.halotroop.fabric.accessor.translations.TranslationStorageAccessor;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.resource.language.TranslationStorage;
 import net.minecraft.item.Item;
@@ -38,11 +45,17 @@ import net.minecraft.item.Item;
  * Utilities for adding translations for things.
  *
  * @see I18n Accessing the translations
- * @since 0.4.1
+ * @since 1.0.0
  *
  * @author Chocohead
  */
 public final class Translations {
+	private static final Map<String, String> languageFolders = new HashMap<>();
+
+	static {
+		addLanguageFolder("minecraft", "/lang");
+	}
+
 	private Translations() {
 	}
 
@@ -119,7 +132,9 @@ public final class Translations {
 	 */
 	public static void loadLangFile(String file) throws IOException {
 		try (InputStream in = Translations.class.getResourceAsStream(file)) {
-			((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations().load(in);
+			if (in != null && in.available() > 0) {
+				((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations().load(in);
+			}
 		}
 	}
 
@@ -132,5 +147,25 @@ public final class Translations {
 	 */
 	public static void loadLangFile(Reader reader) throws IOException {
 		((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations().load(reader);
+	}
+
+	public static void addLanguageFolder(String modId, String path) {
+		languageFolders.put(modId, path);
+	}
+
+	public static void changeLanguage(String localeCode) {
+		Properties translations = ((TranslationStorageAccessor)TranslationStorage.getInstance()).getTranslations();
+		translations.clear();
+		languageFolders.forEach((modId, folder) -> {
+			try {
+				String path = folder;
+				if (!path.endsWith("/")) path = path + "/";
+				loadLangFile(path +             localeCode.replace('-', '_') + ".lang");
+				loadLangFile(path + "stats_" +  localeCode.replace('-', '_') + ".lang");
+			} catch (IOException e) {
+				System.err.println("Error loading language files...");
+				e.printStackTrace();
+			}
+		});
 	}
 }

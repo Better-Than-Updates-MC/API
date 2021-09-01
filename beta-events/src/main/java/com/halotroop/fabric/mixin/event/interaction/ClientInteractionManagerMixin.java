@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.halotroop.fabric.impl.events.interaction.BlockInteractionImpl;
+import com.halotroop.fabric.impl.event.interaction.BlockInteractionImpl;
 import net.minecraft.client.ClientInteractionManager;
 
 @Mixin(ClientInteractionManager.class)

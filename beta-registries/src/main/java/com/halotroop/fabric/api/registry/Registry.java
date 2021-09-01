@@ -252,7 +252,7 @@ public class Registry<T> implements Iterable<T> {
 	/**
 	 * @return a tag of all the mappings, for serialisation.
 	 */
-	public final CompoundTag toTag() {
+	public final CompoundTag writeNBT() {
 		CompoundTag tag = new CompoundTag();
 
 		for (Entry<Identifier, T> entry : this.byRegistryId.entrySet()) {
@@ -274,7 +274,7 @@ public class Registry<T> implements Iterable<T> {
 	 * Called before registry remapping for this registry.
 	 * Override this to add additional preparations for registry remapping.
 	 * @param tag the tag for this registry retrieved from the registry data file.
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	protected void beforeRemap(CompoundTag tag) {
 		this.beforeRemap();
@@ -337,7 +337,7 @@ public class Registry<T> implements Iterable<T> {
 
 	/**
 	 * @return the {@linkplain RegistryEntryAddedCallback} event associated with this registry.
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	public final Event<RegistryRemappedCallback<T>> getRemapEvent() {
 		return this.remapEvent;
@@ -361,7 +361,7 @@ public class Registry<T> implements Iterable<T> {
 	/**
 	 * Iterate over pairs of registry id - tile in this registry.
 	 * @param consumer the callback function.
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	public void forEach(BiConsumer<@NotNull Identifier, ? super T> consumer) {
 		this.byRegistryId.forEach(consumer);

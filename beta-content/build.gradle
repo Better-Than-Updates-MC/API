@@ -3,8 +3,7 @@ version = getSubprojectVersion(project, '1.0.0')
 
 apply plugin: 'java-library'
 
-moduleDependencies(project, 'beta-api-base')
+moduleDependencies(project, 'beta-api-base', 'beta-registries')
 
 dependencies {
-	testImplementation project(path: ':beta-registries')
 }

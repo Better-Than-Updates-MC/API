@@ -36,10 +36,10 @@ import com.halotroop.fabric.impl.base.VanillaCheckerImpl;
 @Mixin(ServerPlayPacketHandler.class)
 public class ServerPlayNetworkHandlerMixin {
 	@Shadow
-	private ServerPlayerEntity serverPlayer;
+	private ServerPlayerEntity player;
 
 	@Inject(at= @At("HEAD"), method = "onClose")
 	public void method_1473(String string, Object[] objects, CallbackInfo ci) {
-		VanillaCheckerImpl.playerMap.remove(serverPlayer.name);
+		VanillaCheckerImpl.playerMap.remove(player.name);
 	}
 }

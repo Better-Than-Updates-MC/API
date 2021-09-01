@@ -6,11 +6,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.GuiElement;
 import net.minecraft.client.render.Tessellator;
 import paulevs.corelib.CoreLib;
 
-@Mixin(DrawableHelper.class)
+@Mixin(GuiElement.class)
 public class DrawableHelperMixin {
 	@Shadow
 	protected float zOffset;

@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-	@ModifyConstant(method = "renderHud", constant = @Constant(stringValue="Minecraft Beta 1.7.3 ("))
+	@ModifyConstant(method = "render", constant = @Constant(stringValue="Minecraft Beta 1.7.3 ("))
 	private String render(String original) {
 		return "Minecraft Beta 1.7.3 / Fabric (";
 	}

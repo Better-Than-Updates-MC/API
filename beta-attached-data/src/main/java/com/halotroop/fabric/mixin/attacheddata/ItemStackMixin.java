@@ -48,7 +48,7 @@ public abstract class ItemStackMixin implements SimpleDataStorage {
 		DataManager.ITEM_STACK.copyData((ItemStack) (Object) this, info.getReturnValue());
 	}
 
-	@Inject(at = @At("RETURN"), method = "toTag")
+	@Inject(at = @At("RETURN"), method = "writeNBT")
 	private void api_addData(CompoundTag tag, CallbackInfoReturnable<CompoundTag> info) {
 		tag.put("moddedData", this.getModdedTag());
 	}
@@ -58,7 +58,7 @@ public abstract class ItemStackMixin implements SimpleDataStorage {
 		DataManager.ITEM_STACK.copyData((ItemStack) (Object) this, info.getReturnValue());
 	}
 
-	@Inject(at = @At("RETURN"), method = "fromTag")
+	@Inject(at = @At("RETURN"), method = "readNBT")
 	private void api_readData(CompoundTag tag, CallbackInfo info) {
 		if (tag.containsKey("moddedData")) {
 			CompoundTag data = tag.getCompoundTag("moddedData");

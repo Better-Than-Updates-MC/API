@@ -1,6 +1,9 @@
-archivesBaseName = 'beta-translations'
+archivesBaseName = 'beta-accessibility'
 version = getSubprojectVersion(project, '1.0.0')
 
-moduleDependencies(project, 'beta-api-base')
+apply plugin: 'java-library'
+
+moduleDependencies(project, 'beta-api-base', 'beta-config')
+
 dependencies {
 }

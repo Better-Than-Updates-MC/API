@@ -30,7 +30,7 @@ import net.minecraft.server.command.CommandSource;
 
 /**
  * Utilities for server commands. Do not reference this class client side!
- * @since 1.1.0
+ * @since 1.0.0
  */
 @Environment(EnvType.SERVER)
 public class ServerCommandUtils {

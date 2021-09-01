@@ -30,14 +30,18 @@ import com.halotroop.fabric.api.attacheddata.v1.DataManager;
 import com.halotroop.fabric.api.attacheddata.v1.DataManager.DataKey;
 import com.halotroop.fabric.api.registry.Translations;
 import com.halotroop.fabric.api.worldtype.WorldType;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 
-public class WorldTypeImpl implements ModInitializer {
+public class WorldTypeImpl implements ModInitializer, ClientModInitializer {
 	@Override
 	public void onInitialize() {
 		// Create world type attached data
 		worldTypeData = DataManager.WORLD_PROPERTIES.addAttachedData(WorldTypeData.ID, properties -> new WorldTypeData(getSelected().getId()));
+	}
 
+	@Override
+	public void onInitializeClient() {
 		// Translate default
 		Translations.addTranslation(WorldType.DEFAULT.toString(), "Default");
 	}

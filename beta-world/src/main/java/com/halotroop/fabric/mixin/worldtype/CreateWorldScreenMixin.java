@@ -25,13 +25,13 @@ package com.halotroop.fabric.mixin.worldtype;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.menu.CreateWorldScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.halotroop.fabric.impl.worldtype.WorldTypeImpl;
-import net.minecraft.client.gui.widgets.Button;
 import net.minecraft.client.resource.language.TranslationStorage;
 
 @Mixin(CreateWorldScreen.class)
@@ -49,22 +49,22 @@ public abstract class CreateWorldScreenMixin extends Screen {
 
 		if (this.api_hasModdedTypesCache) {
 			// TODO use TranslationStorage.getInstance()
-			this.buttons.add(new Button(2, this.width / 2, api_getWTHeight(), 100, 20,
+			this.buttons.add(new ButtonWidget(2, this.width / 2, api_getWTHeight(), 100, 20,
 					TranslationStorage.getInstance().translate(WorldTypeImpl.getSelected().toString()))); // Add button
-			((Button) this.buttons.get(0)).y += 15; // Shift the create world and cancel buttons down
-			((Button) this.buttons.get(1)).y += 15;
+			((ButtonWidget) this.buttons.get(0)).y += 15; // Shift the create world and cancel buttons down
+			((ButtonWidget) this.buttons.get(1)).y += 15;
 		}
 	}
 
 	@Inject(at = @At("RETURN"), method = "render")
 	private void api_onRender(int mouseX, int mouseY, float tickDelta, CallbackInfo info) {
 		if (this.api_hasModdedTypesCache) {
-			this.drawTextWithShadow(this.textManager, "World Type", this.width / 2 - 100, api_getWTHeight() + 5, 10526880); // Draw text (with shadow)
+			this.drawTextWithShadow(this.textRenderer, "World Type", this.width / 2 - 100, api_getWTHeight() + 5, 10526880); // Draw text (with shadow)
 		}
 	}
 
 	@Inject(at = @At("HEAD"), method = "buttonClicked", cancellable = true)
-	private void api_buttonClicked(Button button, CallbackInfo info) {
+	private void api_buttonClicked(ButtonWidget button, CallbackInfo info) {
 		if (this.api_hasModdedTypesCache && button.active && button.id == 2) {
 			// Cycle world type
 			button.text = TranslationStorage.getInstance().translate(WorldTypeImpl.cycle().toString());

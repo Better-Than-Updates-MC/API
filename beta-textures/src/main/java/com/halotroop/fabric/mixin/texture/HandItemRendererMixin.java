@@ -23,7 +23,7 @@
 
 package com.halotroop.fabric.mixin.texture;
 
-import net.minecraft.client.render.HandItemRenderer;
+import net.minecraft.client.render.HeldItemRenderer;
 import net.minecraft.item.ItemStack;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,7 +36,7 @@ import com.halotroop.fabric.impl.texture.AtlasMapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 
-@Mixin(HandItemRenderer.class)
+@Mixin(HeldItemRenderer.class)
 abstract class HandItemRendererMixin {
 	@Shadow
 	private Minecraft client;

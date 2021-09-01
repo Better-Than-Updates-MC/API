@@ -4,18 +4,19 @@
   "version": "${version}",
 
   "name": "Fabric Beta Essentials Base",
-  "description": "A set of fixes and basic hooks recommended for modders and players alike.",
+  "description": "Fabric API Base and essential bug fixes for both modders and players alike.",
   "authors": [
-    "The Cursed Legacy Team",
-    "The Better Than Updates Team"
+    "Cursed Legacy",
+    "Better Than Updates"
   ],
   "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
     "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
     "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
 
   "license": "MIT",
-  "icon": "assets/api/icon.png",
+  "icon": "assets/beta-api-base/icon.png",
   
   "mixins": [
     "beta-api-base.accessors.json",
@@ -27,7 +28,6 @@
     "minecraft": "1.0.0-beta.7.3"
   },
   "breaks": {
-    "stationloader": "*",
-    "api": "*"
+    "stationloader": "*"
   }
 }

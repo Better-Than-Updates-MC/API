@@ -84,7 +84,7 @@ public class RegistryRemapper {
 				LOGGER.info("Collecting Registry Data.");
 
 				for (Registry<?> registry : REGISTRIES) {
-					cache.put(registry.getRegistryId().toString(), registry.toTag());
+					cache.put(registry.getRegistryId().toString(), registry.writeNBT());
 				}
 
 				// write
@@ -119,7 +119,7 @@ public class RegistryRemapper {
 				if (readFrom.containsKey(key)) {
 					writeTo.put(key, registry.remap(readFrom.getCompoundTag(key)));
 				} else {
-					writeTo.put(key, registry.toTag());
+					writeTo.put(key, registry.writeNBT());
 				}
 			}
 		}

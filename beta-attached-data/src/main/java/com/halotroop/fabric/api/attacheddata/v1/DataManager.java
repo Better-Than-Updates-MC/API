@@ -69,7 +69,7 @@ public final class DataManager<T> {
 	 */
 	public AttachedData deserialize(T object, Identifier id, CompoundTag data) {
 		AttachedData result = this.attachedDataFactories.get(id).apply(object);
-		result.fromTag(data);
+		result.readNBT(data);
 		return result;
 	}
 

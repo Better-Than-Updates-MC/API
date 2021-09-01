@@ -31,7 +31,7 @@ import net.minecraft.client.Minecraft;
 
 /**
  * Lifecycle events for the client.
- * @since 1.1.0
+ * @since 1.0.0
  */
 @Environment(EnvType.CLIENT)
 public class ClientLifecycleEvents {

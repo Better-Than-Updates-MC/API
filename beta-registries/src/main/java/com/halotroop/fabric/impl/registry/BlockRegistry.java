@@ -61,7 +61,8 @@ class BlockRegistry extends Registry<Block> {
 
 	@Override
 	public <E extends Block> E registerValue(@NotNull Identifier id, E value) {
-		throw new UnsupportedOperationException("Use register(Identifier, IntFunction<E>) instead, since blocks need to use the provided int serialised ids in their constructor!");
+		throw new UnsupportedOperationException("Use register(Identifier, IntFunction<E>) instead.\n" +
+				"Blocks need to use the provided int serialised ids in their constructor!");
 	}
 
 	@Override
@@ -71,7 +72,7 @@ class BlockRegistry extends Registry<Block> {
 
 	@Override
 	protected int getStartSerialisedId() {
-		return 1; // Because 0 is taken by air and is a null entry because notch spaghetti.
+		return 1; // Because 0 is taken by air and is a null entry because N*tch spaghetti.
 	}
 
 	@Override
@@ -87,7 +88,7 @@ class BlockRegistry extends Registry<Block> {
 
 		// Clear the block array
 
-		for (int i = 1; i < size; i++) { // Starting at 1 as microoptimisation because 0 is taken by a forced null value: Air
+		for (int i = 1; i < size; i++) { // Starting at 1 as micro-optimisation because 0 is taken by a forced null value: Air
 			Block block = Block.BY_ID[i];
 
 			if (block != null) {

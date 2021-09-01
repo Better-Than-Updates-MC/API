@@ -31,7 +31,7 @@ import net.fabricmc.api.ModInitializer;
 
 /** 
  * Implementation for command dispatchers that use our api.
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class CommandsImpl implements ModInitializer {
 	@Override

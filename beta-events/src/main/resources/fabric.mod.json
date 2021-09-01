@@ -6,10 +6,11 @@
   "name": "Fabric Beta Events",
   "description": "A set of events useful for triggering functionality while maintaining mod compatibility.",
   "authors": [
-    "The Cursed Legacy Team",
-    "The Better Than Updates Team"
+    "Cursed Legacy",
+    "Better Than Updates"
   ],
   "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
     "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
     "sources": "https://github.com/Better-Than-Updates-MC/API"
   },
@@ -27,7 +28,6 @@
     "beta-api-base": "*"
   },
   "breaks": {
-    "stationloader": "*",
-    "api": "*"
+    "stationloader": "*"
   }
 }

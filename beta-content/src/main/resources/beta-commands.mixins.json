@@ -1,5 +1,5 @@
 {
-  "required": true,
+  "required": false,
   "package": "com.halotroop.fabric.mixin.command",
   "compatibilityLevel": "JAVA_8",
   "client": [
@@ -10,6 +10,6 @@
 	  "ServerPlayPacketHandlerMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   }
 }
