@@ -30,4 +30,4 @@ local.properties
 .directory
 
 # Minecraft Forge source code
-legacy-forge-hooks/src/main/forge/
+forge/

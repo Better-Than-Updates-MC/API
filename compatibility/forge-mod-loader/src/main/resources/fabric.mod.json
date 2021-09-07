@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "fml",
+	"version": "${version}",
+	"name": "Forge Mod Loader",
+	"description": "A clean reimplementation of a mod loading system for client, server and Bukkit use, incorporating API implementations of client side ModLoader by Risugami.",
+	"authors": [
+		{
+			"name": "cpw",
+			"contact": {
+				"sources": "https://github.com/MinecraftForge/FML",
+				"homepage": "https://github.com/MinecraftForge/FML/wiki",
+				"issues": "https://github.com/MinecraftForge/FML/issues",
+				"email": "cpw@minecraftforge.net"
+			}
+		},
+		{
+			"name": "Better Than Updates",
+			"contact": {
+				"homepage": "https://better-than-updates.halotroop.com",
+				"sources": "https://github.com/Better-Than-Updates-MC/API",
+				"issues": "https://github.com/Better-Than-Updates-MC/API/issues"
+			}
+		}
+	],
+	"contributors": [
+		{
+			"name": "halotroop2288",
+			"contact": {
+				"homepage": "https://halotroop.com",
+				"email": "carolin@halotroop.com"
+			}
+		}
+	],
+	"license": "LGPL-v2",
+	"environment": "*",
+	"icon": "assets/fml/icon.png",
+	"entrypoints": {
+	},
+	"depends": {
+		"minecraft": "1.0.0-beta.7.3",
+		"fabricloader": ">=1.0.0"
+	}
+}

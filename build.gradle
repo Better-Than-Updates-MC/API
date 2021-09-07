@@ -17,6 +17,9 @@ plugins {
 	id 'eclipse'
 	id 'idea'
 	id 'java'
+	id 'groovy'
+	id 'scala'
+	id 'org.jetbrains.kotlin.jvm' version '1.5.30'
 }
 
 @SuppressWarnings('unused')
@@ -73,14 +76,9 @@ allprojects {
 
 	repositories {
 		mavenCentral()
-		maven {
-			name = 'HalfOf2'
-			url = 'https://storage.googleapis.com/devan-maven/'
-		}
-		maven {
-			name = 'Jitpack'
-			url 'https://jitpack.io/'
-		}
+		maven { url = 'https://maven.fabricmc.net/' }
+		maven { url = 'https://storage.googleapis.com/devan-maven/' }
+		maven { url 'https://jitpack.io/' }
 	}
 
 	configurations {
@@ -110,6 +108,10 @@ allprojects {
 		modImplementation("io.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}") {
 			transitive false // Avoid leaking Loader's dependencies forwards
 		}
+
+		testImplementation "net.fabricmc:fabric-language-groovy:1.1.0"
+		testImplementation "net.fabricmc:fabric-language-scala:0.3.1.+"
+		testImplementation "net.fabricmc:fabric-language-kotlin:1.6.4+kotlin.1.5.30"
 
 		//For @Nullable and @NotNull
 		compileOnly 'org.jetbrains:annotations:22.0.0'

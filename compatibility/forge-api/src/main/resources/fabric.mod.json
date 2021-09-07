@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "forge",
+  "version": "${version}",
+  "environment": "*",
+  "name": "Forge API",
+  "description": "Forge is a free, open-source modding API. \nThis API is provided for easier porting from Forge to Fabric.",
+  "authors": [
+    {
+      "name": "Better Than Updates"
+    },
+    {
+      "name": "Minecraft Forge",
+      "contact": {
+        "sources": "https://github.com/MinecraftForge/MinecraftForge/tree/0a874de91d6b26a9369d1ab0fb19ebe47a5124e3"
+      }
+    }
+  ],
+  "contributors": [
+    "Eloraam",
+    "FlowerChild",
+    "Hawkye",
+    "MALfunction84",
+    "Scokeev9",
+    "SpaceToad"
+  ],
+  "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
+    "issues": "https://github.com/Better-Than-Updates/API/issues",
+    "sources": "https://github.com/Better-Than-Updates/API"
+  },
+  "license": "MCFPL-v1.0",
+  "icon": "assets/forge/icon.png",
+  
+  "depends": {
+    "fabricloader": ">=1.0.0",
+    "minecraft": "1.0.0-beta.7.3",
+    "beta-api-base": "*",
+    "beta-events": "*"
+  },
+  "breaks": {
+    "stationloader": "*"
+  },
+  "conflicts": {
+    "beta-api": "*"
+  }
+}

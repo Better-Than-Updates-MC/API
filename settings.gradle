@@ -7,9 +7,6 @@ include 'beta-attached-data'
 include 'beta-content' // <- block-entities, commands, recipes
 include 'beta-config'
 include 'beta-events'
-include 'beta-forge-hooks' // Forge API compatibility layer (Forge -> FBE adapter)
-include 'beta-forge-patches' // Implements Forge patches as extensions to vanilla classes.
-include 'beta-mod-adapter' // Adapts Risugami's ModLoader/ModLoaderMP/Forge mods into Fabric mods.
 include 'beta-networking'
 include 'beta-registries'
 include 'beta-textures'
@@ -17,3 +14,12 @@ include 'beta-world' // <- terrain, world-types
 
 include 'roughly-enough-items'
 include 'modmenu'
+
+addModule ('compatibility', 'forge-mod-loader') // Forge Mod Loader (Risugami's / ModLoaderMP support)
+addModule ('compatibility', 'forge-api') // Forge API compatibility layer
+
+def addModule(String subdir, String name) {
+	include(name)
+	project(":$name").projectDir = new File("${rootDir.path}/$subdir/$name")
+	project(":$name").name = name
+}

@@ -1,7 +1,7 @@
 # Fabric Beta Essentials
 
-The unofficial [Fabric](https://fabricmc.net/) fork for ***Beta 1.7.3.***
-Also includes some essentials as modules.
+The ***modern*** essential mod development pack for **Minecraft beta 1.7.3.**
+Includes 
 
 The goal for the module structure of this API (still up for discussion) currently looks like this:
 
@@ -73,6 +73,9 @@ The goal for the module structure of this API (still up for discussion) currentl
   - In-game item list
   - Recipes accessible from the aforementioned list
   - API for adding custom recipe types
+- [compatibility](./compatibility)
+  - [forge-api](./compatibility/forge-api)
+  - [forge-mod-loader](./compatibility/forge-mod-loader)
 
 For more information, or for help in using the APIs,
 see the [wiki](https://github.com/Better-Than-Updates-MC/API/wiki).

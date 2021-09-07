@@ -1,0 +1,14 @@
+archivesBaseName = 'beta-mod-adapter'
+version = getSubprojectVersion(project, '1.0.0')
+
+moduleDependencies(project, 'beta-forge-hooks')
+
+repositories {
+	maven { url = 'https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/' }
+}
+
+dependencies {
+	modImplementation("net.devtech:grossfabrichacks:6.1") {
+		transitive false
+	}
+}
