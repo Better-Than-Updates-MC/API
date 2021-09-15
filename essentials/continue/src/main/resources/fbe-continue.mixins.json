@@ -1,0 +1,11 @@
+{
+	"required": false,
+	"package": "com.halotroop.fabric.mixin.cont",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"TitleScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	}
+}

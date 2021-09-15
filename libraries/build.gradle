@@ -1,0 +1,15 @@
+archivesBaseName = 'fbe-libraries'
+version = rootProject.version
+
+apply plugin: 'java-library'
+
+dependencies {
+	include modImplementation("io.github.minecraft-cursed-legacy:cursed-legacy-api:${rootProject.cursed_api_version}")
+
+	afterEvaluate {
+		include project(':accessibility')
+		include project(':core')
+		include project(':events')
+		include project(':vanilla-fixes')
+	}
+}

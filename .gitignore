@@ -28,6 +28,3 @@ Thumbs.db
 .DS_Store
 local.properties
 .directory
-
-# Minecraft Forge source code
-forge/

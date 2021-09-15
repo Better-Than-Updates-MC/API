@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fbe-core",
+  "version": "${version}",
+  
+  "name": "Fabric Beta Essentials Core",
+  "description": "Essential bug fixes for both modders and players alike.",
+  "authors": [
+    "Better Than Updates"
+  ],
+  "contact": {
+    "homepage": "https://better-than-updates.halotroop.com/",
+    "issues": "https://github.com/Better-Than-Updates-MC/API/issues",
+    "sources": "https://github.com/Better-Than-Updates-MC/API"
+  },
+  
+  "license": "MIT",
+  "icon": "assets/fbe-core/icon.png",
+  
+  "mixins": [
+  ],
+  
+  "depends": {
+    "fabricloader": ">=1.0.0",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "breaks": {
+    "stationloader": "*"
+  }
+}

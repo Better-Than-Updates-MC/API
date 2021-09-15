@@ -1,5 +1,0 @@
-maven_group = 'com.terraformersmc'
-archivesBaseName = 'modmenu'
-version = getSubprojectVersion(project, '1.0.0')
-
-moduleDependencies(project, "beta-accessibility")

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.halotroop.fabric.mixin.event.lifecycle",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

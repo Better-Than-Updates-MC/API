@@ -1,9 +1,10 @@
-archivesBaseName = 'forge-mod-loader'
-version = getSubprojectVersion(project, '8.0.0')
+archivesBaseName = 'forge-api'
+version = getSubprojectVersion(project, '1.0.4')
 
 apply plugin: 'java-library'
 
-moduleDependencies(project, 'beta-api-base', 'forge-mod-loader', 'beta-events')
+moduleDependencies(project, 'core', 'events')
 
 dependencies {
+	include modImplementation("io.github.minecraft-cursed-legacy:legacy-api-base:${rootProject.cursed_api_version}-1.0.0")
 }

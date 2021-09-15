@@ -1,0 +1,13 @@
+archivesBaseName = 'accessibility'
+version = getSubprojectVersion(project, '1.0.0')
+
+apply plugin: 'java-library'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	include modImplementation("io.github.minecraft-cursed-legacy:legacy-api-base:${rootProject.cursed_api_version}-1.0.0")
+}

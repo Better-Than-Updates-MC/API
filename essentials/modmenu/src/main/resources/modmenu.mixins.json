@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.terraformersmc.modmenu.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"PauseScreenMixin",
+		"TitleScreenMixin",
+		"TexturePackMixin",
+		"MinecraftAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,8 +1,0 @@
-{
-  "required": true,
-  "package": "io.github.minecraftcursedlegacy.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "injectors": {
-    "defaultRequire": 1
-  }
-}

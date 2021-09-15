@@ -1,0 +1,5 @@
+group = 'com.thebrokenrail'
+archivesBaseName = 'modupdater'
+version = getSubprojectVersion(project, '1.1.11')
+
+moduleDependencies(project, 'core', 'events')

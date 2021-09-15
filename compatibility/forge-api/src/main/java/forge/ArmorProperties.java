@@ -1,0 +1,19 @@
+/**
+ * This software is provided under the terms of the Minecraft Forge Public 
+ * License v1.0.
+ */
+
+package forge;
+
+public class ArmorProperties {
+	public int damageRemove = 0;
+	public boolean allowRegularComputation = false;
+	
+	public ArmorProperties() {
+	}
+	
+	public ArmorProperties (int damageRemove, boolean allowRegularComputation) {
+		this.damageRemove = damageRemove;
+		this.allowRegularComputation = allowRegularComputation;
+	}
+}

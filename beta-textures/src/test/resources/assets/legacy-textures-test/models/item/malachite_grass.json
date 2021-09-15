@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "": "beta-textures-test:block/malachite_grass"
-  }
-}

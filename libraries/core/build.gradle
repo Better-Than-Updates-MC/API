@@ -1,0 +1,8 @@
+archivesBaseName = 'core'
+version = rootProject.version
+
+apply plugin: 'java-library'
+
+dependencies {
+	include modImplementation("io.github.minecraft-cursed-legacy:legacy-api-base:${rootProject.cursed_api_version}-1.0.0")
+}

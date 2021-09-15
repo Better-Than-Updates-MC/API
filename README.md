@@ -1,81 +1,47 @@
 # Fabric Beta Essentials
 
 The ***modern*** essential mod development pack for **Minecraft beta 1.7.3.**
-Includes 
 
-The goal for the module structure of this API (still up for discussion) currently looks like this:
+- API includes [Cursed Legacy API], and [CoreLib]
+- Compatibility includes [Minecraft Forge] and [Forge Mod Loader]
+- Essentials includes [Creative Mode], [ModMenu], [Roughly Enough Items]
 
-- [beta-accessibility](./beta-accessibility):
-  - Full localization support (with selector menu)
-  - Sound categories (via SoundCategory registry)
-  - Closed caption support
-- [beta-essentials]:
-  - Events
-    - Essential hooks (events)
-  - Common API classes (like `Identifier`)
-  - Fixes for beta weirdness
-  - Credits entries for mod authors and contributors
-- [beta-config](./beta-config):
-  - Properties for basic configs
-  - JSON5 for more advanced configs
-  - Automatic ModMenu screen generator (optional)
-- [beta-content](./beta-content):
-  - Custom audio
-  - Custom commands
-  - Custom recipes
-  - Custom content (blocks, entities, block entities, items, particles, etc.)
-  - [beta-registries](./beta-registries):
-    - Identifier-based registry system to destroy integer-based ID conflicts.
-    - Built-in registries for:
-      - [ ] Achievements
-      - [x] Blocks
-      - [x] Items
-      - [x] Entity types
-      - [ ] Block entity types
-      - [ ] Painting "motives"
-      - [ ] Sound categories
-      - [ ] Sound events
-- [beta-mod-loader-support]:
-  - Support for loading old mods with Quilt Loader
-  - Stepping stones for porting old mods.
-  - [beta-mod-adapter]:
-    - [ ] Adapter for loading Risugami's ModLoader mods with Fabric
-  - [beta-forge-hooks]:
-    - [ ] Full implementation of Forge API version 1.0.X as a compatibility layer
-  - [beta-risugami-hooks]:
-    - [ ] Full implementation of Risugami's ModLoader & ModLoaderMP API v2 as a compatibility layer
-  - beta-fukkit:
-    - [ ] Full implementation of CraftBukkit API version 1060 as a compatibility layer
-- [beta-events](./beta-events):
-  - [beta-lifecycle-events]:
-    - [x] Events for startup, shutdown, login, and disconnect
-    - [ ] Events for saving and loading the world.
-  - [beta-interaction-events]:
-    - [x] Events for interactions between the player and other in-game objects.
-  - [beta-entity-events]:
-    - [x] Events for sleep, combat, dimension-change, death and respawning, etc.
-- [beta-networking](./beta-networking):
-  - Packet sending/receiving and handling
-- [beta-resources](./beta-textures):
-  - Automatic custom texture and texture atlas handling
-- [beta-world](./beta-world):
-  - [beta-dimension-types]:
-    - Dimensions
-  - [beta-terrain-gen]:
-    - Terrain generation
-  - [beta-world-types]:
-    - World types
-- [modmenu](./modmenu):
-  - Mod list showcasing mod metadata
-  - Full support for all modern features
-  - Robust API for adding custom metadata
-- [roughly-enough-items](./roughly-enough-items):
-  - In-game item list
-  - Recipes accessible from the aforementioned list
-  - API for adding custom recipe types
+*( See below for licensing information on these. )*
+
+The goal for the module structure of this project (still up for discussion) currently looks like this:
+
+- [libraries](./libraries):
+  - Includes the entire [Cursed Legacy API] for compatibility.
+  - [accessibility](./libraries/accessibility)
+    - [ ] Locale menu and translation support.
+    - [ ] Sound categories and extended volume settings.
+    - [ ] Closed captions
+  - [core](./libraries/core)
+    - Includes [Cursed Legacy API] base.
+  - [events](./libraries/events)
+    - Includes [Cursed Legacy API] events.
+  - [vanilla-fixes](./libraries/vanilla-fixes):
+    - 
+- [essentials](./essentials)
+  - [continue-button](./essentials/continue-button):
+    - Adds a "Continue" button to the title screen that loads the most recently played world.
+  - [creative](./essentials/creative):
+    - Re-enables creative mode, with a creative inventory reminiscent of modern Minecraft.
+  - [modmenu](./essentials/modmenu):
+    - Mod list showcasing mod metadata
+    - Full support for all modern features
+    - Robust API for adding custom metadata
+  - [mod-updater](./essentials/mod-updater):
+    - Allows mods to be automatically updated via custom metadata in `fabric.mod.json`.
+  - [roughly-enough-items](./essentials/roughly-enough-items):
+    - In-game item list
+    - Recipes accessible from the aforementioned list
+    - API for adding custom recipe types
 - [compatibility](./compatibility)
   - [forge-api](./compatibility/forge-api)
+    - [ ] Full implementation of Minecraft [Forge API] version 1.0.X as a compatibility layer
   - [forge-mod-loader](./compatibility/forge-mod-loader)
+    - [ ] Full implementation of [Forge Mod Loader] (Risugami's/ModloaderMP) as a compatibility layer
 
 For more information, or for help in using the APIs,
 see the [wiki](https://github.com/Better-Than-Updates-MC/API/wiki).
@@ -147,5 +113,7 @@ Better Than Updates will *not* be supporting other versions, to keep focus on **
 [New Frontier Craft]:(https://newfrontiercraft.net)
 [Cursed Legacy API]:(https://github.com/minecraft-cursed-legacy/Cursed-Legacy-API)
 [Station API]:(https://github.com/ModificationStation/StationAPI)
+[Forge API]:(https://github.com/MinecraftForge/MinecraftForge/tree/0a874de91d6b26a9369d1ab0fb19ebe47a5124e3)
+[Forge Mod Loader]:(https://github.com/MinecraftForge/FML)
 
 [MIT](./LICENSE)

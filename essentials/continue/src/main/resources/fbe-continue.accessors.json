@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.halotroop.fabric.accessor",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"ButtonWidgetAccessor",
+		"SelectWorldScreenAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "fbe-continue",
+	"name": "Continue Button",
+	"version": "${version}",
+	"environment": "client",
+	"license": "MIT",
+	"icon": "assets/fbe-continue/icon.png",
+	"contact": {
+		"homepage": "https://better-than-updates.halotroop.com",
+		"sources": "https://github.com/Better-Than-Updates-MC/API",
+		"issues": "https://github.com/Better-Than-Updates-MC/API/issues"
+	},
+	"depends": {
+		"fabricloader": ">=1.0.0",
+		"minecraft": "1.0.0-beta.7.3"
+	},
+	"authors": [
+		"Better Than Updates"
+	],
+	"contributors": [
+		"halotroop2288"
+	],
+	"description": "Adds a \"continue\" button to the title screen, which loads your most recently played world.",
+	"mixins": [
+		"fbe-continue.accessors.json",
+		"fbe-continue.mixins.json"
+	],
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/jEGF5fb"
+			}
+		}
+	}
+}

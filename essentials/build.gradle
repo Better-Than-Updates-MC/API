@@ -1,0 +1,15 @@
+archivesBaseName = 'fbe-essentials'
+version = rootProject.version
+
+apply plugin: 'java-library'
+
+dependencies {
+	include modImplementation("io.github.minecraft-cursed-legacy:cursed-legacy-api:${rootProject.cursed_api_version}")
+
+	afterEvaluate {
+		include implementationOnly(project(':continue'))
+		include implementationOnly(project(':creative'))
+		include implementationOnly(project(':modmenu'))
+		include implementationOnly(project(':roughly-enough-items'))
+	}
+}

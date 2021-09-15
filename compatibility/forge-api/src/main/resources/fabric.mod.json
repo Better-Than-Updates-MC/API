@@ -3,8 +3,8 @@
   "id": "forge",
   "version": "${version}",
   "environment": "*",
-  "name": "Forge API",
-  "description": "Forge is a free, open-source modding API. \nThis API is provided for easier porting from Forge to Fabric.",
+  "name": "Minecraft Forge API",
+  "description": "Forge is a free, open-source modding API.\nThis API is provided for easier porting from Forge to Fabric.",
   "authors": [
     {
       "name": "Better Than Updates"
@@ -35,13 +35,10 @@
   "depends": {
     "fabricloader": ">=1.0.0",
     "minecraft": "1.0.0-beta.7.3",
-    "beta-api-base": "*",
-    "beta-events": "*"
+    "fbe-core": "*",
+    "fbe-events": "*"
   },
   "breaks": {
     "stationloader": "*"
-  },
-  "conflicts": {
-    "beta-api": "*"
   }
 }

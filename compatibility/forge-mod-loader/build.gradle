@@ -2,8 +2,3 @@ archivesBaseName = 'forge-mod-loader'
 version = getSubprojectVersion(project, '8.0.0')
 
 apply plugin: 'java-library'
-
-moduleDependencies(project, 'beta-accessibility', 'beta-api-base', 'beta-events', 'beta-content', 'beta-registries')
-
-dependencies {
-}

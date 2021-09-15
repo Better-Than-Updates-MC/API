@@ -1,0 +1,16 @@
+archivesBaseName = 'events'
+version = getSubprojectVersion(project, '1.0.0')
+
+apply plugin: 'java-library'
+
+moduleDependencies(project, 'core')
+
+repositories {
+	mavenLocal()
+}
+
+dependencies {
+	modImplementation("io.github.minecraft-cursed-legacy:legacy-api-base:${rootProject.cursed_api_version}-1.0.0")
+	include modImplementation("io.github.minecraft-cursed-legacy:legacy-lifecycle-events-v1:${rootProject.cursed_api_version}-1.0.0")
+	include modImplementation("io.github.minecraft-cursed-legacy:legacy-interaction-events-v0:${rootProject.cursed_api_version}-0.6.3")
+}

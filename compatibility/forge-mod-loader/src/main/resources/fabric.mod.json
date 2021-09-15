@@ -32,7 +32,7 @@
 			}
 		}
 	],
-	"license": "LGPL-v2",
+	"license": "LGPL-2.0",
 	"environment": "*",
 	"icon": "assets/fml/icon.png",
 	"entrypoints": {

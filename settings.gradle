@@ -1,22 +1,41 @@
+pluginManagement {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		gradlePluginPortal()
+	}
+}
+
 rootProject.name = "Fabric Beta Essentials"
 
-include 'beta-api-base'
+//include 'beta-accessibility' // <- translations
+//include 'beta-attached-data'
+//include 'beta-content' // <- block-entities, commands, recipes
+//include 'beta-config'
+//include 'beta-events'
+//include 'beta-networking'
+//include 'beta-registries'
+//include 'beta-textures'
+//include 'beta-world' // <- terrain, world-types
 
-include 'beta-accessibility' // <- translations
-include 'beta-attached-data'
-include 'beta-content' // <- block-entities, commands, recipes
-include 'beta-config'
-include 'beta-events'
-include 'beta-networking'
-include 'beta-registries'
-include 'beta-textures'
-include 'beta-world' // <- terrain, world-types
-
-include 'roughly-enough-items'
-include 'modmenu'
-
+include 'compatibility' // Other loader compatibility
 addModule ('compatibility', 'forge-mod-loader') // Forge Mod Loader (Risugami's / ModLoaderMP support)
 addModule ('compatibility', 'forge-api') // Forge API compatibility layer
+
+include 'essentials' // Essential mods for developers
+addModule ('essentials', 'continue')
+addModule ('essentials', 'creative')
+addModule ('essentials', 'modmenu')
+addModule ('essentials', 'mod-updater')
+addModule ('essentials', 'roughly-enough-items')
+
+include 'libraries' // APIs
+addModule ('libraries', 'accessibility')
+addModule ('libraries', 'core')
+addModule ('libraries', 'events')
+addModule ('libraries', 'vanilla-fixes')
 
 def addModule(String subdir, String name) {
 	include(name)

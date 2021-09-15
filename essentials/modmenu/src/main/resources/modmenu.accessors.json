@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.terraformersmc.modmenu.accessor",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"ButtonWidgetAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

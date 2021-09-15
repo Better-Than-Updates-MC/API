@@ -1,0 +1,8 @@
+group = 'ambos'
+archivesBaseName = 'vanilla-fixes'
+version = getSubprojectVersion(project, "1.0.3")
+
+dependencies {
+	implementation 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
+	include 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
+}

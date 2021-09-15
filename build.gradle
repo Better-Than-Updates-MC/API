@@ -22,6 +22,10 @@ plugins {
 	id 'org.jetbrains.kotlin.jvm' version '1.5.30'
 }
 
+// Subprojects will set these themselves
+archivesBaseName = archives_base_name
+version = mod_version
+
 @SuppressWarnings('unused')
 static String getSubprojectVersion(project, ver) {
 	return "${project.mod_version}-$ver"
@@ -37,6 +41,7 @@ def moduleDependencies(Project project, String... projectNames) {
 				implementationOnly it
 			}
 		}
+
 		publishing {
 			publications {
 				mavenJava(MavenPublication) {
@@ -67,6 +72,7 @@ allprojects {
 	apply plugin: 'fabric-loom'
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
+	apply plugin: 'org.jetbrains.kotlin.jvm'
 
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
@@ -76,16 +82,16 @@ allprojects {
 
 	repositories {
 		mavenCentral()
-		maven { url = 'https://maven.fabricmc.net/' }
-		maven { url = 'https://storage.googleapis.com/devan-maven/' }
+		maven { url 'https://maven.fabricmc.net/' }
+		maven { url 'https://repo.blucobalt.dev/repository/maven-halotroop/'}
+		maven { url 'https://storage.googleapis.com/devan-maven/' }
 		maven { url 'https://jitpack.io/' }
 	}
 
 	configurations {
-		implementationOnly //A non-transitive implementation
+		implementationOnly // A non-transitive implementation
 		runtimeClasspath.extendsFrom implementationOnly
 		compileClasspath.extendsFrom implementationOnly
-
 	}
 
 	minecraft {
@@ -98,6 +104,10 @@ allprojects {
 	}
 
 	dependencies {
+		implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+		implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
+		annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+		annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
 		//to change the versions see the gradle.properties file
 		minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
@@ -158,6 +168,17 @@ allprojects {
 			}
 		}
 	}
+
+	compileKotlin {
+		kotlinOptions {
+			jvmTarget = "1.8"
+		}
+	}
+	compileTestKotlin {
+		kotlinOptions {
+			jvmTarget = "1.8"
+		}
+	}
 }
 
 import net.fabricmc.loom.task.RunClientTask
@@ -213,12 +234,6 @@ subprojects {subproject ->
 		}
 	}
 }
-
-
-
-// Subprojects will set these themselves
-archivesBaseName = archives_base_name
-version = mod_version
 
 dependencies {
 	afterEvaluate {
